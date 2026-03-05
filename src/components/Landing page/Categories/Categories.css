@@ -1,0 +1,54 @@
+/* Categories styles */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+}
+
+.category {
+  background: #FFFFFF;
+  box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 18px;
+}
+
+.category-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.category img {
+  width: 148px;
+  height: 148px;
+  object-fit: contain;
+}
+
+.category p {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #2D2D2D;
+}
+
+@media (max-width: 992px) {
+  .categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category img {
+    width: 110px;
+    height: 110px;
+  }
+}

@@ -1,3 +1,5 @@
+import './PromoSection.css';
+
 function PromoSection() {
   return (
     <section className="section">

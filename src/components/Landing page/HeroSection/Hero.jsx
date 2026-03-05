@@ -1,3 +1,6 @@
+import './Hero.css';
+import laptopImg from '../../../assets/images/laptop.png';
+
 function Hero() {
   return (
     <section className="section hero">
@@ -9,7 +12,7 @@ function Hero() {
         </div>
 
         <div>
-          <img src="/laptop.png"alt="hero" />
+          <img src={laptopImg} alt="hero" />
         </div>
       </div>
     </section>

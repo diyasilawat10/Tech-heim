@@ -1,0 +1,58 @@
+/* Product card styles */
+.sale-card {
+  width: 200px;
+  background: #F3F3F3;
+  border-radius: 8px;
+  padding: 16px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sale-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: contain;
+  display: block;
+}
+
+.card-info {
+  margin-top: 14px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+  color: #2D2D2D;
+  margin-bottom: 10px;
+}
+
+.card-prices {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.old-price {
+  font-size: 13px;
+  text-decoration: line-through;
+  color: #8A8A8A;
+}
+
+.new-price {
+  font-size: 18px;
+  font-weight: 500;
+  color: #0C0C0C;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  background: #FAD7C7;
+  color: #F45E0C;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 5px 10px;
+  border-radius: 0 8px 8px 0;
+}
