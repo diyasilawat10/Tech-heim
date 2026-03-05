@@ -1,9 +1,9 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Categories from "./components/Categories";
-import ProductSection from "./components/ProductSection";
-import PromoSection from "./components/PromoSection";
-import Footer from "./components/Footer";
+import Navbar from "./components/Landing page/Navbar/Navbar";
+import Hero from "./components/Landing page/HeroSection/Hero";
+import Categories from "./components/Landing page/Categories/Categories";
+import ProductSection from "./components/Landing page/ProductSection/ProductSection";
+import PromoSection from "./components/Landing page/PromoSection/PromoSection";
+import Footer from "./components/Landing page/Footer/Footer";
 
 function App() {
   return (

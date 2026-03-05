@@ -1,0 +1,128 @@
+/* Sales/product section styles */
+
+
+.sales-section {
+  background: #17458F;
+  border-radius: 12px;
+  padding: 80px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sales-random-shape {
+  position: absolute;
+  width: 900px;
+  height: 700px;
+  left: -150px;
+  top: -120px;
+  bottom: auto;
+  background-repeat: no-repeat;
+  transform: rotate(100deg);
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.sales-layout {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.sales-left {
+  width: 300px;
+  flex-shrink: 0;
+  padding-left: 80px;
+}
+
+.sales-text h2 {
+  font-size: 42px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sales-text p {
+  font-size: 26px;
+  font-weight: 300;
+  margin-top: 12px;
+  color: #ffffff;
+}
+
+.view-all-btn {
+  margin-top: 18px;
+  background: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sales-cards {
+  display: flex;
+  gap: 32px;
+  overflow: hidden;
+  flex: 1;
+  /* allow a bit of the next card to peek */
+  padding-right: 100px;
+}
+
+.sales-arrows {
+  position: absolute;
+  right: 60px;
+  bottom: 20px;
+  display: flex;
+  gap: 14px;
+  z-index: 3;
+}
+
+.arrow {
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.arrow:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+.arrow img {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1100px) {
+  .sales-layout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sales-cards {
+    flex-wrap: wrap;
+  }
+
+  .sales-arrows {
+    position: static;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sale-card {
+    width: 100%;
+  }
+
+  .sales-random-shape {
+    display: none;
+  }
+}

@@ -1,3 +1,5 @@
+import './ProductCard.css';
+
 function ProductCard({ title, price, oldPrice, discount, image }) {
   return (
     <div className="sale-card">

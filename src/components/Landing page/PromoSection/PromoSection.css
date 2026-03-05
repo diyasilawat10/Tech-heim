@@ -1,0 +1,26 @@
+/* Promo/banner section styles */
+.banner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.banner {
+  padding: 40px;
+  border-radius: 12px;
+  color: white;
+}
+
+.blue {
+  background: #2f80ed;
+}
+
+.orange {
+  background: #f2994a;
+}
+
+@media (max-width: 768px) {
+  .banner-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,10 +1,16 @@
+import './Navbar.css';
+import logoImg from '../../../assets/icons/logo.png';
+import searchIcon from '../../../assets/icons/search-normal.png';
+import bagIcon from '../../../assets/icons/bag.png';
+import userIcon from '../../../assets/icons/user.png';
+
 function Navbar() {
   return (
     <header className="header">
       <div className="container header-inner">
 
         <div className="logo">
-          <img src="/logo.png" alt="Logo" />
+          <img src={logoImg} alt="Logo" />
         </div>
 
         <nav className="navbar">
@@ -18,9 +24,9 @@ function Navbar() {
         </nav>
 
         <div className="nav-icons">
-          <img src="/search-normal.png" alt="Search" />
-          <img src="/cart.png" alt="Cart" />
-          <img src="/user.png" alt="User" />
+          <img src={searchIcon} alt="Search" />
+          <img src={bagIcon} alt="Cart" />
+          <img src={userIcon} alt="User" />
         </div>
 
       </div>
