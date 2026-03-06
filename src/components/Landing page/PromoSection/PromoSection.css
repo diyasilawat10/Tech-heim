@@ -215,18 +215,6 @@
   border-radius: 50%;
 }
 
-.banner-ps5::after {
-  content: '';
-  position: absolute;
-  width: 118px;
-  height: 118px;
-  left: -59px;
-  top: 361px;
-  background: #005690;
-  border-radius: 50%;
-  transform: rotate(-90deg);
-}
-
 .ps5-wave {
   position: absolute;
   width: 566px;

@@ -1,20 +1,24 @@
 import './Footer.css';
-import locationIcon from '../../../assets/icons/location.png';
-import callIcon from '../../../assets/icons/call-calling.png';
-import smsIcon from '../../../assets/icons/sms-edit.png';
-import fbIcon from '../../../assets/icons/Facebook.png';
-import twitterIcon from '../../../assets/icons/twitter.png';
-import instaIcon from '../../../assets/icons/Instagram.png';
-import youtubeIcon from '../../../assets/icons/Youtube.png';
-import arrowIcon from '../../../assets/icons/arrow.png';
-import paypalIcon from '../../../assets/icons/paypal.png';
-import amexIcon from '../../../assets/icons/american express.png';
-import visaIcon from '../../../assets/icons/visa.png';
-import masterIcon from '../../../assets/icons/master card.png';
-import arrowUpIcon from '../../../assets/icons/arrowup.png';
-import chatIcon from '../../../assets/icons/chatbubble.png';
+import locationIcon from '../../../assets/icons/location.svg';
+import callIcon from '../../../assets/icons/call-calling.svg';
+import smsIcon from '../../../assets/icons/sms-edit.svg';
+import fbIcon from '../../../assets/icons/Facebook.svg';
+import twitterIcon from '../../../assets/icons/twitter.svg';
+import instaIcon from '../../../assets/icons/Instagram.svg';
+import youtubeIcon from '../../../assets/icons/Youtube.svg';
+import userIcon from '../../../assets/icons/user.svg';
+import paypalIcon from '../../../assets/icons/paypal.svg';
+import amexIcon from '../../../assets/icons/american express.svg';
+import visaIcon from '../../../assets/icons/visa.svg';
+import masterIcon from '../../../assets/icons/master card.svg';
+import arrowUpIcon from '../../../assets/icons/back to up bottun.svg';
+import chatIcon from '../../../assets/icons/online chat.svg';
 
 function Footer() {
+  const handleBackToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="footer">
 
@@ -22,16 +26,16 @@ function Footer() {
 
         <div className="footer-column">
           <h4>Company</h4>
-          <p>About us</p>
-          <p>Blog</p>
-          <p>Returns</p>
-          <p>Order status</p>
+          <p>about us</p>
+          <p>blog</p>
+          <p>returns</p>
+          <p>order status</p>
         </div>
 
         <div className="footer-column">
           <h4>Info</h4>
           <p>How it works?</p>
-          <p>Our promises</p>
+          <p>our promises</p>
           <p>FAQ</p>
         </div>
 
@@ -39,35 +43,35 @@ function Footer() {
           <h4>Contact us</h4>
 
           <div className="contact-item">
-            <img src={locationIcon}/>
-            <p>123 Main Street, Anytown, USA</p>
+            <img src={locationIcon} alt="Location" />
+            <p>123 Main Street, Anytown,USA</p>
           </div>
           
           <div className="contact-item">
-            <img src={callIcon}/>
+            <img src={callIcon} alt="Call" />
             <p>+1 (555) 123-4567</p>
           </div>
 
           <div className="contact-item">
-            <img src={smsIcon}/>
+            <img src={smsIcon} alt="Email" />
             <p>TechHeimSupport@gmail.com</p>
-          </div>
-
-          <div className="social-icons">
-            <img src={fbIcon} alt="Facebook" />
-            <img src={twitterIcon} alt="Twitter" />
-            <img src={instaIcon} alt="Instagram" />
-            <img src={youtubeIcon} alt="Youtube" />
           </div>
         </div>
 
         <div className="footer-column newsletter">
           <h4>Sign up for News and updates</h4>
           <div className="newsletter-input">
-            <input type="email" placeholder="Enter your email" />
-            <button>
-              <img src={arrowIcon} alt="Arrow" />
-            </button>
+            <span className="newsletter-user-icon">
+              <img src={userIcon} alt="User" />
+            </span>
+            <span className="newsletter-label">E-mail Address</span>
+            <button aria-label="Submit newsletter" />
+          </div>
+          <div className="social-icons">
+            <img src={fbIcon} alt="Facebook" />
+            <img src={twitterIcon} alt="Twitter" />
+            <img src={instaIcon} alt="Instagram" />
+            <img src={youtubeIcon} alt="Youtube" />
           </div>
         </div>
 
@@ -85,7 +89,7 @@ function Footer() {
           <p>&copy; 2023 Tech Heim.</p>
 
           <div className="footer-links">
-            <span>Cookie settings</span>
+            <span>cookie settings</span>
             <span>Privacy Policy</span>
             <span>Terms and Conditions</span>
             <span>Imprint</span>
@@ -93,7 +97,7 @@ function Footer() {
         </div>
       </div>
 
-      <button className="back-to-top">
+      <button className="back-to-top" onClick={handleBackToTop} aria-label="Back to top">
         <img src={arrowUpIcon} alt="Back to top" />
       </button>
 
