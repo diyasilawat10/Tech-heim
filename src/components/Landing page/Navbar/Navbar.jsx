@@ -1,8 +1,8 @@
 import './Navbar.css';
-import logoImg from '../../../assets/icons/logo.png';
-import searchIcon from '../../../assets/icons/search-normal.png';
-import bagIcon from '../../../assets/icons/bag.png';
-import userIcon from '../../../assets/icons/user.png';
+import logoImg from '../../../assets/icons/logo.svg';
+import searchIcon from '../../../assets/icons/search-normal.svg';
+import bagIcon from '../../../assets/icons/basket.svg';
+import userIcon from '../../../assets/icons/profile.svg';
 
 function Navbar() {
   const navLinks = ['Home', 'Products', 'Blog', 'FAQ', 'Contact Us'];
@@ -27,13 +27,13 @@ function Navbar() {
 
         <div className="nav-icons">
           <button type="button" className="icon-btn" aria-label="Search">
-            <img src={searchIcon} alt="" />
+            <img src={searchIcon} alt="" className="icon-search" />
           </button>
           <button type="button" className="icon-btn" aria-label="Cart">
-            <img src={bagIcon} alt="" />
+            <img src={bagIcon} alt="" className="icon-basket" />
           </button>
           <button type="button" className="icon-btn" aria-label="User profile">
-            <img src={userIcon} alt="" />
+            <img src={userIcon} alt="" className="icon-user" />
           </button>
         </div>
       </div>

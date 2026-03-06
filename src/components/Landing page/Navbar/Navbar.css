@@ -70,11 +70,14 @@
 
 .nav-icons {
   width: 136px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
   padding: 8px 0;
+  align-self: start;
+  margin-top: 22px;
 }
 
 .icon-btn {
@@ -91,6 +94,28 @@
 .icon-btn img {
   width: 24px;
   height: 24px;
+  display: block;
+  object-fit: contain;
+}
+
+.icon-search,
+.icon-basket,
+.icon-user {
+  width: 24px;
+  height: 24px;
+  transform-origin: center;
+}
+
+.icon-search {
+  transform: scale(1);
+}
+
+.icon-basket {
+  transform: scale(1.68);
+}
+
+.icon-user {
+  transform: scale(1.7);
 }
 
 @media (max-width: 1280px) {
