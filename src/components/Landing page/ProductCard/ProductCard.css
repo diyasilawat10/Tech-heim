@@ -1,58 +1,84 @@
-/* Product card styles */
 .sale-card {
-  width: 200px;
-  background: #F3F3F3;
-  border-radius: 8px;
-  padding: 16px;
-  flex-shrink: 0;
   position: relative;
+  width: 184px;
+  height: 237px;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .sale-card img {
-  width: 100%;
-  height: 170px;
+  width: 168px;
+  height: 146px;
   object-fit: contain;
-  display: block;
 }
 
 .card-info {
-  margin-top: 14px;
+  width: 168px;
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .card-title {
-  font-size: 14px;
+  margin: 0;
+  height: 30px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
   font-weight: 300;
-  line-height: 18px;
-  color: #2D2D2D;
-  margin-bottom: 10px;
+  font-size: 12px;
+  line-height: 15px;
+  color: #0c0c0c;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .card-prices {
+  width: 168px;
+  height: 17px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .old-price {
-  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  color: #717171;
   text-decoration: line-through;
-  color: #8A8A8A;
 }
 
 .new-price {
-  font-size: 18px;
-  font-weight: 500;
-  color: #0C0C0C;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 300;
+  color: #0c0c0c;
+  text-align: right;
 }
 
 .discount-badge {
   position: absolute;
-  top: 10px;
   left: 0;
-  background: #FAD7C7;
-  color: #F45E0C;
-  font-size: 12px;
-  font-weight: 400;
-  padding: 5px 10px;
+  top: 8px;
+  min-width: 40px;
+  height: 23px;
+  padding: 4px 6px;
   border-radius: 0 8px 8px 0;
+  background: #fddbc9;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 300;
+  color: #f45e0c;
 }

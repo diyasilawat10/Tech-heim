@@ -3,17 +3,17 @@ import laptopImg from '../../../assets/images/laptop.png';
 
 function Hero() {
   return (
-    <section className="section hero">
-      <div className="container hero-content">
-        <div>
-          <h1>Join the digital revolution</h1>
-          <p>Explore innovation like never before.</p>
-          <button className="primary-btn">Explore More</button>
+    <section className="hero">
+      <div className="hero-frame">
+        <div className="hero-copy">
+          <h1 className="hero-title">Tech Heim</h1>
+          <h2 className="hero-subtitle">
+            "Join the <span>digital revolution</span>"
+          </h2>
+          <button className="hero-btn">Explore More</button>
         </div>
 
-        <div>
-          <img src={laptopImg} alt="hero" />
-        </div>
+        <img src={laptopImg} alt="Laptop showcase" className="hero-laptop" />
       </div>
     </section>
   );
