@@ -3,10 +3,16 @@ import './ProductCard.css';
 
 function ProductCard({ title, price, oldPrice, discount, image, colors, hasHeart: initialHasHeart, rate = "4.5" }) {
   const [isFavorited, setIsFavorited] = useState(initialHasHeart || false);
+  const [activeColorIdx, setActiveColorIdx] = useState(0);
 
   const toggleFavorite = (e) => {
     e.stopPropagation(); // prevent parent clicks if any
     setIsFavorited(!isFavorited);
+  };
+
+  const handleColorClick = (e, idx) => {
+    e.stopPropagation();
+    setActiveColorIdx(idx);
   };
 
   return (
@@ -25,9 +31,19 @@ function ProductCard({ title, price, oldPrice, discount, image, colors, hasHeart
         {colors && colors.length > 0 && (
           <div className="product-colors">
             {colors.map((color, idx) => (
-              <div key={idx} className="product-color" style={{ background: color }}></div>
+              <div
+                key={idx}
+                className="product-color"
+                style={{
+                  background: color,
+                  border: activeColorIdx === idx ? '2px solid #063A88' : '0.25px solid #444444',
+                  transform: activeColorIdx === idx ? 'scale(1.2)' : 'scale(1)',
+                  transition: 'all 0.2s ease-in-out'
+                }}
+                onClick={(e) => handleColorClick(e, idx)}
+              ></div>
             ))}
-            <div className="product-color-plus">+</div>
+            <div className="product-color-plus" onClick={(e) => e.stopPropagation()}>+</div>
           </div>
         )}
       </div>
