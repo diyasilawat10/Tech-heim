@@ -1,20 +1,20 @@
 .sales-wrapper {
   width: 100%;
   padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .sales-section {
   position: relative;
   width: 1224px;
   max-width: calc(100% - 24px);
-  margin: 48px auto;
+  height: 325px;
+  margin: 48px auto 0;
+  /* no bottom margin — gap is managed by NewProducts margin-top */
   background: #063a88;
   border-radius: 8px;
   overflow: hidden;
-  padding: 40px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
 }
 
 .sales-random-shape {
@@ -26,89 +26,328 @@
   transform: rotate(100.63deg);
   pointer-events: none;
   opacity: 0.10;
-  z-index: 1;
 }
 
-.sales-header {
-  position: relative;
+.sales-left {
+  position: absolute;
+  left: 32px;
+  top: 62px;
+  width: 230px;
+  height: 201px;
   z-index: 2;
-  color: #fff;
 }
 
-.sales-header h2 {
+.sales-text {
+  position: relative;
+  width: 230px;
+  height: 127px;
+}
+
+.sales-text h2 {
+  position: absolute;
+  width: 198px;
+  height: 29px;
+  left: 0;
+  top: 0;
   margin: 0;
   font-family: 'Inter', sans-serif;
+  font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
   color: #ffffff;
 }
 
-.sales-header p {
-  margin: 8px 0 0 0;
+.sales-text p {
+  position: absolute;
+  width: 102px;
+  height: 28px;
+  left: 48px;
+  top: 37px;
+  margin: 0;
   font-family: 'Inter', sans-serif;
+  font-style: normal;
   font-weight: 300;
   font-size: 20px;
   line-height: 28px;
   color: #ffffff;
 }
 
-.sales-content {
-  position: relative;
+.sales-view-all {
+  position: absolute;
+  left: 48px;
+  top: 182px;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: #dce9ff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+  cursor: pointer;
+}
+
+.sales-cards-viewport {
+  position: absolute;
+  width: 904px;
+  height: 237px;
+  left: 312px;
+  top: 44px;
+  overflow: hidden;
   z-index: 2;
-  width: 100%;
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
-  justify-content: center;
-  justify-items: center;
-  /* keep cards centered in their columns */
-}
-
-/* Status container (loading, error, empty) styles */
-.status-container {
+.sales-cards {
   display: flex;
-  flex-direction: column;
+  gap: 24px;
+  transition: transform 0.28s ease;
+  height: 100%;
+}
+
+.sales-arrows {
+  position: absolute;
+  width: 64px;
+  height: 32px;
+  left: 1152px;
+  top: 285px;
+  display: flex;
+  z-index: 3;
+}
+
+.arrow {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 100px;
+  background: transparent;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 240px;
-  color: #ffffff;
-  font-family: 'Inter', sans-serif;
-  font-size: 18px;
+  padding: 0;
+  cursor: pointer;
 }
 
-.status-container.error {
-  color: #ffb4b4;
-  font-weight: 500;
+.arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-/* CSS Spinner for loading state */
-.spinner {
-  width: 48px;
-  height: 48px;
-  border: 4px solid rgba(255, 255, 255, 0.2);
-  border-top-color: #ffffff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 24px;
+.arrow img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+/* OVERRIDES FOR REUSABLE PRODUCT CARD INSIDE PRODUCT SECTION ONLY */
+.sales-cards .sale-card {
+  flex: 0 0 auto !important;
+  /* Extremely important for flex child to preserve size */
+  width: 184px !important;
+  height: 237px !important;
+  padding: 8px !important;
+  gap: 12px !important;
+  border-radius: 4px !important;
+  justify-content: center !important;
+  background: #FFFFFF !important;
+  isolation: isolate !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+
+.sales-cards .product-image-container {
+  width: 168px !important;
+  height: 146px !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  background-color: transparent !important;
+}
+
+.sales-cards .product-image {
+  width: 168px !important;
+  height: 146px !important;
+  left: 0 !important;
+  top: 0 !important;
+  border-radius: 0 !important;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.sales-cards .product-line {
+  display: none !important;
+}
+
+.sales-cards .product-info {
+  width: 168px !important;
+  height: 55px !important;
+  gap: 8px !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.sales-cards .product-title {
+  width: 168px !important;
+  height: 30px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 12px !important;
+  line-height: 15px !important;
+  color: #0C0C0C !important;
+  display: flex !important;
+  align-items: center !important;
+  text-align: left !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+.sales-cards .product-price-rate {
+  width: 168px !important;
+  height: 17px !important;
+  gap: 39px !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.sales-cards .product-price {
+  width: 168px !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.sales-cards .product-last-price {
+  width: 84px !important;
+  text-align: left !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 15px !important;
+  text-decoration-line: line-through !important;
+  color: #717171 !important;
+  margin: 0 !important;
+  height: 15px !important;
+}
+
+.sales-cards .product-new-price {
+  width: 84px !important;
+  text-align: right !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 14px !important;
+  line-height: 17px !important;
+  color: #0C0C0C !important;
+  height: 17px !important;
+  margin: 0 !important;
+}
+
+.sales-cards .product-rate {
+  display: none !important;
+}
+
+.sales-cards .discount-badge,
+.sales-cards .product-discount {
+  position: absolute !important;
+  width: 38px !important;
+  height: 23px !important;
+  padding: 4px 6px !important;
+  top: 8px !important;
+  left: 0 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 12px !important;
+  line-height: 15px !important;
+  color: #F45E0C !important;
+  background: #FDDBC9 !important;
+  border-radius: 0px 8px 8px 0px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+}
+
+.sales-cards .product-heart,
+.sales-cards .product-colors {
+  display: none !important;
+}
+
+@media (max-width: 1280px) {
+  .sales-cards-viewport {
+    width: calc(100% - 320px);
+  }
+
+  .sales-arrows {
+    left: auto;
+    right: 8px;
   }
 }
 
 @media (max-width: 900px) {
   .sales-section {
-    padding: 24px;
+    height: auto;
+    min-height: 540px;
+    padding-bottom: 56px;
+  }
+
+  .sales-left {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 24px 24px 0;
+  }
+
+  .sales-text {
+    width: auto;
+    height: auto;
+  }
+
+  .sales-text h2,
+  .sales-text p,
+  .sales-view-all {
+    position: static;
+  }
+
+  .sales-text p {
+    margin-top: 8px;
+  }
+
+  .sales-view-all {
+    margin-top: 24px;
+  }
+
+  .sales-cards-viewport {
+    position: static;
+    width: calc(100% - 24px);
+    height: auto;
+    margin-left: 12px;
+    padding-top: 16px;
+  }
+
+  .sales-cards {
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .sales-arrows {
+    position: static;
+    margin: 12px 0 0 auto;
+    padding-right: 12px;
   }
 }
 
 @media (max-width: 600px) {
+  .sale-card {
+    width: 100%;
+  }
+
   .sales-random-shape {
     display: none;
   }

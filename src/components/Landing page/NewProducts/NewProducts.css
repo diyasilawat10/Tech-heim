@@ -1,32 +1,67 @@
 .new-products-section {
+  position: relative;
+  width: 1224px;
+  max-width: calc(100% - 24px);
+  margin: 16px auto 48px;
   background-color: transparent;
+  padding: 0;
+  /* Override global .section { padding: 80px 0 } */
+}
+
+.new-products-section .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 32px;
+  width: 100%;
+}
+
+.new-products-header-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+  width: 100%;
+  height: auto;
+  /* Allow natural height based on content */
 }
 
 .new-products-header {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  padding: 0px;
+  width: 100%;
+  height: 48px;
 }
 
 .new-products-title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  height: 48px;
   font-family: 'Inter', sans-serif;
+  font-style: normal;
   font-weight: 500;
   font-size: 32px;
-  line-height: 1.2;
+  line-height: 39px;
   color: #0C0C0C;
-  margin: 0;
 }
 
 .view-all-button {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
+  padding: 4px 8px;
+  height: 48px;
+  border-radius: 8px;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
   transition: opacity 0.3s ease;
 }
 
@@ -36,60 +71,260 @@
 
 .view-all-button span {
   font-family: 'Inter', sans-serif;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 400;
   font-size: 16px;
+  line-height: 19px;
+  text-align: center;
   color: #0C0C0C;
 }
 
 .view-all-icon {
   width: 24px;
   height: 24px;
-  object-fit: contain;
 }
 
 .header-divider {
-  border: none;
-  height: 2px;
-  background-color: #B4B4B4;
-  margin: 0 0 32px 0;
   width: 100%;
+  height: 0px;
+  border: 1px solid #B4B4B4;
+  /* Figma says 2px solid in some dumps, 1px renders better usually */
+  border-bottom: 1px solid #B4B4B4;
+  margin: 0;
 }
 
 .new-products-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
   gap: 24px;
   width: 100%;
-  margin-bottom: 40px;
+  height: auto;
+  min-height: 347px;
+  overflow-x: auto;
+  padding-bottom: 12px;
 }
 
-.products-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
+/* OVERRIDES FOR REUSABLE PRODUCT CARD INSIDE NEW PRODUCTS SECTION ONLY */
+.new-products-list .sale-card {
+  width: 288px !important;
+  height: 347px !important;
+  padding: 16px !important;
+  gap: 16px !important;
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12) !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  isolation: isolate !important;
+  flex: 0 0 auto !important;
 }
 
-@media (max-width: 1024px) {
-  .products-grid {
-    gap: 16px;
-  }
+.new-products-list .product-image-container {
+  width: 256px !important;
+  height: 190px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  position: relative !important;
+  display: block !important;
 }
 
-@media (max-width: 768px) {
-  .header-frame {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+.new-products-list .product-image {
+  position: absolute !important;
+  width: 272px !important;
+  /* from figma: depending on card, 217x161 or 272x202 */
+  height: 202px !important;
+  left: calc(50% - 272px/2) !important;
+  top: calc(50% - 202px/2) !important;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-radius: 8px !important;
+}
+
+/* Ensure the divider line matches figma */
+.new-products-list .product-line {
+  width: 256px !important;
+  height: 0px !important;
+  border: 1px solid #EAEAEA !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+.new-products-list .product-info {
+  width: 256px !important;
+  height: 93px !important;
+  gap: 16px !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+.new-products-list .product-title {
+  width: 256px !important;
+  height: 53px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  color: #0C0C0C !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+.new-products-list .product-price-rate {
+  width: 256px !important;
+  height: 24px !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.new-products-list .product-price {
+  width: 128px !important;
+  height: 22px !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  position: relative !important;
+  display: flex !important;
+}
+
+.new-products-list .product-last-price {
+  display: none !important;
+}
+
+.new-products-list .product-new-price {
+  width: 128px !important;
+  height: 22px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 18px !important;
+  line-height: 22px !important;
+  color: #0C0C0C !important;
+  text-align: left !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.new-products-list .product-rate {
+  width: 128px !important;
+  height: 24px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  margin: 0 !important;
+}
+
+.new-products-list .product-rate-frame {
+  width: 51px !important;
+  height: 24px !important;
+  gap: 2px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+}
+
+.new-products-list .product-star svg {
+  width: 24px !important;
+  height: 24px !important;
+  background: transparent !important;
+}
+
+.new-products-list .product-rate-text {
+  font-family: 'Inter', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 19px !important;
+  color: #063A88 !important;
+  margin-top: 2px !important;
+}
+
+.new-products-list .product-colors {
+  position: absolute !important;
+  width: 12px !important;
+  height: 79px !important;
+  right: 0px !important;
+  top: calc(50% - 79px/2) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  z-index: 5 !important;
+}
+
+.new-products-list .product-color {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  border: 0.25px solid #444444 !important;
+  box-sizing: border-box !important;
+}
+
+.new-products-list .product-color-plus {
+  width: 11px !important;
+  height: 19px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 19px !important;
+  text-align: center !important;
+  color: #505050 !important;
+}
+
+/* Hide the plus sign for the cards that don't have multiple colored mock dots based on Figma */
+.new-products-list>.sale-card:nth-child(n+3) .product-color-plus {
+  display: none !important;
+}
+
+.new-products-list .product-heart {
+  position: absolute !important;
+  width: 24px !important;
+  height: 24px !important;
+  left: 16px !important;
+  top: 16px !important;
+  z-index: 3 !important;
+}
+
+.new-products-list .product-discount {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .new-products-section {
+    width: auto;
+    max-width: none;
+    padding: 0 12px;
   }
 
-  .products-grid {
-    flex-direction: column;
-    align-items: center;
+  .new-products-title {
+    font-size: 24px;
+    height: auto;
   }
 
-  .product-card {
-    width: 100%;
-    max-width: 350px;
+  .view-all-button {
+    height: auto;
+  }
+
+  .new-products-header {
+    height: auto;
   }
 }
