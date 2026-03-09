@@ -190,3 +190,13 @@
     padding-right: 12px;
   }
 }
+
+@media (max-width: 600px) {
+  .sale-card {
+    width: 100%;
+  }
+
+  .sales-random-shape {
+    display: none;
+  }
+}
