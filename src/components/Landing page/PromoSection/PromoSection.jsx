@@ -1,7 +1,7 @@
 import React from 'react';
 import './PromoSection.css';
-import iphoneImg from '../../../assets/images/iphone-promo.png';
-import ps5Img from '../../../assets/images/ps5promo.png';
+import iphoneImg from '../../../assets/images/iphones.png';
+import ps5Img from '../../../assets/images/ps53.png';
 
 const PromoSection = () => {
   const timerUnits = [
