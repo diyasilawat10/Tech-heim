@@ -7,11 +7,14 @@
   position: relative;
   width: 1224px;
   max-width: calc(100% - 24px);
-  height: 325px;
   margin: 48px auto;
   background: #063a88;
   border-radius: 8px;
   overflow: hidden;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .sales-random-shape {
@@ -23,179 +26,89 @@
   transform: rotate(100.63deg);
   pointer-events: none;
   opacity: 0.10;
+  z-index: 1;
 }
 
-.sales-left {
-  position: absolute;
-  left: 32px;
-  top: 62px;
-  width: 230px;
-  height: 201px;
-  z-index: 2;
-}
-
-.sales-text {
+.sales-header {
   position: relative;
-  width: 230px;
-  height: 127px;
+  z-index: 2;
+  color: #fff;
 }
 
-.sales-text h2 {
-  position: absolute;
-  width: 198px;
-  height: 29px;
-  left: 0;
-  top: 0;
+.sales-header h2 {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
   color: #ffffff;
 }
 
-.sales-text p {
-  position: absolute;
-  width: 102px;
-  height: 28px;
-  left: 48px;
-  top: 37px;
-  margin: 0;
+.sales-header p {
+  margin: 8px 0 0 0;
   font-family: 'Inter', sans-serif;
-  font-style: normal;
   font-weight: 300;
   font-size: 20px;
   line-height: 28px;
   color: #ffffff;
 }
 
-.sales-view-all {
-  position: absolute;
-  left: 48px;
-  top: 182px;
-  margin: 0;
-  border: 0;
-  background: transparent;
-  color: #dce9ff;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 17px;
-}
-
-.sales-cards-viewport {
-  position: absolute;
-  width: 904px;
-  height: 237px;
-  left: 312px;
-  top: 44px;
-  overflow: hidden;
+.sales-content {
+  position: relative;
   z-index: 2;
+  width: 100%;
 }
 
-.sales-cards {
-  display: flex;
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 24px;
-  transition: transform 0.28s ease;
+  justify-content: center;
+  justify-items: center;
+  /* keep cards centered in their columns */
 }
 
-.sales-arrows {
-  position: absolute;
-  width: 64px;
-  height: 32px;
-  left: 1152px;
-  top: 285px;
+/* Status container (loading, error, empty) styles */
+.status-container {
   display: flex;
-  z-index: 3;
-}
-
-.arrow {
-  width: 32px;
-  height: 32px;
-  border: 0;
-  border-radius: 100px;
-  background: transparent;
-  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  min-height: 240px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
 }
 
-.arrow img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
+.status-container.error {
+  color: #ffb4b4;
+  font-weight: 500;
 }
 
-@media (max-width: 1280px) {
-  .sales-cards-viewport {
-    width: calc(100% - 320px);
-  }
+/* CSS Spinner for loading state */
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 24px;
+}
 
-  .sales-arrows {
-    left: auto;
-    right: 8px;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
 @media (max-width: 900px) {
   .sales-section {
-    height: auto;
-    min-height: 540px;
-    padding-bottom: 56px;
-  }
-
-  .sales-left {
-    position: static;
-    width: auto;
-    height: auto;
-    padding: 24px 24px 0;
-  }
-
-  .sales-text {
-    width: auto;
-    height: auto;
-  }
-
-  .sales-text h2,
-  .sales-text p,
-  .sales-view-all {
-    position: static;
-  }
-
-  .sales-text p {
-    margin-top: 8px;
-  }
-
-  .sales-view-all {
-    margin-top: 24px;
-  }
-
-  .sales-cards-viewport {
-    position: static;
-    width: calc(100% - 24px);
-    height: auto;
-    margin-left: 12px;
-    padding-top: 16px;
-  }
-
-  .sales-cards {
-    overflow-x: auto;
-    padding-bottom: 8px;
-  }
-
-  .sales-arrows {
-    position: static;
-    margin: 12px 0 0 auto;
-    padding-right: 12px;
+    padding: 24px;
   }
 }
 
 @media (max-width: 600px) {
-  .sale-card {
-    width: 100%;
-  }
-
   .sales-random-shape {
     display: none;
   }
