@@ -333,6 +333,14 @@
     grid-template-columns: 1fr;
   }
 
+  .contact-item p {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    color: #CBCBCB;
+    margin: 0;
+  }
+
   .footer-bottom {
     height: auto;
     padding: 12px 0;
