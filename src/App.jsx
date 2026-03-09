@@ -5,6 +5,7 @@ import ProductSection from "./components/Landing page/ProductSection/ProductSect
 import NewProducts from "./components/Landing page/NewProducts/NewProducts";
 import PromoSection from "./components/Landing page/PromoSection/PromoSection";
 import WatchBanner from "./components/Landing page/WatchBanner/WatchBanner";
+import TopBrands from "./components/Landing page/TopBrands/TopBrands";
 import ServiceBar from "./components/Landing page/ServiceBar/ServiceBar";
 import Footer from "./components/Landing page/Footer/Footer";
 
@@ -18,6 +19,7 @@ function App() {
       <NewProducts />
       <PromoSection />
       <WatchBanner />
+      <TopBrands />
       <ServiceBar />
       <Footer />
     </>
