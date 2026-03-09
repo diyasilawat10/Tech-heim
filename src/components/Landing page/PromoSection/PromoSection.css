@@ -1,5 +1,4 @@
 .promo-container {
-  position: relative;
   width: 1224px;
   max-width: calc(100% - 24px);
   height: 420px;
@@ -13,23 +12,19 @@
 .banner-iphone,
 .banner-ps5 {
   position: relative;
-  height: 420px;
   border-radius: 8px;
+  overflow: hidden;
+  height: 420px;
 }
 
 .banner-iphone {
   width: 756px;
+  height: 420px;
   background: linear-gradient(286.99deg, #b0e9c9 1.99%, #1fb6cf 48.52%, #1975b9 98.92%);
-  overflow: hidden;
-}
-
-.banner-ps5 {
-  overflow: hidden;
 }
 
 .banner-iphone::before,
-.banner-iphone::after,
-.iphone-ellipse-left {
+.banner-iphone::after {
   content: '';
   position: absolute;
   box-sizing: border-box;
@@ -50,9 +45,35 @@
 }
 
 .iphone-ellipse-left {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  width: 118px;
+  height: 118px;
+  border: 20px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
   left: -70px;
   top: 18px;
   transform: rotate(90deg);
+}
+
+.iphone-dot-grid-left,
+.iphone-dot-grid-right {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+}
+
+.iphone-dot-grid-left {
+  left: 110px;
+  top: 398px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="44" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="rgba(255,255,255,0.3)"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/></g><g fill="%2391610F"><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="rgba(255,255,255,0.6)"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/></g></svg>');
+}
+
+.iphone-dot-grid-right {
+  left: 623px;
+  top: 339px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="44" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="rgba(255,255,255,0.3)"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="rgba(255,255,255,0.6)"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/></g></svg>');
 }
 
 .title-black {
@@ -112,13 +133,17 @@
 }
 
 .time-text {
-  width: 33px;
-  height: 17px;
-  font-weight: 300;
   font-size: 14px;
+  font-weight: 300;
   line-height: 17px;
-  text-align: center;
   color: #0c0c0c;
+}
+
+.iphone-content {
+  position: absolute;
+  left: 423px;
+  top: 119px;
+  width: 253px;
 }
 
 .sub-title-black {
@@ -180,27 +205,9 @@
   top: 112px;
 }
 
-.iphone-dot-grid-left,
-.iphone-dot-grid-right {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-}
-
-.iphone-dot-grid-left {
-  left: 110px;
-  top: 398px;
-  background-image: url('data:image/svg+xml;utf8,<svg width="44" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="rgba(255,255,255,0.3)"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/></g><g fill="%2391610F"><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="rgba(255,255,255,0.6)"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/></g></svg>');
-}
-
-.iphone-dot-grid-right {
-  left: 623px;
-  top: 339px;
-  background-image: url('data:image/svg+xml;utf8,<svg width="44" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="rgba(255,255,255,0.3)"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="rgba(255,255,255,0.6)"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/></g></svg>');
-}
-
 .banner-ps5 {
   width: 444px;
+  height: 420px;
   background: #005690;
 }
 
@@ -225,6 +232,25 @@
   border-radius: 50%;
 }
 
+.ps5-dot-grid-left,
+.ps5-dot-grid-right {
+  position: absolute;
+  width: 60px;
+  height: 44px;
+}
+
+.ps5-dot-grid-left {
+  left: 8px;
+  top: 269px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="60" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="%2391610F"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="%23FCC870"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="50" cy="2" r="2"/><circle cx="58" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="50" cy="10" r="2"/><circle cx="58" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="50" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="58" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="50" cy="34" r="2"/><circle cx="58" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/><circle cx="50" cy="42" r="2"/><circle cx="58" cy="42" r="2"/></g></svg>');
+}
+
+.ps5-dot-grid-right {
+  left: 372px;
+  top: 172px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="60" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="%2391610F"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="%23FCC870"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="50" cy="2" r="2"/><circle cx="58" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="50" cy="10" r="2"/><circle cx="58" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="50" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="58" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="50" cy="34" r="2"/><circle cx="58" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/><circle cx="50" cy="42" r="2"/><circle cx="58" cy="42" r="2"/></g></svg>');
+}
+
 .title-yellow {
   position: absolute;
   width: 158px;
@@ -240,11 +266,9 @@
 
 .img-ps5 {
   position: absolute;
-  width: 232px;
-  height: 182px;
-  left: 206px;
-  top: 146px;
-  object-fit: contain;
+  width: 210px;
+  left: 224px;
+  top: 158px;
 }
 
 .ps5-badge {
@@ -275,33 +299,66 @@
   gap: 8px;
 }
 
-.ps5-dot-grid-left,
-.ps5-dot-grid-right {
-  position: absolute;
-  width: 60px;
-  height: 44px;
-}
-
-.ps5-dot-grid-left {
-  left: 8px;
-  top: 269px;
-  background-image: url('data:image/svg+xml;utf8,<svg width="60" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="%2391610F"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="%23FCC870"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="50" cy="2" r="2"/><circle cx="58" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="50" cy="10" r="2"/><circle cx="58" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="50" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="58" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="50" cy="34" r="2"/><circle cx="58" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/><circle cx="50" cy="42" r="2"/><circle cx="58" cy="42" r="2"/></g></svg>');
-}
-
-.ps5-dot-grid-right {
-  left: 372px;
-  top: 172px;
-  background-image: url('data:image/svg+xml;utf8,<svg width="60" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="%2391610F"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="%23FCC870"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="50" cy="2" r="2"/><circle cx="58" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="50" cy="10" r="2"/><circle cx="58" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="50" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="58" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="50" cy="34" r="2"/><circle cx="58" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/><circle cx="50" cy="42" r="2"/><circle cx="58" cy="42" r="2"/></g></svg>');
+@media (max-width: 1280px) {
+  .promo-container {
+    width: calc(100% - 24px);
+  }
 }
 
 @media (max-width: 900px) {
   .promo-container {
     height: auto;
     flex-direction: column;
+    gap: 16px;
+    width: calc(100% - 24px);
   }
 
   .banner-iphone,
   .banner-ps5 {
     width: 100%;
+  }
+
+  .banner-iphone {
+    height: 500px;
+  }
+
+  .title-black {
+    left: 20px;
+    top: 20px;
+  }
+
+  .timer-container {
+    left: 20px;
+    top: 64px;
+  }
+
+  .iphone-content {
+    left: 20px;
+    top: 130px;
+    width: calc(100% - 40px);
+    max-width: 280px;
+  }
+
+  .img-iphone {
+    left: -40px;
+    top: 235px;
+    height: 250px;
+  }
+
+  .banner-ps5 {
+    height: 380px;
+  }
+
+  .img-ps5 {
+    left: auto;
+    right: 16px;
+    top: 142px;
+    width: 200px;
+  }
+
+  .ps5-footer {
+    left: 20px;
+    top: 230px;
+    gap: 24px;
   }
 }
