@@ -1,12 +1,12 @@
 .promo-container {
-  position: relative;
-  width: min(1224px, 100%);
+  width: 1224px;
+  max-width: calc(100% - 24px);
   height: 420px;
-  margin: 50px auto;
+  margin: 40px auto;
   display: flex;
   gap: 24px;
-  justify-content: center;
   font-family: 'Inter', sans-serif;
+  overflow: hidden;
 }
 
 .banner-iphone,
@@ -14,6 +14,7 @@
   position: relative;
   border-radius: 8px;
   overflow: hidden;
+  height: 420px;
 }
 
 .banner-iphone {
@@ -26,6 +27,7 @@
 .banner-iphone::after {
   content: '';
   position: absolute;
+  box-sizing: border-box;
   width: 118px;
   height: 118px;
   border: 20px solid rgba(255, 255, 255, 0.5);
@@ -42,34 +44,50 @@
   top: 329px;
 }
 
+.iphone-ellipse-left {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  width: 118px;
+  height: 118px;
+  border: 20px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  left: -70px;
+  top: 18px;
+  transform: rotate(90deg);
+}
+
 .iphone-dot-grid-left,
 .iphone-dot-grid-right {
   position: absolute;
   width: 44px;
   height: 44px;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.55) 2px, transparent 2px);
-  background-size: 8px 8px;
 }
 
 .iphone-dot-grid-left {
   left: 110px;
   top: 398px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="44" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="rgba(255,255,255,0.3)"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/></g><g fill="%2391610F"><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="rgba(255,255,255,0.6)"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/></g></svg>');
 }
 
 .iphone-dot-grid-right {
   left: 623px;
   top: 339px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="44" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="rgba(255,255,255,0.3)"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="rgba(255,255,255,0.6)"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/></g></svg>');
 }
 
 .title-black {
   position: absolute;
+  width: 190px;
+  height: 29px;
   left: 48px;
   top: 24px;
   margin: 0;
-  font-size: 24px;
   font-weight: 500;
+  font-size: 24px;
   line-height: 29px;
   color: #0c0c0c;
+  text-align: left;
 }
 
 .title-iphone-dark {
@@ -82,6 +100,8 @@
 
 .timer-container {
   position: absolute;
+  width: 244px;
+  height: 46px;
   left: 429px;
   top: 44px;
   display: flex;
@@ -98,13 +118,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 4px 8px;
   gap: 2px;
 }
 
 .time-num {
-  font-size: 16px;
+  width: 33px;
+  height: 19px;
   font-weight: 500;
+  font-size: 16px;
   line-height: 19px;
+  text-align: center;
   color: #0c0c0c;
 }
 
@@ -123,17 +147,28 @@
 }
 
 .sub-title-black {
-  margin: 0 0 7px;
+  position: absolute;
+  width: 253px;
+  height: 24px;
+  left: 423px;
+  top: 119px;
+  margin: 0;
+  font-weight: 600;
   font-size: 20px;
-  font-weight: 500;
   line-height: 24px;
+  text-align: left;
   color: #0c0c0c;
 }
 
 .desc-text {
-  margin: 0 0 24px;
-  font-size: 16px;
+  position: absolute;
+  width: 248px;
+  height: 120px;
+  left: 436px;
+  top: 150px;
+  margin: 0;
   font-weight: 300;
+  font-size: 16px;
   line-height: 24px;
   color: #2d2d2d;
 }
@@ -142,24 +177,32 @@
   border: 0;
   border-radius: 8px;
   background: #0c68f4;
-  color: #fff;
+  color: #ffffff;
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
   font-weight: 400;
+  font-size: 16px;
   line-height: 19px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
 .register-btn {
+  position: absolute;
   width: 134px;
   height: 48px;
+  left: 484px;
+  top: 295px;
+  padding: 8px 16px;
+  gap: 8px;
 }
 
 .img-iphone {
   position: absolute;
+  height: 282px;
   left: 24px;
   top: 112px;
-  height: 282px;
 }
 
 .banner-ps5 {
@@ -194,29 +237,29 @@
   position: absolute;
   width: 60px;
   height: 44px;
-  background-image: radial-gradient(circle, #91610f 2px, transparent 2px);
-  background-size: 8px 8px;
 }
 
 .ps5-dot-grid-left {
   left: 8px;
   top: 269px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="60" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="%2391610F"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="%23FCC870"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="50" cy="2" r="2"/><circle cx="58" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="50" cy="10" r="2"/><circle cx="58" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="50" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="58" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="50" cy="34" r="2"/><circle cx="58" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/><circle cx="50" cy="42" r="2"/><circle cx="58" cy="42" r="2"/></g></svg>');
 }
 
 .ps5-dot-grid-right {
   left: 372px;
   top: 172px;
-  background-image: radial-gradient(circle, #fcc870 2px, transparent 2px);
+  background-image: url('data:image/svg+xml;utf8,<svg width="60" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="%2391610F"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="%23FCC870"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="50" cy="2" r="2"/><circle cx="58" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="50" cy="10" r="2"/><circle cx="58" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="50" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="58" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="50" cy="34" r="2"/><circle cx="58" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/><circle cx="50" cy="42" r="2"/><circle cx="58" cy="42" r="2"/></g></svg>');
 }
 
 .title-yellow {
   position: absolute;
+  width: 158px;
+  height: 29px;
+  left: calc(50% - 158px / 2);
   top: 32px;
-  left: 50%;
-  transform: translateX(-50%);
   margin: 0;
-  font-size: 24px;
   font-weight: 500;
+  font-size: 24px;
   line-height: 29px;
   color: #fcc870;
 }
@@ -228,27 +271,32 @@
   top: 158px;
 }
 
-.ps5-footer {
-  position: absolute;
-  left: 62px;
-  top: 255px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 59px;
-}
-
 .ps5-badge {
+  position: absolute;
+  width: 195px;
+  height: 24px;
+  left: calc(50% - 195px / 2 - 81px);
+  top: 254px;
   margin: 0;
-  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
   font-weight: 500;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: left;
+  white-space: nowrap;
   color: #005690;
 }
 
 .buy-btn {
+  position: absolute;
   width: 148px;
   height: 46px;
+  left: calc(50% - 148px / 2 - 82px);
+  top: 338px;
+  padding: 8px 16px;
+  gap: 8px;
 }
 
 @media (max-width: 1280px) {

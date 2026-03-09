@@ -15,6 +15,7 @@ const PromoSection = () => {
     <section className="promo-container">
       {/* IPHONE 15 BOX */}
       <div className="banner-iphone">
+        <div className="iphone-ellipse-left" aria-hidden="true" />
         <div className="iphone-dot-grid-left" aria-hidden="true" />
         <div className="iphone-dot-grid-right" aria-hidden="true" />
 
@@ -22,7 +23,7 @@ const PromoSection = () => {
           <span className="title-iphone-dark">Iphone </span>
           <span className="title-iphone-light">15 Series</span>
         </h2>
-        
+
         <div className="timer-container">
           {timerUnits.map((item, index) => (
             <div key={index} className="timer-box">
@@ -35,7 +36,7 @@ const PromoSection = () => {
         <div className="iphone-content">
           <h3 className="sub-title-black">It feels good to be the first</h3>
           <p className="desc-text">
-            Get ready for the future of smartphones. Experience innovation like never before. 
+            Get ready for the future of smartphones. Experience innovation like never before.
             Stay tuned for the big iPhone 15 pre-sale.
           </p>
           <button className="btn-primary register-btn">Register Now</button>
@@ -52,11 +53,9 @@ const PromoSection = () => {
 
         <h2 className="title-yellow">Play Station 5</h2>
         <img src={ps5Img} alt="PS5" className="img-ps5" />
-        
-        <div className="ps5-footer">
-          <div className="ps5-badge">Digital Edition + 2TB</div>
-          <button className="btn-primary buy-btn">Buy Now</button>
-        </div>
+
+        <div className="ps5-badge">Digital Edition + 2TB</div>
+        <button className="btn-primary buy-btn">Buy Now</button>
       </div>
     </section>
   );

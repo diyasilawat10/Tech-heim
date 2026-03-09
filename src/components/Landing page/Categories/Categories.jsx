@@ -8,7 +8,7 @@ import smartwatchImg from '../../../assets/images/smartwatch.png';
 
 function Categories() {
   return (
-    <section className="section">
+    <section className="categories-section">
       <div className="container categories">
 
         <div className="category">

@@ -26,15 +26,22 @@
 }
 
 .product-image-container {
-  width: 256px;
-  height: 190px;
-
   flex: none;
   order: 0;
   align-self: stretch;
   flex-grow: 0;
   z-index: 0;
   position: relative;
+  width: 184px;
+  height: 237px;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .product-image {
@@ -183,8 +190,6 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 24px;
-  display: flex;
-  align-items: flex-start;
 
   color: #0C0C0C;
 
@@ -320,4 +325,20 @@
   flex: none;
   order: 1;
   flex-grow: 0;
+}
+
+.discount-badge {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  min-width: 40px;
+  height: 23px;
+  padding: 4px 6px;
+  border-radius: 0 8px 8px 0;
+  background: #fddbc9;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 300;
+  color: #f45e0c;
 }

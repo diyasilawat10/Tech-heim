@@ -1,4 +1,9 @@
 /* Categories styles */
+.categories-section {
+  padding-top: 80px;
+  padding-bottom: 0;
+}
+
 .categories {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

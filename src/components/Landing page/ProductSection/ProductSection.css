@@ -1,119 +1,193 @@
-/* Sales/product section styles */
-
+.sales-wrapper {
+  width: 100%;
+  padding: 0;
+}
 
 .sales-section {
-  background: #17458F;
-  border-radius: 12px;
-  padding: 80px 40px;
   position: relative;
+  width: 1224px;
+  max-width: calc(100% - 24px);
+  height: 325px;
+  margin: 48px auto;
+  background: #063a88;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .sales-random-shape {
   position: absolute;
-  width: 900px;
-  height: 700px;
-  left: -150px;
-  top: -120px;
-  bottom: auto;
-  background-repeat: no-repeat;
-  transform: rotate(100deg);
-  opacity: 0.2;
-  z-index: 0;
-}
-
-.sales-layout {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-  position: relative;
-  z-index: 2;
+  width: 500.44px;
+  height: 435.65px;
+  left: -156px;
+  top: calc(50% - 435.65px / 2 - 76px);
+  transform: rotate(100.63deg);
+  pointer-events: none;
+  opacity: 0.10;
 }
 
 .sales-left {
-  width: 300px;
-  flex-shrink: 0;
-  padding-left: 80px;
+  position: absolute;
+  left: 32px;
+  top: 62px;
+  width: 230px;
+  height: 201px;
+  z-index: 2;
+}
+
+.sales-text {
+  position: relative;
+  width: 230px;
+  height: 127px;
 }
 
 .sales-text h2 {
-  font-size: 42px;
-  font-weight: 600;
-  color: #ffffff;
+  position: absolute;
+  width: 198px;
+  height: 29px;
+  left: 0;
+  top: 0;
   margin: 0;
-  line-height: 1.2;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #ffffff;
 }
 
 .sales-text p {
-  font-size: 26px;
+  position: absolute;
+  width: 102px;
+  height: 28px;
+  left: 48px;
+  top: 37px;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
   font-weight: 300;
-  margin-top: 12px;
+  font-size: 20px;
+  line-height: 28px;
   color: #ffffff;
 }
 
-.view-all-btn {
-  margin-top: 18px;
+.sales-view-all {
+  position: absolute;
+  left: 48px;
+  top: 182px;
+  margin: 0;
+  border: 0;
   background: transparent;
-  border: 1px solid #ffffff;
-  color: #ffffff;
-  padding: 6px 14px;
-  border-radius: 4px;
-  font-size: 13px;
-  cursor: pointer;
+  color: #dce9ff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.sales-cards-viewport {
+  position: absolute;
+  width: 904px;
+  height: 237px;
+  left: 312px;
+  top: 44px;
+  overflow: hidden;
+  z-index: 2;
 }
 
 .sales-cards {
   display: flex;
-  gap: 32px;
-  overflow: hidden;
-  flex: 1;
-  /* allow a bit of the next card to peek */
-  padding-right: 100px;
+  gap: 24px;
+  transition: transform 0.28s ease;
 }
 
 .sales-arrows {
   position: absolute;
-  right: 60px;
-  bottom: 20px;
+  width: 64px;
+  height: 32px;
+  left: 1152px;
+  top: 285px;
   display: flex;
-  gap: 14px;
   z-index: 3;
 }
 
 .arrow {
-  cursor: pointer;
-  width: 48px;
-  height: 48px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 100px;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
-}
-
-.arrow:hover {
-  background: rgba(255,255,255,0.5);
+  padding: 0;
 }
 
 .arrow img {
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
-@media (max-width: 1100px) {
-  .sales-layout {
-    flex-direction: column;
-    align-items: flex-start;
+@media (max-width: 1280px) {
+  .sales-cards-viewport {
+    width: calc(100% - 320px);
+  }
+
+  .sales-arrows {
+    left: auto;
+    right: 8px;
+  }
+}
+
+@media (max-width: 900px) {
+  .sales-section {
+    height: auto;
+    min-height: 540px;
+    padding-bottom: 56px;
+  }
+
+  .sales-left {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 24px 24px 0;
+  }
+
+  .sales-text {
+    width: auto;
+    height: auto;
+  }
+
+  .sales-text h2,
+  .sales-text p,
+  .sales-view-all {
+    position: static;
+  }
+
+  .sales-text p {
+    margin-top: 8px;
+  }
+
+  .sales-view-all {
+    margin-top: 24px;
+  }
+
+  .sales-cards-viewport {
+    position: static;
+    width: calc(100% - 24px);
+    height: auto;
+    margin-left: 12px;
+    padding-top: 16px;
   }
 
   .sales-cards {
-    flex-wrap: wrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
   }
 
   .sales-arrows {
     position: static;
-    margin-top: 30px;
+    margin: 12px 0 0 auto;
+    padding-right: 12px;
   }
 }
 
