@@ -6,6 +6,7 @@ import NewProducts from "./components/Landing page/NewProducts/NewProducts";
 import PromoSection from "./components/Landing page/PromoSection/PromoSection";
 import WatchBanner from "./components/Landing page/WatchBanner/WatchBanner";
 import TopBrands from "./components/Landing page/TopBrands/TopBrands";
+import BlogsSection from "./components/Landing page/BlogsSection/BlogsSection";
 import ServiceBar from "./components/Landing page/ServiceBar/ServiceBar";
 import Footer from "./components/Landing page/Footer/Footer";
 
@@ -20,6 +21,7 @@ function App() {
       <PromoSection />
       <WatchBanner />
       <TopBrands />
+      <BlogsSection />
       <ServiceBar />
       <Footer />
     </>
