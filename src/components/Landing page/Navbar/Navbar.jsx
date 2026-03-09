@@ -3,9 +3,9 @@ import logoImg from '../../../assets/icons/logo.svg';
 import searchIcon from '../../../assets/icons/search-normal.svg';
 import bagIcon from '../../../assets/icons/basket.svg';
 import userIcon from '../../../assets/icons/profile.svg';
+import { navLinks } from '../../../constants/mockData';
 
 function Navbar() {
-  const navLinks = ['Home', 'Products', 'Blog', 'FAQ', 'Contact Us'];
 
   return (
     <header className="header">

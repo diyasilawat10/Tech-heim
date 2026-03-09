@@ -2,14 +2,9 @@ import React from 'react';
 import './PromoSection.css';
 import iphoneImg from '../../../assets/images/iphones.png';
 import ps5Img from '../../../assets/images/ps53.png';
+import { timerUnits } from '../../../constants/mockData';
 
 const PromoSection = () => {
-  const timerUnits = [
-    { value: '8', label: 'Days' },
-    { value: '8', label: 'Days' },
-    { value: '8', label: 'Days' },
-    { value: '8', label: 'Days' }
-  ];
 
   return (
     <section className="promo-container">
