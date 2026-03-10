@@ -18,9 +18,9 @@ export const navLinks = ['Home', 'Products', 'Blog', 'FAQ', 'Contact Us'];
 
 export const timerUnits = [
     { value: '08', label: 'Days' },
-    { value: '24', label: 'Hours' },
-    { value: '36', label: 'Minutes' },
-    { value: '59', label: 'Seconds' },
+    { value: '08', label: 'Hours' },
+    { value: '08', label: 'Minutes' },
+    { value: '08', label: 'Seconds' },
 ];
 
 export const saleProducts = [
@@ -89,10 +89,11 @@ export const newProducts = [
     {
         id: 4,
         title: 'VR VisionTech X1',
-        price: '2499.00',
+        price: '1,399.00',
         image: headsetImg,
         colors: ['#B4B4B4'],
         hasHeart: false,
+        rate: '3.9',
     },
     {
         id: 5,

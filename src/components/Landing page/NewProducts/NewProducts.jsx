@@ -1,12 +1,12 @@
 import React from 'react';
 import './NewProducts.css';
 import ProductCard from '../ProductCard/ProductCard';
-import arrowRightIcon from '../../../assets/icons/arrow-right.svg';
+import arrowRightIcon from '../../../assets/icons/arrow-circle-right.svg';
 import { newProducts } from '../../../constants/mockData';
 
 function NewProducts() {
     return (
-        <section className="new-products-section section">
+        <section className="new-products-section">
             <div className="container">
                 <div className="new-products-header">
                     <h2 className="new-products-title">New Products</h2>
@@ -27,6 +27,7 @@ function NewProducts() {
                             image={product.image}
                             colors={product.colors}
                             hasHeart={product.hasHeart}
+                            rate={product.rate}
                         />
                     ))}
                 </div>

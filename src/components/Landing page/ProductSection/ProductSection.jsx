@@ -48,6 +48,7 @@ function ProductSection() {
                 price={item.price}
                 discount={item.discount}
                 image={item.image}
+                isSmall={true}
               />
             ))}
           </div>

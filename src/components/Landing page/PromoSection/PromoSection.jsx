@@ -23,7 +23,7 @@ const PromoSection = () => {
           {timerUnits.map((item, index) => (
             <div key={index} className="timer-box">
               <span className="time-num">{item.value}</span>
-              <span className="time-text">{item.label}</span>
+              <span className="time-text">Days</span>
             </div>
           ))}
         </div>

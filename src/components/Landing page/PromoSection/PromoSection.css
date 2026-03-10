@@ -2,7 +2,7 @@
   width: 1224px;
   max-width: calc(100% - 24px);
   height: 420px;
-  margin: 40px auto;
+  margin: 48px auto;
   display: flex;
   gap: 24px;
   font-family: 'Inter', sans-serif;
@@ -42,10 +42,22 @@
 .banner-iphone::after {
   left: 661px;
   top: 329px;
+  transform: rotate(-90deg);
+  opacity: 0.5;
+}
+
+.iphone-ring-bottom {
+  position: absolute;
+  box-sizing: border-box;
+  width: 118px;
+  height: 118px;
+  border: 20px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  left: 686px;
+  top: 323px;
 }
 
 .iphone-ellipse-left {
-  content: '';
   position: absolute;
   box-sizing: border-box;
   width: 118px;
@@ -87,7 +99,7 @@
   font-size: 24px;
   line-height: 29px;
   color: #0c0c0c;
-  text-align: left;
+  text-align: center;
 }
 
 .title-iphone-dark {
@@ -150,13 +162,13 @@
   position: absolute;
   width: 253px;
   height: 24px;
-  left: 423px;
-  top: 119px;
+  left: 0;
+  top: 0;
   margin: 0;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 20px;
   line-height: 24px;
-  text-align: left;
+  text-align: center;
   color: #0c0c0c;
 }
 
@@ -164,8 +176,8 @@
   position: absolute;
   width: 248px;
   height: 120px;
-  left: 436px;
-  top: 150px;
+  left: 13px;
+  top: 31px;
   margin: 0;
   font-weight: 300;
   font-size: 16px;
@@ -192,17 +204,19 @@
   position: absolute;
   width: 134px;
   height: 48px;
-  left: 484px;
-  top: 295px;
+  left: 61px;
+  top: 176px;
   padding: 8px 16px;
   gap: 8px;
 }
 
 .img-iphone {
   position: absolute;
+  width: 378px;
   height: 282px;
   left: 24px;
   top: 112px;
+  object-fit: contain;
 }
 
 .banner-ps5 {
@@ -220,7 +234,9 @@
   top: -102px;
   background: #fcc870;
   border-radius: 50%;
+  z-index: 0;
 }
+
 
 .ps5-wave {
   position: absolute;
@@ -246,6 +262,7 @@
 }
 
 .ps5-dot-grid-right {
+  display: block;
   left: 372px;
   top: 172px;
   background-image: url('data:image/svg+xml;utf8,<svg width="60" height="44" xmlns="http://www.w3.org/2000/svg"><g fill="%2391610F"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/><circle cx="26" cy="2" r="2"/><circle cx="2" cy="10" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="26" cy="10" r="2"/><circle cx="2" cy="18" r="2"/><circle cx="10" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="26" cy="18" r="2"/><circle cx="2" cy="26" r="2"/><circle cx="10" cy="26" r="2"/><circle cx="18" cy="26" r="2"/><circle cx="26" cy="26" r="2"/><circle cx="2" cy="34" r="2"/><circle cx="10" cy="34" r="2"/><circle cx="18" cy="34" r="2"/><circle cx="26" cy="34" r="2"/><circle cx="2" cy="42" r="2"/><circle cx="10" cy="42" r="2"/><circle cx="18" cy="42" r="2"/><circle cx="26" cy="42" r="2"/></g><g fill="%23FCC870"><circle cx="34" cy="2" r="2"/><circle cx="42" cy="2" r="2"/><circle cx="50" cy="2" r="2"/><circle cx="58" cy="2" r="2"/><circle cx="34" cy="10" r="2"/><circle cx="42" cy="10" r="2"/><circle cx="50" cy="10" r="2"/><circle cx="58" cy="10" r="2"/><circle cx="34" cy="18" r="2"/><circle cx="42" cy="18" r="2"/><circle cx="50" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="34" cy="26" r="2"/><circle cx="42" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="58" cy="26" r="2"/><circle cx="34" cy="34" r="2"/><circle cx="42" cy="34" r="2"/><circle cx="50" cy="34" r="2"/><circle cx="58" cy="34" r="2"/><circle cx="34" cy="42" r="2"/><circle cx="42" cy="42" r="2"/><circle cx="50" cy="42" r="2"/><circle cx="58" cy="42" r="2"/></g></svg>');

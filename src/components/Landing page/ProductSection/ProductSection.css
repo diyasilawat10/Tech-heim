@@ -99,6 +99,11 @@
   transition: transform 0.28s ease;
 }
 
+.sales-cards>* {
+  flex: 0 0 184px;
+  height: 237px;
+}
+
 .sales-arrows {
   position: absolute;
   width: 64px;
