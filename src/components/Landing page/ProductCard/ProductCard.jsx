@@ -11,6 +11,8 @@ function ProductCard({
   hasHeart: initialHasHeart,
   rate = '4.5',
   isSmall = false,
+  showHeart = false,
+  heartOnHover = false,
 }) {
   const [isFavorited, setIsFavorited] = useState(initialHasHeart || false);
   const visibleColors = Array.isArray(colors) ? colors.slice(0, 3) : [];
@@ -24,9 +26,9 @@ function ProductCard({
   };
 
   return (
-    <div className={`sale-card ${isSmall ? 'small' : ''}`}>
+    <div className={`sale-card ${isSmall ? 'small' : ''} ${heartOnHover ? 'heart-on-hover' : ''}`}>
       <div className="product-image-container">
-        {!isSmall && (
+        {!isSmall && showHeart && (
           <div className="product-heart" onClick={toggleFavorite} role="button" aria-label="Toggle favorite">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path

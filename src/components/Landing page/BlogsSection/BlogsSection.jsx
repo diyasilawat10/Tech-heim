@@ -137,7 +137,7 @@ const BlogsSection = () => {
   const isBitcoinSaved = savedBlogs.includes('bitcoin-blog');
 
   return (
-    <section className="blogs-section">
+    <section className="blogs-section main-container main-section">
       <div className="blogs-header-wrap">
         <div className="blogs-header-row">
           <h2 className="blogs-title">Our Blogs</h2>
@@ -146,7 +146,7 @@ const BlogsSection = () => {
             <img src={arrowCircleRightIcon} alt="" aria-hidden="true" className="blogs-view-arrow-icon" />
           </button>
         </div>
-        <div className="blogs-divider" />
+        <div className="blogs-divider section-divider" />
       </div>
 
       <div className="blogs-content">
@@ -203,9 +203,15 @@ const BlogsSection = () => {
                 </p>
               </div>
               <div className="blog-horizontal-footer">
-                <div className="blog-meta-item">
-                  <CalendarIcon />
-                  <span>March , 28 , 2023</span>
+                <div className="blog-horizontal-meta">
+                  <div className="blog-meta-item">
+                    <CalendarIcon />
+                    <span>March , 28 , 2023</span>
+                  </div>
+                  <div className="blog-meta-item blog-meta-time">
+                    <TimerIcon />
+                    <span>5 min read</span>
+                  </div>
                 </div>
                 <button
                   className={`blog-save-btn${isHeadphoneSaved ? ' is-saved' : ''}`}
@@ -236,9 +242,15 @@ const BlogsSection = () => {
                 </p>
               </div>
               <div className="blog-horizontal-footer">
-                <div className="blog-meta-item">
-                  <CalendarIcon />
-                  <span>August , 17 , 2023</span>
+                <div className="blog-horizontal-meta">
+                  <div className="blog-meta-item">
+                    <CalendarIcon />
+                    <span>August , 17 , 2023</span>
+                  </div>
+                  <div className="blog-meta-item blog-meta-time">
+                    <TimerIcon />
+                    <span>4 min read</span>
+                  </div>
                 </div>
                 <button
                   className={`blog-save-btn blog-save-on-hover${isBitcoinSaved ? ' is-saved' : ''}`}
