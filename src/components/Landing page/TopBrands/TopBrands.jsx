@@ -1,4 +1,5 @@
 import './TopBrands.css';
+import arrowRightIcon from '../../../assets/icons/arrow-circle-right.svg';
 import appleLogo from '../../../assets/icons/applelogo.svg';
 import sonyLogo from '../../../assets/icons/sonylogo.svg';
 import samsungLogo from '../../../assets/icons/samsunglogo.svg';
@@ -8,10 +9,16 @@ import lenovoLogo from '../../../assets/icons/lenovologo.svg';
 
 function TopBrands() {
   return (
-    <section className="top-brands-wrapper">
+    <section className="top-brands-wrapper main-container main-section">
       <div className="top-brands-header">
-        <h2>Top Brands</h2>
-        <div className="top-brands-line" />
+        <div className="top-brands-header-row">
+          <h2>Top Brands</h2>
+          <button type="button" className="top-brands-view-all">
+            <span>View all</span>
+            <img src={arrowRightIcon} alt="" aria-hidden="true" />
+          </button>
+        </div>
+        <div className="top-brands-line section-divider" />
       </div>
 
       <div className="top-brands-logos" aria-label="Top brands">

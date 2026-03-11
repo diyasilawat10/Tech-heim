@@ -48,19 +48,19 @@ const BestSellers = () => {
   ];
 
   return (
-    <section className="best-sellers-container">
+    <section className="best-sellers-container main-container main-section">
       <div className="best-sellers-header">
         <div className="best-sellers-header-top">
           <h2 className="best-sellers-title">Best Sellers</h2>
-          <a href="#" className="view-all-link">
+          <button type="button" className="view-all-link">
             View all
-            <img src={arrowCircleRightIcon} alt="Arrow Circle Right" className="view-all-link-icon" />
-          </a>
+            <img src={arrowCircleRightIcon} alt="" aria-hidden="true" className="view-all-link-icon" />
+          </button>
         </div>
-        <div className="best-sellers-divider"></div>
+        <div className="section-divider"></div>
       </div>
 
-      <div className="best-sellers-grid">
+      <div className="best-sellers-grid product-grid">
         {products.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}

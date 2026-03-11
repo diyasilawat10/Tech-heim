@@ -5,14 +5,14 @@ import ellipseImage from '../../../assets/icons/Ellipse 525.svg';
 
 const WatchBanner = () => {
   return (
-    <section className="watch-banner">
+    <section className="watch-banner main-container main-section">
       <img src={ellipseImage} alt="" aria-hidden="true" className="watch-banner__ellipse" />
 
       <div className="watch-banner__content">
         <h2 className="watch-banner__title">SMART WATCH</h2>
         <p className="watch-banner__subtitle">Various designs and brands</p>
         <button className="watch-banner__button">
-          <span className="watch-banner__button-label">view</span>
+          <span className="watch-banner__button-label">Shop Now</span>
         </button>
       </div>
 

@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 .blogs-section {
-  width: 1224px;
-  max-width: calc(100% - 24px);
+  width: 100%;
   height: 433px;
-  margin: 48px auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -13,8 +12,7 @@
 }
 
 .blogs-header-wrap {
-  width: 1224px;
-  max-width: 100%;
+  width: 100%;
   height: 65px;
   display: flex;
   flex-direction: column;
@@ -22,8 +20,7 @@
 }
 
 .blogs-header-row {
-  width: 1220px;
-  max-width: 100%;
+  width: 100%;
   height: 48px;
   display: flex;
   justify-content: space-between;
@@ -74,15 +71,11 @@
 }
 
 .blogs-divider {
-  width: 1224px;
-  max-width: 100%;
-  border-top: 2px solid #b4b4b4;
-  transform: rotate(-0.05deg);
+  width: 100%;
 }
 
 .blogs-content {
-  width: 1224px;
-  max-width: 100%;
+  width: 100%;
   height: 336px;
   display: flex;
   align-items: flex-start;
@@ -331,6 +324,8 @@
   flex-direction: column;
   justify-content: center;
   gap: 16px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .blog-horizontal-info-compact {
@@ -348,6 +343,7 @@
   flex-direction: column;
   gap: 8px;
   overflow: hidden;
+  flex: none;
 }
 
 .blog-horizontal-title {
@@ -365,6 +361,9 @@
   align-self: stretch;
   flex-grow: 0;
   transition: color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .blog-horizontal-title-highlight {
@@ -413,6 +412,16 @@
   order: 1;
   align-self: stretch;
   flex-grow: 0;
+  box-sizing: border-box;
+}
+
+.blog-horizontal-meta {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  min-width: 0;
 }
 
 .blog-horizontal-footer .blog-meta-item {
@@ -420,10 +429,11 @@
   flex-direction: row;
   align-items: center;
   padding: 0px;
-  gap: 2px;
+  gap: 8px;
   flex: none;
   order: 0;
   flex-grow: 1;
+  min-width: 0;
 }
 
 .blog-horizontal-footer .blog-meta-item span {
@@ -470,6 +480,10 @@
 .blog-card-bitcoin .blog-horizontal-title,
 .blog-card-bitcoin .blog-horizontal-desc,
 .blog-card-bitcoin .blog-horizontal-footer {
+  width: 540px;
+}
+
+.blog-card-bitcoin .blog-horizontal-meta {
   width: 540px;
 }
 
@@ -548,13 +562,6 @@
 }
 
 @media (max-width: 900px) {
-  .blogs-header-row {
-    height: auto;
-    gap: 8px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .blogs-header-wrap {
     height: auto;
   }
@@ -590,5 +597,192 @@
   .blog-horizontal-footer {
     width: 100%;
     padding-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .blogs-section {
+    height: auto;
+    gap: 16px;
+  }
+
+  .blogs-header-wrap {
+    height: 40px;
+    gap: 0;
+  }
+
+  .blogs-header-row {
+    height: 40px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .blogs-title {
+    width: 75px;
+    height: 24px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .blogs-view-all {
+    width: 91px;
+    height: 40px;
+    padding: 8px;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .blogs-view-all span {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .blogs-view-arrow-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .blogs-content,
+  .blog-right-stack {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .blog-card-large,
+  .blog-card-horizontal,
+  .blog-card-bitcoin {
+    width: 100%;
+    height: 267px;
+    border-radius: 4px;
+    box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12);
+    overflow: hidden;
+  }
+
+  .blog-card-large {
+    gap: 8px;
+  }
+
+  .blog-card-horizontal,
+  .blog-card-bitcoin {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .blog-large-image,
+  .blog-horizontal-image {
+    width: 100%;
+    height: 140px;
+    border-radius: 4px 4px 0 0;
+    object-fit: cover;
+  }
+
+  .blog-large-info,
+  .blog-horizontal-info,
+  .blog-horizontal-info-compact {
+    width: 100%;
+    height: 119px;
+    padding: 0 16px 16px;
+    box-sizing: border-box;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .blog-meta-row,
+  .blog-horizontal-footer {
+    width: 100%;
+    height: 20px;
+    gap: 0;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .blog-meta-date,
+  .blog-meta-time,
+  .blog-horizontal-footer .blog-meta-item {
+    width: auto;
+    height: 20px;
+    margin: 0;
+    gap: 4px;
+    flex-grow: 0;
+  }
+
+  .blog-horizontal-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .blog-meta-item span,
+  .blog-horizontal-footer .blog-meta-item span,
+  .blog-meta-time span {
+    width: auto;
+    font-size: 12px;
+    line-height: 15px;
+    color: #9e9e9e;
+  }
+
+  .blog-large-heading,
+  .blog-horizontal-title,
+  .blog-card-bitcoin .blog-horizontal-title {
+    width: 100%;
+    height: auto;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+    white-space: normal;
+    color: #0c0c0c;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .blog-large-text,
+  .blog-horizontal-desc,
+  .blog-card-bitcoin .blog-horizontal-desc {
+    width: 100%;
+    height: auto;
+    font-size: 12px;
+    line-height: 15px;
+    color: #9e9e9e;
+    -webkit-line-clamp: 2;
+  }
+
+  .blog-large-extra,
+  .blog-save-on-hover {
+    display: none;
+  }
+
+  .blog-horizontal-copy,
+  .blog-card-bitcoin .blog-horizontal-copy,
+  .blog-card-bitcoin .blog-horizontal-title,
+  .blog-card-bitcoin .blog-horizontal-desc,
+  .blog-card-bitcoin .blog-horizontal-footer {
+    width: 100%;
+  }
+
+  .blog-horizontal-copy {
+    height: auto;
+    gap: 4px;
+  }
+
+  .blog-save-btn {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+  }
+
+  .blog-save-on-hover {
+    display: flex;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
   }
 }
