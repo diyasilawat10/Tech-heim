@@ -8,5 +8,5 @@
   width: 1440px;
   margin: 0 auto;
   position: relative;
-  min-height: 500px; /* Ensure enough space for absolute elements */
+  min-height: 2200px; /* Increased to accommodate tall absolute Filters sidebar */
 }

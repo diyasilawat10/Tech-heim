@@ -1,0 +1,87 @@
+.filter-chips-wrapper {
+  position: absolute;
+  width: 728px;
+  height: 40px;
+  left: 108px;
+  top: 266px; /* 366px - 100px (header) */
+  display: flex;
+  align-items: center;
+}
+
+.filter-chips {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.filter-chip {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+  gap: 8px;
+  height: 40px;
+  min-width: 133px; /* Default from Figma */
+  border: 1px solid #0C0C0C;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Specific width for some chips as seen in Figma if needed, 
+   but auto-width with padding is usually better. 
+   Keeping 133px as min-width to match the "Chips" snippet for standard ones. */
+
+.filter-chip:hover {
+  border: 1px solid #0C68F4;
+}
+
+.chip-label {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #0C0C0C;
+  flex: 1;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover .chip-label {
+  color: #0C68F4;
+}
+
+.chip-close-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.chip-close-icon img {
+  width: 24px;
+  height: 24px;
+  /* Filter to change SVG color to primary blue on hover */
+  /* #0C68F4 filter: invert(34%) sepia(87%) saturate(2853%) hue-rotate(208deg) brightness(98%) contrast(97%) */
+}
+
+.filter-chip:hover .chip-close-icon img {
+  filter: invert(34%) sepia(87%) saturate(2853%) hue-rotate(208deg) brightness(98%) contrast(97%);
+}
+
+/* Responsiveness */
+@media (max-width: 1440px) {
+  .filter-chips-wrapper {
+    left: 20px;
+    width: calc(100% - 40px);
+  }
+}
