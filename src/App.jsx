@@ -1,3 +1,5 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from "./components/Landing page/Navbar/Navbar";
 import Hero from "./components/Landing page/HeroSection/Hero";
 import Categories from "./components/Landing page/Categories/Categories";
@@ -10,23 +12,33 @@ import WatchBanner from "./components/Landing page/WatchBanner/WatchBanner";
 import BlogsSection from "./components/Landing page/BlogsSection/BlogsSection";
 import ServiceBar from "./components/Landing page/ServiceBar/ServiceBar";
 import Footer from "./components/Landing page/Footer/Footer";
+import ProductsPage from "./pages/ProductsPage/ProductsPage";
+
+const HomePage = () => (
+  <>
+    <Hero />
+    <Categories />
+    <ProductSection />
+    <NewProducts />
+    <PromoSection />
+    <BestSellers />
+    <TopBrands />
+    <WatchBanner />
+    <BlogsSection />
+    <ServiceBar />
+  </>
+);
 
 function App() {
   return (
-    <>
+    <Router>
       <Navbar />
-      <Hero />
-      <Categories />
-      <ProductSection />
-      <NewProducts />
-      <PromoSection />
-      <BestSellers />
-      <TopBrands />
-      <WatchBanner />
-      <BlogsSection />
-      <ServiceBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductsPage />} />
+      </Routes>
       <Footer />
-    </>
+    </Router>
   );
 }
 

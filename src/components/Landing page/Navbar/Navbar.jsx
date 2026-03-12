@@ -1,9 +1,10 @@
-import './Navbar.css';
+import { NavLink } from 'react-router-dom';
 import logoImg from '../../../assets/icons/logo.svg';
 import searchIcon from '../../../assets/icons/search-normal.svg';
 import bagIcon from '../../../assets/icons/basket.svg';
 import userIcon from '../../../assets/icons/profile.svg';
 import { navLinks } from '../../../constants/mockData';
+import './Navbar.css';
 
 function Navbar() {
 
@@ -12,14 +13,23 @@ function Navbar() {
       <div className="header-inner">
 
         <div className="logo" aria-label="Tech Heim logo">
-          <img src={logoImg} alt="Logo" />
+          <NavLink to="/">
+            <img src={logoImg} alt="Logo" />
+          </NavLink>
         </div>
 
         <nav className="navbar">
           <ul>
             {navLinks.map((link) => (
               <li key={link}>
-                <button type="button" className="nav-link">{link}</button>
+                <NavLink 
+                  to={link === 'Home' ? '/' : `/${link.toLowerCase().replace(/\s+/g, '-')}`} 
+                  className={({ isActive }) => 
+                    `nav-link ${isActive ? 'active' : ''} ${link === 'Products' && isActive ? 'active-products' : ''}`
+                  }
+                >
+                  {link}
+                </NavLink>
               </li>
             ))}
           </ul>

@@ -78,10 +78,21 @@
   font-weight: 300;
   line-height: 22px;
   color: #0c0c0c;
+  text-decoration: none; /* Add this for NavLink */
+  display: flex; /* Add this for better alignment */
+  align-items: center;
+  justify-content: center;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
   color: #0c68f4;
+}
+
+.nav-link.active-products {
+  border-bottom: 1px solid #0c68f4;
+  height: 38px;
+  box-sizing: border-box;
 }
 
 .nav-icons {
