@@ -5,8 +5,8 @@
 }
 
 .products-page-container {
-  max-width: 1224px;
+  width: 1440px;
   margin: 0 auto;
-  padding: 0 20px;
   position: relative;
+  min-height: 500px; /* Ensure enough space for absolute elements */
 }

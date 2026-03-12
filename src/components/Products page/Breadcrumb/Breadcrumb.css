@@ -6,8 +6,9 @@
     position: absolute;
     width: 241px;
     height: 30px;
-    left: 0;
-    top: 24px; /* Adjusted from 124px as it's relative to container */
+    left: 80px; 
+    top: 24px; /* Total 124px from top (header 100px + 24px) */
+    margin: 0; /* Reset margins */
 }
 
 .breadcrumb-item {
