@@ -1,0 +1,250 @@
+.promo-banners-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+  width: 912px;
+  height: 420px;
+}
+
+/* iPhone Banner */
+.iphone-promo-banner {
+  width: 444px;
+  height: 420px;
+  background: #E4EEFE;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.iphone-image-overlay {
+  position: absolute;
+  width: 261px;
+  height: 420px;
+  left: 0px;
+  top: 0px;
+  background-image: url('https://images.unsplash.com/photo-1632661674596-df8be070a5c5?q=80&w=261&h=420&auto=format&fit=crop'); /* Realistic backup */
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-content-v1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  position: absolute;
+  width: 198px;
+  height: 140px;
+  left: 230px;
+  top: 112px;
+}
+
+.banner-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.banner-subtitle {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #0C0C0C;
+}
+
+.banner-desc {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #444444;
+}
+
+.shop-now-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  width: 110px;
+  height: 48px;
+  background: #0C68F4;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.banner-footer-url {
+  position: absolute;
+  width: 134px;
+  height: 41px;
+  left: 310px;
+  top: 379px;
+  background: #0C68F4;
+  border-radius: 8px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-footer-url span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 9.5px;
+  color: #FFFFFF;
+}
+
+/* AirPods Banner */
+.airpods-promo-banner {
+  width: 444px;
+  height: 420px;
+  background: #EDEDED;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.airpods-discount-side {
+  width: 180px;
+  height: 420px;
+  background: #0C0C0C;
+  position: relative;
+}
+
+.discount-badge-white {
+  position: absolute;
+  width: 128px;
+  height: 188px;
+  left: 26px;
+  top: 0px;
+  background: #FFFFFF;
+  border-radius: 0px 0px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 29px;
+  box-sizing: border-box;
+}
+
+.upto-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #0C0C0C;
+}
+
+.percent-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 48px;
+  color: #C91433;
+}
+
+.discount-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #0C0C0C;
+}
+
+.airpods-product-img {
+  position: absolute;
+  width: 267px;
+  height: 257px;
+  left: -44px;
+  top: 163px;
+  background-image: url('https://images.unsplash.com/photo-1588423770674-f2855ee82639?q=80&w=267&h=257&auto=format&fit=crop'); /* Realistic backup */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.airpods-offer-side {
+  flex: 1;
+  position: relative;
+  padding-left: 92px; /* to push it into position */
+}
+
+.offer-content {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  gap: 20px;
+  position: absolute;
+  width: 148px;
+  height: 165px;
+  left: 272px; /* Wait, the Figma left is absolute to the parent frame */
+  top: 88px;
+  width: 148px;
+  left: 92px; /* Adjustment for inside the component */
+}
+
+.offer-title {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #0C0C0C;
+}
+
+.offer-desc {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #0C0C0C;
+}
+
+.secondary-shop-btn {
+  width: 110px;
+  height: 48px;
+  background: #F45E0C;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.banner-footer-url-orange {
+  position: absolute;
+  width: 221px;
+  height: 48px;
+  right: 0px;
+  bottom: 0px;
+  background: #F45E0C;
+  border-radius: 8px 0px 0px 0px; /* Wait, Figma says 0px 0px 8px 0px */
+  border-radius: 0px 0px 8px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 110px; /* Adjusting proportional to space */
+}
+
+.banner-footer-url-orange span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #FFFFFF;
+}

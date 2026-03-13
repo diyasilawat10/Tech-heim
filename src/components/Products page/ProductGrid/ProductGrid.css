@@ -1,0 +1,33 @@
+.product-grid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px; /* Row gap */
+  width: 912px;
+  height: auto;
+}
+
+.product-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+  width: 912px;
+  height: 347px;
+}
+
+/* Responsiveness */
+@media (max-width: 1440px) {
+  .product-grid-container {
+    left: 310px; /* Adjust if sidebar is smaller or hidden */
+    width: calc(100% - 330px);
+  }
+  
+  .product-row {
+    width: 100%;
+    flex-wrap: wrap;
+    height: auto;
+  }
+}
