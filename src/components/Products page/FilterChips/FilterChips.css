@@ -1,11 +1,11 @@
 .filter-chips-wrapper {
-  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px;
   width: 728px;
   height: 40px;
-  left: 108px;
-  top: 266px; /* 366px - 100px (header) */
-  display: flex;
-  align-items: center;
 }
 
 .filter-chips {

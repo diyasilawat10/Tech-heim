@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import './ProductsPage.css';
+import Navbar from '../../components/Landing page/Navbar/Navbar';
 import Breadcrumb from '../../components/Products page/Breadcrumb/Breadcrumb';
 import ProductCategories from '../../components/Products page/ProductCategories/ProductCategories';
 import FilterChips from '../../components/Products page/FilterChips/FilterChips';
 import Filters from '../../components/Products page/Filters/Filters';
+import ProductGrid from '../../components/Products page/ProductGrid/ProductGrid';
+import './ProductsPage.css';
 
 const ProductsPage = () => {
   const [filters, setFilters] = useState({
@@ -60,19 +62,25 @@ const ProductsPage = () => {
 
   return (
     <div className="products-page">
-      <div className="products-page-container">
+      <Navbar />
+      <div className="products-page-content">
         <Breadcrumb />
         <ProductCategories />
         <FilterChips 
           filters={filters} 
           onRemove={removeFilterChip} 
+          onClearAll={clearAllFilters} 
         />
-        <Filters 
-          filters={filters} 
-          onToggle={toggleFilter} 
-          onClearAll={clearAllFilters}
-        />
-        {/* Further components will be added here */}
+        <div className="horizontal-layout">
+          <Filters 
+            filters={filters} 
+            onToggle={toggleFilter} 
+            onClearAll={clearAllFilters}
+          />
+          <div className="main-products-area">
+            <ProductGrid />
+          </div>
+        </div>
       </div>
     </div>
   );

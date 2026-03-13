@@ -1,13 +1,21 @@
+.breadcrumb-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  width: 216px;
+  height: 24px;
+}
+
 .breadcrumb {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 0px;
-    position: absolute;
+    position: static;
     width: 241px;
     height: 30px;
-    left: 108px; 
-    top: 24px; /* Total 124px from top (header 100px + 24px) */
     margin: 0; /* Reset margins */
 }
 

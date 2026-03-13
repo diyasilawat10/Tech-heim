@@ -332,6 +332,17 @@ input:checked + .slider:before {
   position: relative;
 }
 
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 288px;
+  background: #FFFFFF;
+  z-index: 5;
+  position: static;
+}
+
 .slider-track {
   position: absolute;
   width: 100%;

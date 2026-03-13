@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './FilterChips.css';
 import closeSquareIcon from '../../../assets/icons/close-square.svg';
 
-const initialChips = [
-  { id: 1, label: 'Silver' },
-  { id: 2, label: 'Intel Core i9' },
-  { id: 3, label: 'Apple' },
-  { id: 4, label: '12 GB' },
-  { id: 5, label: 'Silver' },
-];
 
 const FilterChips = ({ filters, onRemove }) => {
   const getActiveChips = () => {
