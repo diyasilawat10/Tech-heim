@@ -23,19 +23,23 @@
 
 .header-inner {
   width: 100%;
-  max-width: 1224px;
+  max-width: 1440px;
   height: 100%;
-  padding: 0 20px;
+  padding: 0;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 56px 1fr 136px;
+  position: relative;
+  display: flex;
   align-items: center;
-  column-gap: 90px;
+  justify-content: center;
 }
 
 .logo {
+  position: absolute;
   width: 56px;
   height: 63px;
+  left: 108px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,15 +100,13 @@
 }
 
 .nav-icons {
-  width: 136px;
-  height: 56px;
+  position: absolute;
+  right: 108px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 8px;
-  padding: 8px 0;
-  align-self: start;
-  margin-top: 22px;
 }
 
 .icon-btn {

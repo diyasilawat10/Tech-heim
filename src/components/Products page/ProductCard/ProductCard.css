@@ -1,0 +1,349 @@
+.products-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 16px;
+  width: 288px;
+  height: 347px;
+  background: #FFFFFF;
+  box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12); /* Shadow 1 from Figma */
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Shadows */
+.shadow-variant-1, .shadow-variant-2 {
+  box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12);
+}
+
+.products-card:hover {
+  box-shadow: -2px 2px 20px -1px rgba(113, 113, 113, 0.2); /* Lift to Shadow 2 on hover */
+}
+
+/* Image Area */
+.product-image-area {
+  width: 256px;
+  height: 190px;
+  position: relative;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-img {
+  position: absolute;
+  width: 217px;
+  height: 161px;
+  left: calc(50% - 217px/2 - 0.5px);
+  top: calc(50% - 161px/2 - 0.5px);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.products-card:hover .product-img {
+  width: 272px;
+  height: 202px;
+  left: calc(50% - 272px/2);
+  top: calc(50% - 202px/2);
+  transform: scale(1.02); /* Subtle extra zoom to ensure visual feedback */
+}
+
+/* Middle Card Specific Zoom */
+.is-middle:hover .product-img {
+  transform: scale(1.05);
+}
+
+/* Divider */
+.card-divider {
+  position: absolute;
+  bottom: 0;
+  width: 256px;
+  height: 0px;
+  border-top: 1px solid;
+  border-image-source: linear-gradient(90deg, rgba(68, 68, 68, 0.1) 0%, rgba(16, 16, 16, 0.7) 54.17%, rgba(68, 68, 68, 0.1) 99.47%);
+  border-image-slice: 1;
+  z-index: 1; /* z-index from Figma */
+  transition: border-image-source 0.3s ease;
+}
+
+.products-card:hover .card-divider {
+  border-image-source: linear-gradient(90deg, rgba(66, 138, 246, 0.3) 0%, #0951BE 54.17%, rgba(66, 138, 246, 0.3) 99.47%);
+}
+
+/* Info Section */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px; /* High-fidelity gap from Figma */
+  width: 256px;
+  height: 93px;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  z-index: 2; /* z-index from Figma */
+}
+
+.product-title {
+  width: 256px;
+  height: 53px; /* Height from Figma Dump */
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0C0C0C; /* Black from Figma Dump */
+  display: flex;
+  align-items: center;
+  margin: 0;
+  transition: color 0.3s ease;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+/* Stack Logic for Normal/Hover Rows */
+.card-content-stack {
+  position: relative;
+  width: 256px;
+  height: 48px;
+}
+
+.normal-row, .hover-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 256px;
+  height: 24px; /* Height from Figma Dump */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 53px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.normal-row {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+.hover-row {
+  opacity: 0;
+  visibility: hidden;
+  z-index: 3; /* z-index from Figma */
+}
+
+.products-card:hover .normal-row {
+  opacity: 0;
+  visibility: hidden;
+  display: none; /* Force removal to prevent any overlap */
+}
+
+.products-card:hover .hover-row {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Pricing Area */
+.price-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center from Figma Dump */
+  width: 128px;
+  height: 24px; /* Height from Figma Dump */
+}
+
+.old-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: line-through;
+  color: #717171;
+}
+
+.current-price {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+  color: #0C0C0C;
+  height: 22px; /* Height from Figma Dump */
+}
+
+/* Rating Area */
+.rating-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2px;
+  width: 128px;
+  height: 24px; /* Height from Figma Dump */
+}
+
+.star-icon {
+  width: 24px;
+  height: 24px;
+  /* Filter for Primary Blue #063A88 */
+  filter: invert(16%) sepia(87%) saturate(2250%) hue-rotate(205deg) brightness(89%) contrast(98%);
+}
+
+.rating-value {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #063A88;
+}
+
+/* Actions Row */
+.add-to-cart-btn {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  margin: 0 auto;
+  width: 150px;
+  height: 48px;
+  border: 2px solid #0C68F4;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #0C68F4;
+  transition: all 0.2s ease;
+  z-index: 4; /* Above info area */
+}
+
+.add-to-cart-btn:hover {
+  background: #0C68F4;
+  color: #FFFFFF;
+}
+
+.add-to-cart-btn img {
+  width: 24px;
+  height: 24px;
+  /* Filter for #0C68F4 */
+  filter: invert(34%) sepia(87%) saturate(2853%) hue-rotate(208deg) brightness(98%) contrast(97%);
+}
+
+.add-to-cart-btn:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.heart-icon-wrapper {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.heart-icon-wrapper img {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 0px;
+  top: 0px;
+  /* Filter for #063A88 */
+  filter: invert(16%) sepia(87%) saturate(2250%) hue-rotate(205deg) brightness(89%) contrast(98%);
+}
+
+.heart-icon-wrapper img.favorited {
+  filter: invert(16%) sepia(87%) saturate(2250%) hue-rotate(205deg) brightness(89%) contrast(98%) drop-shadow(0 0 2px #063A88);
+}
+
+/* Discount Tag */
+.product-discount-tag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 6px;
+  position: absolute;
+  width: 49px;
+  height: 32px;
+  left: 0px;
+  top: 16px;
+  background: #FDDBC9;
+  border-radius: 0px 8px 8px 0px;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.products-card:hover .product-discount-tag {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.discount-value {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: #F45E0C;
+}
+
+/* Middle Card Colors */
+.product-colors {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  position: absolute;
+  width: 12px;
+  height: 79px;
+  right: 0px;
+  z-index: 5;
+  transition: opacity 0.3s ease;
+}
+
+.color-dot {
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 0.25px solid #444444;
+
+  flex: none;
+  flex-grow: 0;
+}
+
+.color-plus {
+  width: 11px;
+  height: 19px;
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
+  color: #505050;
+
+  flex: none;
+  flex-grow: 0;
+}
