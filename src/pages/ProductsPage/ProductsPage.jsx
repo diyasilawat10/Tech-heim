@@ -5,9 +5,11 @@ import ProductCategories from '../../components/Products page/ProductCategories/
 import FilterChips from '../../components/Products page/FilterChips/FilterChips';
 import Filters from '../../components/Products page/Filters/Filters';
 import ProductGrid from '../../components/Products page/ProductGrid/ProductGrid';
+import Sort from '../../components/Products page/Sort/Sort';
 import './ProductsPage.css';
 
 const ProductsPage = () => {
+  const [sortOrder, setSortOrder] = useState('featured');
   const [filters, setFilters] = useState({
     Brand: ['Apple'],
     Color: [],
@@ -66,6 +68,7 @@ const ProductsPage = () => {
       <div className="products-page-content">
         <Breadcrumb />
         <ProductCategories />
+        <Sort onSortChange={setSortOrder} />
         <FilterChips 
           filters={filters} 
           onRemove={removeFilterChip} 
@@ -78,7 +81,7 @@ const ProductsPage = () => {
             onClearAll={clearAllFilters}
           />
           <div className="main-products-area">
-            <ProductGrid />
+            <ProductGrid sortOrder={sortOrder} />
           </div>
         </div>
       </div>

@@ -51,7 +51,7 @@
 }
 
 /* Ensure no absolute positioning leaks */
-.products-page-content > *,
+.products-page-content > *:not(.sort-container),
 .horizontal-layout > *,
 .main-products-area > * {
   position: static !important;
