@@ -1,0 +1,40 @@
+.admin-breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 24px 0;
+  gap: 4px;
+  z-index: 10;
+}
+
+.breadcrumb-item {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #717171;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.breadcrumb-item:hover {
+  color: #0C68F4;
+}
+
+.breadcrumb-item.active {
+  color: #0C68F4;
+  border-bottom: 1px solid #0C68F4;
+}
+
+.breadcrumb-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}

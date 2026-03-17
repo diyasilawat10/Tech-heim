@@ -8,12 +8,10 @@
   background: #ffffff;
   border-bottom: 1px solid transparent;
   border-image-slice: 1;
-  border-image-source: linear-gradient(
-    147.38deg,
-    rgba(12, 104, 244, 0.3) 60.98%,
-    rgba(12, 104, 244, 0.7) 81.93%,
-    rgba(12, 104, 244, 0.3) 99.45%
-  );
+  border-image-source: linear-gradient(147.38deg,
+      rgba(12, 104, 244, 0.3) 60.98%,
+      rgba(12, 104, 244, 0.7) 81.93%,
+      rgba(12, 104, 244, 0.3) 99.45%);
   z-index: 1000;
 }
 
@@ -78,8 +76,10 @@
   font-weight: 300;
   line-height: 22px;
   color: #0c0c0c;
-  text-decoration: none; /* Add this for NavLink */
-  display: flex; /* Add this for better alignment */
+  text-decoration: none;
+  /* Add this for NavLink */
+  display: flex;
+  /* Add this for better alignment */
   align-items: center;
   justify-content: center;
 }

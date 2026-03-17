@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import logoImg from '../../../assets/icons/logo.svg';
 import searchIcon from '../../../assets/icons/search-normal.svg';
 import bagIcon from '../../../assets/icons/basket.svg';
@@ -22,9 +22,9 @@ function Navbar() {
           <ul>
             {navLinks.map((link) => (
               <li key={link}>
-                <NavLink 
-                  to={link === 'Home' ? '/' : `/${link.toLowerCase().replace(/\s+/g, '-')}`} 
-                  className={({ isActive }) => 
+                <NavLink
+                  to={link === 'Home' ? '/' : `/${link.toLowerCase().replace(/\s+/g, '-')}`}
+                  className={({ isActive }) =>
                     `nav-link ${isActive ? 'active' : ''} ${link === 'Products' && isActive ? 'active-products' : ''}`
                   }
                 >
@@ -42,9 +42,9 @@ function Navbar() {
           <button type="button" className="icon-btn" aria-label="Cart">
             <img src={bagIcon} alt="" className="icon-basket" />
           </button>
-          <button type="button" className="icon-btn" aria-label="User profile">
+          <Link to="/admin" className="icon-btn" aria-label="User profile">
             <img src={userIcon} alt="" className="icon-user" />
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -62,9 +62,9 @@ function Navbar() {
             <button type="button" className="icon-btn mobile-icon-btn" aria-label="Cart">
               <img src={bagIcon} alt="" className="icon-basket" />
             </button>
-            <button type="button" className="icon-btn mobile-icon-btn" aria-label="User profile">
+            <Link to="/admin" className="icon-btn mobile-icon-btn" aria-label="User profile">
               <img src={userIcon} alt="" className="icon-user" />
-            </button>
+            </Link>
           </div>
         </div>
 

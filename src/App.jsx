@@ -13,6 +13,7 @@ import BlogsSection from "./components/Landing page/BlogsSection/BlogsSection";
 import ServiceBar from "./components/Landing page/ServiceBar/ServiceBar";
 import Footer from "./components/Landing page/Footer/Footer";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
+import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 
 const HomePage = () => (
   <>
@@ -36,6 +37,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
       <Footer />
     </Router>
