@@ -14,6 +14,7 @@ import ServiceBar from "./components/Landing page/ServiceBar/ServiceBar";
 import Footer from "./components/Landing page/Footer/Footer";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
+import AdminProducts from "./pages/Admin/AdminProducts/AdminProducts";
 
 const HomePage = () => (
   <>
@@ -38,6 +39,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/products" element={<AdminProducts />} />
       </Routes>
       <Footer />
     </Router>

@@ -45,12 +45,61 @@ const ModalInput = ({ label, value, onChange, placeholder, type = 'text', error,
   );
 };
 
-const AdminModal = ({ isOpen, onClose, onSave, title, children, saveText = 'save' }) => {
+const FileUpload = ({ label, value, onChange, error }) => {
+  const fileInputRef = React.useRef(null);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        onChange(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  return (
+    <div className={`modal-input-group file-upload ${error ? 'error' : ''}`}>
+      <div className="modal-label-container filled">
+        <span className="modal-label-segment left"></span>
+        <label className="modal-input-label">{label}</label>
+        <span className="modal-label-segment fill"></span>
+      </div>
+      <div className="modal-input-wrapper file-wrapper">
+        <input 
+          type="file" 
+          ref={fileInputRef} 
+          style={{ display: 'none' }} 
+          accept="image/*"
+          onChange={handleFileChange}
+        />
+        <div className="file-display" onClick={() => fileInputRef.current.click()}>
+          {value && value.startsWith('data:') ? (
+            <div className="file-preview-mini" style={{ backgroundImage: `url(${value})` }}></div>
+          ) : (
+            <div className="upload-placeholder">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M9 17V11L7 13" stroke="#717171" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M9 11L11 13" stroke="#717171" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M22 10V15C22 20 20 22 15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H14" stroke="#717171" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M22 10H18C15 10 14 9 14 6V2L22 10Z" stroke="#717171" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>{value ? 'Change local image' : 'Click to or drag to upload image'}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AdminModal = ({ isOpen, onClose, onSave, title, children, saveText = 'save', variant = 'default' }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="admin-modal-container" onClick={(e) => e.stopPropagation()}>
+    <div className={`modal-overlay ${variant}`} onClick={onClose}>
+      <div className={`admin-modal-container ${variant === 'delete' ? 'delete-modal' : ''}`} onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">{title}</h2>
           <button className="modal-close-btn" onClick={onClose} aria-label="Close">
@@ -76,5 +125,6 @@ const AdminModal = ({ isOpen, onClose, onSave, title, children, saveText = 'save
 };
 
 AdminModal.Input = ModalInput;
+AdminModal.FileUpload = FileUpload;
 
 export default AdminModal;
