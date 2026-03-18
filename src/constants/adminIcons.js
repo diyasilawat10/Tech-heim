@@ -66,6 +66,16 @@ export const getAdminIcon = (type) => {
           <path d="M12.9201 10.73H6.42012C6.01012 10.73 5.67012 10.39 5.67012 9.98004V3.12004C5.67012 2.71004 6.01012 2.37004 6.42012 2.37004H12.9101C13.3201 2.37004 13.6601 2.71004 13.6601 3.12004V9.97004C13.6601 10.39 13.3301 10.73 12.9201 10.73ZM7.17012 9.23004H12.1601V3.87004H7.17012V9.23004Z" fill="currentColor" />
         </svg>
       );
+    case 'trash':
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M21 5.98C17.67 5.65 14.32 5.48 10.98 5.48C9 5.48 7.02 5.58 5.04 5.78L3 5.98" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M8.5 4.97L8.72 3.66C8.88 2.71 9 2 10.69 2H13.31C15 2 15.13 2.75 15.28 3.67L15.5 4.97" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M18.85 9.14L18.2 19.21C18.09 20.78 18 22 15.21 22H8.79C6 22 5.91 20.78 5.8 19.21L5.15 9.14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M10.33 16.5H13.66" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M9.5 12.5H14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
     case 'close':
       return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
