@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Navbar.css';
 import logoImg from '../../../assets/icons/logo.svg';
 import searchIcon from '../../../assets/icons/search-normal.svg';
@@ -9,10 +9,11 @@ import AuthModal from '../AuthModal/AuthModal';
 import StatusModal from '../AuthModal/StatusModal';
 
 // Modal states
-const MODAL = { NONE: 'none', LOGIN: 'login', SUCCESS: 'success', ERROR: 'error' };
+const MODAL = { NONE: 'none', AUTH: 'auth', SUCCESS: 'success', ERROR: 'error' };
 
 function Navbar() {
   const [modal, setModal] = useState(MODAL.NONE);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Close on Escape key
   useEffect(() => {
@@ -26,10 +27,16 @@ function Navbar() {
   }, [modal]);
 
   const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+    setModal(MODAL.NONE);
+  };
+
+  const handleRegisterSuccess = () => {
+    setIsAuthenticated(true);
     setModal(MODAL.SUCCESS);
   };
 
-  const handleLoginError = () => {
+  const handleRegisterError = () => {
     setModal(MODAL.ERROR);
   };
 
@@ -52,31 +59,41 @@ function Navbar() {
             </ul>
           </nav>
 
-          <div className="nav-icons">
+          <div className={`nav-icons ${isAuthenticated ? 'nav-icons--authenticated' : 'nav-icons--before-login'}`}>
             <button type="button" className="icon-btn" aria-label="Search">
               <img src={searchIcon} alt="" className="icon-search" />
             </button>
             <button type="button" className="icon-btn" aria-label="Cart">
               <img src={bagIcon} alt="" className="icon-basket" />
             </button>
-            <button
-              type="button"
-              className="icon-btn"
-              aria-label="User profile"
-              onClick={() => setModal(MODAL.LOGIN)}
-            >
-              <img src={userIcon} alt="" className="icon-user" />
-            </button>
+            {isAuthenticated ? (
+              <button
+                type="button"
+                className="icon-btn"
+                aria-label="User profile"
+              >
+                <img src={userIcon} alt="" className="icon-user" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="auth-trigger-btn"
+                onClick={() => setModal(MODAL.AUTH)}
+              >
+                Login / Register
+              </button>
+            )}
           </div>
         </div>
       </header>
 
       {/* Login Modal */}
-      {modal === MODAL.LOGIN && (
+      {modal === MODAL.AUTH && (
         <AuthModal
           onClose={() => setModal(MODAL.NONE)}
           onLoginSuccess={handleLoginSuccess}
-          onLoginError={handleLoginError}
+          onRegisterSuccess={handleRegisterSuccess}
+          onRegisterError={handleRegisterError}
         />
       )}
 

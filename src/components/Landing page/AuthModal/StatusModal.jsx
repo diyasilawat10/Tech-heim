@@ -1,48 +1,88 @@
 import './StatusModal.css';
 
+function SuccessIcon() {
+    return (
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+            <path
+                d="M60 110C87.6142 110 110 87.6142 110 60C110 32.3858 87.6142 10 60 10C32.3858 10 10 32.3858 10 60C10 87.6142 32.3858 110 60 110Z"
+                opacity="0"
+            />
+            <path
+                d="M40.5 60.5L53.5 73.5L80 47"
+                stroke="#22A861"
+                strokeWidth="8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+}
+
+function ErrorIcon() {
+    return (
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+            <path
+                d="M60 110C87.6142 110 110 87.6142 110 60C110 32.3858 87.6142 10 60 10C32.3858 10 10 32.3858 10 60C10 87.6142 32.3858 110 60 110Z"
+                opacity="0"
+            />
+            <path
+                d="M42 42L78 78"
+                stroke="#C91433"
+                strokeWidth="8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+            <path
+                d="M78 42L42 78"
+                stroke="#C91433"
+                strokeWidth="8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+}
+
+const MODAL_COPY = {
+    success: {
+        title: 'Well done',
+        message: 'Congratulation your account has been successfully created.',
+    },
+    error: {
+        title: 'Oops.',
+        message: 'Unfortunately, there was a problem during creating your account. try again later.',
+    },
+};
+
 function StatusModal({ type = 'success', onClose }) {
     const isSuccess = type === 'success';
+    const { title, message } = MODAL_COPY[isSuccess ? 'success' : 'error'];
 
-    const handleBackdropClick = (e) => {
-        if (e.target === e.currentTarget) onClose();
+    const handleBackdropClick = (event) => {
+        if (event.target === event.currentTarget) {
+            onClose();
+        }
     };
 
     return (
         <div className="status-modal-backdrop" onClick={handleBackdropClick}>
-            <div className="status-modal" role="dialog" aria-modal="true">
-
-                {/* Icon circle */}
-                <div className={`status-icon-circle ${isSuccess ? 'success' : 'error'}`}>
-                    {isSuccess ? (
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 13l4 4L19 7" stroke="#22A861" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    ) : (
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 6l12 12M18 6L6 18" stroke="#E03131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    )}
+            <div
+                className={`status-modal status-modal--${type}`}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="status-modal-title"
+            >
+                <div className="status-icon-shell">
+                    <div className="status-icon">
+                        {isSuccess ? <SuccessIcon /> : <ErrorIcon />}
+                    </div>
                 </div>
 
-                {/* Heading */}
-                <h2 className={`status-heading ${isSuccess ? 'success' : 'error'}`}>
-                    {isSuccess ? 'Well done' : 'Oops.'}
+                <h2 id="status-modal-title" className="status-title">
+                    {title}
                 </h2>
 
-                {/* Message */}
-                <p className="status-message">
-                    {isSuccess
-                        ? 'Congratulation your account has been successfully created.'
-                        : 'Unfortunately, there was a problem during creating your account. try again later.'}
-                </p>
-
-                {/* Close / OK button */}
-                <button
-                    className={`status-close-btn ${isSuccess ? 'success' : 'error'}`}
-                    onClick={onClose}
-                >
-                    {isSuccess ? 'Continue' : 'Try Again'}
-                </button>
+                <p className="status-message">{message}</p>
             </div>
         </div>
     );
