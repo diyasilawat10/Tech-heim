@@ -1,0 +1,12 @@
+.products-page {
+  padding-top: 100px; /* Space for fixed navbar */
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.products-page-container {
+  max-width: 1224px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}

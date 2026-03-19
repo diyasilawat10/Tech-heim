@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import './Navbar.css';
 import logoImg from '../../../assets/icons/logo.svg';
 import searchIcon from '../../../assets/icons/search-normal.svg';
@@ -44,16 +45,24 @@ function Navbar() {
     <>
       <header className="header">
         <div className="header-inner">
-
           <div className="logo" aria-label="Tech Heim logo">
-            <img src={logoImg} alt="Logo" />
+            <NavLink to="/">
+              <img src={logoImg} alt="Logo" />
+            </NavLink>
           </div>
 
           <nav className="navbar">
             <ul>
               {navLinks.map((link) => (
                 <li key={link}>
-                  <button type="button" className="nav-link">{link}</button>
+                  <NavLink
+                    to={link === 'Home' ? '/' : `/${link.toLowerCase().replace(/\s+/g, '-')}`}
+                    className={({ isActive }) =>
+                      `nav-link ${isActive ? 'active' : ''} ${link === 'Products' && isActive ? 'active-products' : ''}`
+                    }
+                  >
+                    {link}
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -67,13 +76,9 @@ function Navbar() {
               <img src={bagIcon} alt="" className="icon-basket" />
             </button>
             {isAuthenticated ? (
-              <button
-                type="button"
-                className="icon-btn"
-                aria-label="User profile"
-              >
+              <Link to="/admin" className="icon-btn" aria-label="User profile">
                 <img src={userIcon} alt="" className="icon-user" />
-              </button>
+              </Link>
             ) : (
               <button
                 type="button"
@@ -84,6 +89,43 @@ function Navbar() {
               </button>
             )}
           </div>
+        </div>
+
+        <div className="header-mobile">
+          <div className="header-mobile-top">
+            <button type="button" className="mobile-menu-btn" aria-label="Open menu">
+              <span />
+              <span />
+              <span />
+            </button>
+
+            <div className="mobile-logo-text">Tech Heim</div>
+
+            <div className="mobile-icons">
+              <button type="button" className="icon-btn mobile-icon-btn" aria-label="Cart">
+                <img src={bagIcon} alt="" className="icon-basket" />
+              </button>
+              {isAuthenticated ? (
+                <Link to="/admin" className="icon-btn mobile-icon-btn" aria-label="User profile">
+                  <img src={userIcon} alt="" className="icon-user" />
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  className="icon-btn mobile-icon-btn"
+                  aria-label="Login / Register"
+                  onClick={() => setModal(MODAL.AUTH)}
+                >
+                  <img src={userIcon} alt="" className="icon-user" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          <button type="button" className="mobile-search" aria-label="Search products">
+            <span className="mobile-search-placeholder">What can we help you to find ?</span>
+            <img src={searchIcon} alt="" className="mobile-search-icon" />
+          </button>
         </div>
       </header>
 
@@ -117,4 +159,3 @@ function Navbar() {
 }
 
 export default Navbar;
-

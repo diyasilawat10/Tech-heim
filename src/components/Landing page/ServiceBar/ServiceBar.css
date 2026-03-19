@@ -106,3 +106,51 @@
         padding: 0 16px;
     }
 }
+
+@media (max-width: 480px) {
+    .svcbar-root {
+        height: auto;
+        padding: 0 24px;
+        margin-top: -4px;
+        margin-bottom: 24px;
+    }
+
+    .svcbar-inner {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .svcbar-item {
+        gap: 8px;
+        min-height: 27px;
+    }
+
+    .svcbar-icon-tech {
+        width: 24.97px;
+        height: 21px;
+    }
+
+    .svcbar-icon-guarantee {
+        width: 24.67px;
+        height: 27px;
+    }
+
+    .svcbar-icon-shipping {
+        width: 32.46px;
+        height: 16px;
+    }
+
+    .svcbar-icon-support {
+        width: 23.99px;
+        height: 27px;
+    }
+
+    .svcbar-label {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

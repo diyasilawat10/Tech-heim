@@ -21,10 +21,18 @@ function Footer() {
 
   return (
     <footer className="footer">
-
       <div className="footer-main container">
+        <div className="footer-mobile-top-row">
+          <button className="chat-bubble">
+            <img src={chatIcon} alt="Chat" />
+          </button>
 
-        <div className="footer-column">
+          <button className="back-to-top" onClick={handleBackToTop} aria-label="Back to top">
+            <img src={arrowUpIcon} alt="Back to top" />
+          </button>
+        </div>
+
+        <div className="footer-column footer-company">
           <h4>Company</h4>
           <p>about us</p>
           <p>blog</p>
@@ -32,14 +40,14 @@ function Footer() {
           <p>order status</p>
         </div>
 
-        <div className="footer-column">
+        <div className="footer-column footer-info">
           <h4>Info</h4>
           <p>How it works?</p>
           <p>our promises</p>
           <p>FAQ</p>
         </div>
 
-        <div className="footer-column">
+        <div className="footer-column footer-contact">
           <h4>Contact us</h4>
 
           <div className="contact-item">
@@ -58,7 +66,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="footer-column newsletter">
+        <div className="footer-column footer-newsletter newsletter">
           <h4>Sign up for News and updates</h4>
           <div className="newsletter-input">
             <span className="newsletter-user-icon">
@@ -67,7 +75,7 @@ function Footer() {
             <span className="newsletter-label">E-mail Address</span>
             <button aria-label="Submit newsletter" />
           </div>
-          <div className="social-icons">
+          <div className="social-icons social-icons-desktop">
             <img src={fbIcon} alt="Facebook" />
             <img src={twitterIcon} alt="Twitter" />
             <img src={instaIcon} alt="Instagram" />
@@ -77,6 +85,14 @@ function Footer() {
 
       </div>
 
+      <button className="chat-bubble footer-desktop-float" aria-label="Open chat">
+        <img src={chatIcon} alt="Chat" />
+      </button>
+
+      <button className="back-to-top footer-desktop-float" onClick={handleBackToTop} aria-label="Back to top">
+        <img src={arrowUpIcon} alt="Back to top" />
+      </button>
+
       <div className="payment-row container">
         <img src={paypalIcon} alt="PayPal" />
         <img src={amexIcon} alt="American Express" />
@@ -84,9 +100,40 @@ function Footer() {
         <img src={masterIcon} alt="Mastercard" />
       </div>
 
+      <div className="footer-mobile-bottom-row">
+        <div className="payment-row-mobile">
+          <img src={paypalIcon} alt="PayPal" />
+          <img src={amexIcon} alt="American Express" />
+          <img src={visaIcon} alt="Visa" />
+          <img src={masterIcon} alt="Mastercard" />
+        </div>
+
+        <div className="social-icons social-icons-mobile">
+          <img src={fbIcon} alt="Facebook" />
+          <img src={twitterIcon} alt="Twitter" />
+          <img src={instaIcon} alt="Instagram" />
+          <img src={youtubeIcon} alt="Youtube" />
+        </div>
+      </div>
+
+      <div className="footer-mobile-panels">
+        <button type="button" className="footer-mobile-panel">
+          <span>Company</span>
+          <span className="footer-mobile-chevron" aria-hidden="true" />
+        </button>
+        <button type="button" className="footer-mobile-panel">
+          <span>Info</span>
+          <span className="footer-mobile-chevron" aria-hidden="true" />
+        </button>
+        <button type="button" className="footer-mobile-panel">
+          <span>Contact us</span>
+          <span className="footer-mobile-chevron" aria-hidden="true" />
+        </button>
+      </div>
+
       <div className="footer-bottom">
         <div className="container footer-bottom-inner">
-          <p>&copy; 2023 Tech Heim.</p>
+          <p className="footer-copyright">&copy; 2023 Tech Heim.</p>
 
           <div className="footer-links">
             <span>cookie settings</span>
@@ -96,14 +143,6 @@ function Footer() {
           </div>
         </div>
       </div>
-
-      <button className="back-to-top" onClick={handleBackToTop} aria-label="Back to top">
-        <img src={arrowUpIcon} alt="Back to top" />
-      </button>
-
-      <button className="chat-bubble">
-        <img src={chatIcon} alt="Chat" />
-      </button>
 
     </footer>
   );

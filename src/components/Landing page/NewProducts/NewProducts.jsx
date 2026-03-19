@@ -1,24 +1,23 @@
 import React from 'react';
 import './NewProducts.css';
 import ProductCard from '../ProductCard/ProductCard';
-import arrowRightIcon from '../../../assets/icons/arrow-right.svg';
+import arrowRightIcon from '../../../assets/icons/arrow-circle-right.svg';
 import { newProducts } from '../../../constants/mockData';
 
 function NewProducts() {
     return (
-        <section className="new-products-section section">
-            <div className="container">
+        <section className="new-products-section main-container main-section">
                 <div className="new-products-header">
                     <h2 className="new-products-title">New Products</h2>
-                    <button className="view-all-button">
+                    <button type="button" className="view-all-button">
                         <span>View all</span>
-                        <img src={arrowRightIcon} alt="Arrow Right" className="view-all-icon" />
+                        <img src={arrowRightIcon} alt="" aria-hidden="true" className="view-all-icon" />
                     </button>
                 </div>
 
-                <hr className="header-divider" />
+                <hr className="section-divider" />
 
-                <div className="new-products-list">
+                <div className="new-products-list product-grid">
                     {newProducts.slice(0, 4).map((product) => (
                         <ProductCard
                             key={product.id}
@@ -27,10 +26,12 @@ function NewProducts() {
                             image={product.image}
                             colors={product.colors}
                             hasHeart={product.hasHeart}
+                            showHeart={true}
+                            heartOnHover={true}
+                            rate={product.rate}
                         />
                     ))}
                 </div>
-            </div>
         </section>
     );
 }

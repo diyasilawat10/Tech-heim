@@ -5,9 +5,10 @@ import ps5Img from '../../../assets/images/ps53.png';
 import { timerUnits } from '../../../constants/mockData';
 
 const PromoSection = () => {
+  const mobileTimerLabels = ['Days', 'hour', 'minu', 'sec'];
 
   return (
-    <section className="promo-container">
+    <section className="promo-container main-container main-section">
       {/* IPHONE 15 BOX */}
       <div className="banner-iphone">
         <div className="iphone-ellipse-left" aria-hidden="true" />
@@ -23,7 +24,12 @@ const PromoSection = () => {
           {timerUnits.map((item, index) => (
             <div key={index} className="timer-box">
               <span className="time-num">{item.value}</span>
-              <span className="time-text">{item.label}</span>
+              <span
+                className="time-text"
+                data-mobile-label={mobileTimerLabels[index] || item.label}
+              >
+                {item.label}
+              </span>
             </div>
           ))}
         </div>
@@ -32,9 +38,9 @@ const PromoSection = () => {
           <h3 className="sub-title-black">It feels good to be the first</h3>
           <p className="desc-text">
             Get ready for the future of smartphones. Experience innovation like never before.
-            Stay tuned for the big iPhone 15 pre-sale.
+            Stay tuned for the big iPhone 15 sale.
           </p>
-          <button className="btn-primary register-btn">Register Now</button>
+          <button className="btn-primary register-btn">Shop Now</button>
         </div>
 
         <img src={iphoneImg} alt="iPhone 15" className="img-iphone" />
