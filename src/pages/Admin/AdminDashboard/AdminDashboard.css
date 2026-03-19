@@ -1,54 +1,17 @@
-.admin-dashboard {
-  padding-top: 100px;
-  /* Space for fixed navbar */
-  min-height: 100vh;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-}
-
-.admin-container {
-  max-width: 1224px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.admin-layout-wrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  /* Figma gap between columns is 24px */
-  align-items: flex-start;
-  margin-bottom: 60px;
-}
-
-.admin-main-content {
-  flex-grow: 1;
-  min-width: 0;
-  /* Figma Content starts at 420px on 1440px screen. Container starts at 108px. 420 - 108 = 312px */
-  /* Sidebar(288) + Gap(24) = 312px */
-}
-
-/* Identification Section */
-.identification-section {
+.admin-dashboard-content {
   display: flex;
   flex-direction: column;
   gap: 40px;
   margin-top: 24px;
 }
 
-.section-header {
+.admin-dashboard-content .section-header {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.section-title {
+.admin-dashboard-content .section-title {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -58,7 +21,7 @@
   margin: 0;
 }
 
-.section-subtitle {
+.admin-dashboard-content .section-subtitle {
   font-family: 'Inter';
   font-weight: 300;
   font-size: 16px;
@@ -68,32 +31,33 @@
   margin: 0;
 }
 
-.identification-content-wrapper {
+.admin-dashboard-content .identification-content-wrapper {
   display: flex;
   gap: 24px;
 }
 
-.identification-frame {
+.admin-dashboard-content .identification-frame {
   display: flex;
   flex-direction: column;
   gap: 24px;
   width: 392px;
+  max-width: 100%;
 }
 
-.account-input-group {
+.admin-dashboard-content .account-input-group {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 392px;
+  max-width: 100%;
   isolation: isolate;
 }
 
-/* Label Container with cut-out border logic */
-.label-container {
+.admin-dashboard-content .label-container {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  padding: 0px;
+  padding: 0;
   position: absolute;
   height: 17px;
   left: 19px;
@@ -101,23 +65,23 @@
   top: -17px;
   z-index: 3;
   pointer-events: none;
-  opacity: 1; /* Fixed: always visible */
+  opacity: 1;
   transition: opacity 0.2s ease;
 }
 
-.account-input-group.filled .label-container,
-.account-input-group.focused .label-container,
-.account-input-group.error .label-container,
-.account-input-group.editing .label-container {
+.admin-dashboard-content .account-input-group.filled .label-container,
+.admin-dashboard-content .account-input-group.focused .label-container,
+.admin-dashboard-content .account-input-group.error .label-container,
+.admin-dashboard-content .account-input-group.editing .label-container {
   opacity: 1;
 }
 
-.input-label {
+.admin-dashboard-content .input-label {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0px 4px;
+  padding: 0 4px;
   gap: 4px;
   height: 17px;
   white-space: nowrap;
@@ -127,25 +91,23 @@
   font-size: 14px;
   line-height: 17px;
   color: #717171;
-  background: #FFFFFF; /* Fix: prevent line from passing through text */
-  padding: 0 4px;
+  background: #FFFFFF;
   position: relative;
   z-index: 4;
 }
 
-
-.label-segment {
-  height: 0px;
+.admin-dashboard-content .label-segment {
+  height: 0;
   border-top: 1px solid #F6F6F6;
   flex-grow: 1;
 }
 
-.segment-left {
+.admin-dashboard-content .segment-left {
   width: 18px;
   flex-grow: 0;
 }
 
-.account-input-container {
+.admin-dashboard-content .account-input-container {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -153,6 +115,7 @@
   align-items: center;
   padding: 24px 16px;
   width: 392px;
+  max-width: 100%;
   height: 72px;
   background: #F9F9F9;
   border: 1px solid #F6F6F6;
@@ -161,25 +124,25 @@
   transition: all 0.2s ease;
 }
 
-.shadow {
+.admin-dashboard-content .shadow {
   position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   border-radius: 8px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease;
 }
 
-.account-input-group.focused .shadow {
+.admin-dashboard-content .account-input-group.focused .shadow {
   border: 1px solid #428AF6;
   filter: blur(5px);
   opacity: 1;
 }
 
-.input-left {
+.admin-dashboard-content .input-left {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -188,13 +151,13 @@
   z-index: 0;
 }
 
-.input-right {
+.admin-dashboard-content .input-right {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.input-icon {
+.admin-dashboard-content .input-icon {
   width: 24px;
   height: 24px;
   display: flex;
@@ -203,7 +166,7 @@
   color: #444444;
 }
 
-.close-icon {
+.admin-dashboard-content .close-icon {
   width: 24px;
   height: 24px;
   display: none;
@@ -214,8 +177,8 @@
   z-index: 1;
 }
 
-.field-input,
-.field-display-text {
+.admin-dashboard-content .field-input,
+.admin-dashboard-content .field-display-text {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 300;
@@ -229,20 +192,20 @@
   padding: 0;
 }
 
-.field-display-text {
+.admin-dashboard-content .field-display-text {
   color: #717171;
 }
 
-.account-input-group.filled .field-display-text,
-.account-input-group.editing .field-display-text {
+.admin-dashboard-content .account-input-group.filled .field-display-text,
+.admin-dashboard-content .account-input-group.editing .field-display-text {
   color: #0C0C0C;
 }
 
-.field-input::placeholder {
+.admin-dashboard-content .field-input::placeholder {
   color: #717171;
 }
 
-.edit-btn {
+.admin-dashboard-content .edit-btn {
   background: transparent;
   border: none;
   cursor: pointer;
@@ -256,87 +219,62 @@
   z-index: 2;
 }
 
-/* Interactivity States */
-
-/* Hover */
-.account-input-container:hover {
+.admin-dashboard-content .account-input-container:hover {
   border-color: #717171;
 }
 
-.account-input-container:hover .label-segment {
+.admin-dashboard-content .account-input-container:hover .label-segment {
   border-color: #717171;
 }
 
-/* Focused / Editing */
-.account-input-group.focused .account-input-container,
-.account-input-group.editing .account-input-container {
+.admin-dashboard-content .account-input-group.focused .account-input-container,
+.admin-dashboard-content .account-input-group.editing .account-input-container {
   border-color: #0C68F4;
 }
 
-.account-input-group.focused .label-segment,
-.account-input-group.editing .label-segment {
+.admin-dashboard-content .account-input-group.focused .label-segment,
+.admin-dashboard-content .account-input-group.editing .label-segment {
   border-color: #0C68F4;
 }
 
-.account-input-group.focused .input-label,
-.account-input-group.editing .input-label,
-.account-input-group.focused .input-icon,
-.account-input-group.editing .input-icon,
-.account-input-group.focused .close-icon,
-.account-input-group.editing .close-icon {
+.admin-dashboard-content .account-input-group.focused .input-label,
+.admin-dashboard-content .account-input-group.editing .input-label,
+.admin-dashboard-content .account-input-group.focused .input-icon,
+.admin-dashboard-content .account-input-group.editing .input-icon,
+.admin-dashboard-content .account-input-group.focused .close-icon,
+.admin-dashboard-content .account-input-group.editing .close-icon {
   color: #0C68F4;
 }
 
-/* Error State */
-.account-input-group.error .account-input-container {
+.admin-dashboard-content .account-input-group.error .account-input-container {
   border-color: #C91433;
 }
 
-.account-input-group.error .label-segment {
+.admin-dashboard-content .account-input-group.error .label-segment {
   border-color: #C91433;
 }
 
-.account-input-group.error .input-label,
-.account-input-group.error .field-input,
-.account-input-group.error .input-icon,
-.account-input-group.error .supporting-text,
-.account-input-group.error .close-icon {
+.admin-dashboard-content .account-input-group.error .input-label,
+.admin-dashboard-content .account-input-group.error .field-input,
+.admin-dashboard-content .account-input-group.error .input-icon,
+.admin-dashboard-content .account-input-group.error .supporting-text,
+.admin-dashboard-content .account-input-group.error .close-icon {
   color: #C91433;
 }
 
-/* Disabled / Inactive State */
-.account-input-group.disabled .account-input-container {
+.admin-dashboard-content .account-input-group.disabled .account-input-container {
   border-color: #CBCBCB;
 }
 
-.account-input-group.disabled .label-segment,
-.account-input-group.disabled .input-label,
-.account-input-group.disabled .input-icon {
-  color: #CBCBCB;
-  border-color: #CBCBCB;
-}
-
-.account-input-group.disabled .label-segment,
-.account-input-group.disabled .input-label,
-.account-input-group.disabled .input-icon {
+.admin-dashboard-content .account-input-group.disabled .label-segment,
+.admin-dashboard-content .account-input-group.disabled .input-label,
+.admin-dashboard-content .account-input-group.disabled .input-icon {
   color: #CBCBCB;
   border-color: #CBCBCB;
 }
 
 @media (max-width: 1200px) {
-  .identification-content-wrapper {
+  .admin-dashboard-content .identification-content-wrapper {
     flex-direction: column;
-  }
-}
-
-@media (max-width: 1024px) {
-  .admin-layout-wrapper {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .admin-sidebar {
-    width: 100%;
-    min-height: auto;
   }
 }

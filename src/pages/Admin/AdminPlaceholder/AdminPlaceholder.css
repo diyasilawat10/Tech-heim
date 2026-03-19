@@ -1,0 +1,59 @@
+.admin-placeholder-page .admin-placeholder-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 24px;
+}
+
+.admin-placeholder-page .admin-placeholder-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-placeholder-page .admin-placeholder-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 240px;
+  padding: 32px;
+  background: #FFFFFF;
+  border: 1px solid #F6F6F6;
+  border-radius: 8px;
+  box-shadow: -2px 2px 20px -1px rgba(113, 113, 113, 0.12);
+}
+
+.admin-placeholder-page .admin-placeholder-card.standalone {
+  max-width: 1224px;
+  width: 100%;
+}
+
+.admin-placeholder-page .admin-placeholder-title {
+  margin: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0C0C0C;
+}
+
+.admin-placeholder-page .admin-placeholder-subtitle {
+  margin: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: #717171;
+}
+
+.admin-placeholder-page .admin-placeholder-copy {
+  margin: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: #717171;
+}
