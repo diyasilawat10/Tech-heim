@@ -8,32 +8,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
   z-index: 1000;
 }
 
 .admin-modal-container {
   position: relative;
   width: 392px;
-  min-height: 310px; /* Base height from Figma */
+  max-width: 100%;
+  min-height: 310px;
+  max-height: calc(100vh - 48px);
   background: #FFFFFF;
   box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12);
   border-radius: 8px;
   box-sizing: border-box;
-  padding-bottom: 24px; /* Ensure some bottom space */
-  overflow: visible; /* Ensure nothing is clipped */
-}
-
-/* For modals with more fields (like Add Product) */
-.admin-modal-container:has(.modal-input-group:nth-child(3)) {
-  min-height: 440px;
-}
-
-.admin-modal-container:has(.modal-input-group:nth-child(5)) {
-  min-height: 500px;
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
-  height: 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .modal-title {
@@ -44,10 +45,7 @@
   line-height: 24px;
   color: #444444;
   margin: 0;
-  position: absolute;
-  left: 19px;
-  top: 28px;
-  width: 246px; /* Matches Figma text area */
+  flex: 1;
 }
 
 .modal-close-btn {
@@ -57,46 +55,23 @@
   padding: 0;
   width: 30px;
   height: 30px;
-  position: absolute;
-  right: 24px;
-  top: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10; /* Ensure it's on top */
+  flex-shrink: 0;
+  z-index: 10;
 }
 
 .modal-body {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .modal-input-group {
-  position: absolute; /* Absolute as per Figma body dump */
-  left: 24px;
-  right: 24px;
-  height: 48px;
+  position: relative;
+  min-height: 48px;
   isolation: isolate;
-}
-
-.modal-body .modal-input-group:nth-child(1) {
-  top: 94px;
-}
-
-.modal-body .modal-input-group:nth-child(2) {
-  top: 158px;
-}
-
-.modal-body .modal-input-group:nth-child(3) {
-  top: 222px;
-}
-
-.modal-body .modal-input-group:nth-child(4) {
-  top: 286px;
-}
-
-.modal-body .modal-input-group:nth-child(5) {
-  top: 350px;
 }
 
 .modal-label-container {
@@ -110,12 +85,6 @@
   top: -7px;
   z-index: 3;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.modal-input-group.filled .modal-label-container,
-.modal-input-group.focused .modal-label-container {
   opacity: 1;
 }
 
@@ -224,9 +193,9 @@
 }
 
 .modal-footer {
-  position: absolute;
-  right: 24px;
-  bottom: 24px; /* Relative to bottom now */
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
 }
 
 /* Delete Modal Specific Styles */
@@ -242,6 +211,7 @@
 }
 
 .delete-modal .modal-header {
+  display: block;
   height: auto;
   margin-bottom: 24px;
 }
@@ -262,6 +232,7 @@
 .delete-modal .modal-body {
   width: 100%;
   margin-bottom: 32px;
+  gap: 0;
 }
 
 .delete-modal .modal-footer {
@@ -310,6 +281,11 @@
   background: #0856c9;
 }
 
+.modal-save-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 /* Error State Styles */
 .modal-input-group.error .modal-input-wrapper {
   border-color: #C91433;
@@ -347,10 +323,7 @@
   font-size: 12px;
   line-height: 15px;
   color: #C91433;
-  margin: 4px 0 0 0;
-  position: absolute;
-  top: 100%; /* Positioned below the input group (which is 48px high) */
-  left: 0;
+  margin: 4px 0 0;
 }
 
 /* File Upload Styles */

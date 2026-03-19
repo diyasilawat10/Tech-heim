@@ -1,14 +1,11 @@
 import React from 'react';
-import AdminBreadcrumbs from '../../../components/Admin/AdminBreadcrumbs/AdminBreadcrumbs';
-import AdminSidebar from '../../../components/Admin/AdminSidebar/AdminSidebar';
+import AdminLayout from '../../../components/Admin/AdminLayout/AdminLayout';
 import AdminModal from '../../../components/Admin/AdminModal/AdminModal';
 import { getAdminIcon } from '../../../constants/adminIcons';
 import { fieldGroup1, fieldGroup2 } from '../../../constants/adminFields';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
-  const [focusedField, setFocusedField] = React.useState(null);
-  const [errorFields, setErrorFields] = React.useState({});
   const [fieldData, setFieldData] = React.useState({
     'full-name': 'Jimmy Smith',
     'phone-number': '+12345678910',
@@ -101,14 +98,13 @@ const AdminDashboard = () => {
 
   const renderField = (field) => {
     const value = fieldData[field.id];
-    const isError = errorFields[field.id];
     const isFilled = !!value;
     const displayText = field.type === 'password' ? '*'.repeat(8) : (value || field.placeholder);
 
     return (
       <div
         key={field.id}
-        className={`account-input-group ${focusedField === field.id ? 'focused' : ''} ${isError ? 'error' : ''} ${isFilled ? 'filled' : ''}`}
+        className={`account-input-group ${isFilled ? 'filled' : ''}`}
       >
         <div className="label-container">
           <span className="label-segment segment-left"></span>
@@ -139,33 +135,28 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="admin-dashboard">
-      <div className="admin-container">
-        <AdminBreadcrumbs />
+    <>
+      <AdminLayout
+        pageClassName="admin-dashboard-page"
+        profileName={fieldData['full-name']}
+      >
+        <section className="admin-dashboard-content identification-section">
+          <header className="section-header">
+            <h2 className="section-title">Identification</h2>
+            <p className="section-subtitle">Verify your identity</p>
+          </header>
 
-        <div className="admin-layout-wrapper">
-          <AdminSidebar profileName={fieldData['full-name']} />
+          <div className="identification-content-wrapper">
+            <div className="identification-frame frame-1">
+              {fieldGroup1.map(renderField)}
+            </div>
 
-          <main className="admin-main-content">
-            <section className="identification-section">
-              <header className="section-header">
-                <h2 className="section-title">Identification</h2>
-                <p className="section-subtitle">Verify your identity</p>
-              </header>
-
-              <div className="identification-content-wrapper">
-                <div className="identification-frame frame-1">
-                  {fieldGroup1.map(renderField)}
-                </div>
-
-                <div className="identification-frame frame-2">
-                  {fieldGroup2.map(renderField)}
-                </div>
-              </div>
-            </section>
-          </main>
-        </div>
-      </div>
+            <div className="identification-frame frame-2">
+              {fieldGroup2.map(renderField)}
+            </div>
+          </div>
+        </section>
+      </AdminLayout>
 
       <AdminModal
         isOpen={modalConfig.isOpen}
@@ -185,7 +176,7 @@ const AdminDashboard = () => {
           />
         ))}
       </AdminModal>
-    </div>
+    </>
   );
 };
 

@@ -94,7 +94,16 @@ const FileUpload = ({ label, value, onChange, error }) => {
   );
 };
 
-const AdminModal = ({ isOpen, onClose, onSave, title, children, saveText = 'save', variant = 'default' }) => {
+const AdminModal = ({
+  isOpen,
+  onClose,
+  onSave,
+  title,
+  children,
+  saveText = 'save',
+  variant = 'default',
+  saveDisabled = false
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -115,7 +124,7 @@ const AdminModal = ({ isOpen, onClose, onSave, title, children, saveText = 'save
         </div>
 
         <div className="modal-footer">
-          <button className="modal-save-btn" onClick={onSave}>
+          <button className="modal-save-btn" onClick={onSave} disabled={saveDisabled}>
             {saveText}
           </button>
         </div>
