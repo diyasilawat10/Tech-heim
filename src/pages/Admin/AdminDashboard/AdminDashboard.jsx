@@ -7,8 +7,6 @@ import { fieldGroup1, fieldGroup2 } from '../../../constants/adminFields';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
-  const [focusedField, setFocusedField] = React.useState(null);
-  const [errorFields, setErrorFields] = React.useState({});
   const [fieldData, setFieldData] = React.useState({
     'full-name': 'Jimmy Smith',
     'phone-number': '+12345678910',
@@ -25,8 +23,6 @@ const AdminDashboard = () => {
 
   const getFirstName = () => fieldData['full-name'].split(' ')[0] || '';
   const getLastName = () => fieldData['full-name'].split(' ').slice(1).join(' ') || '';
-
-
 
   const handleEdit = (id) => {
     if (id === 'full-name') {
@@ -101,14 +97,13 @@ const AdminDashboard = () => {
 
   const renderField = (field) => {
     const value = fieldData[field.id];
-    const isError = errorFields[field.id];
     const isFilled = !!value;
     const displayText = field.type === 'password' ? '*'.repeat(8) : (value || field.placeholder);
 
     return (
       <div
         key={field.id}
-        className={`account-input-group ${focusedField === field.id ? 'focused' : ''} ${isError ? 'error' : ''} ${isFilled ? 'filled' : ''}`}
+        className={`account-input-group ${isFilled ? 'filled' : ''}`}
       >
         <div className="label-container">
           <span className="label-segment segment-left"></span>

@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './AuthModal.css';
+import { signUp, login } from '../../../api/auth';
 
 const TAB = {
     LOGIN: 'login',
@@ -240,6 +241,8 @@ function AuthField({
     supportingText = '',
     clearable = false,
     onClear,
+    disabled = false,
+    inputRef,
 }) {
     const trailingContent = trailing || (hasError && clearable ? (
         <button
@@ -247,6 +250,7 @@ function AuthField({
             className="auth-field-action-button"
             aria-label={`Clear ${label || placeholder}`}
             onClick={onClear}
+            disabled={disabled}
         >
             <CloseCircleIcon />
         </button>
@@ -255,7 +259,7 @@ function AuthField({
     return (
         <div className={`auth-field ${hasError ? 'auth-field--error' : ''}`}>
             <label className="auth-field-shell" htmlFor={id}>
-                {hasError && label ? (
+                {label ? (
                     <span className="auth-field-label">
                         <span className="auth-field-label-chip">
                             <span className="auth-field-label-required">*</span>
@@ -274,6 +278,8 @@ function AuthField({
                     placeholder={placeholder}
                     autoComplete={autoComplete}
                     aria-invalid={hasError || undefined}
+                    disabled={disabled}
+                    ref={inputRef}
                 />
             </label>
             <span className={`auth-field-trailing ${trailingContent ? '' : 'is-hidden'}`}>
@@ -286,8 +292,7 @@ function AuthField({
     );
 }
 
-function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError }) {
-    const submitTimeoutRef = useRef(null);
+function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError, isOpen, modalType }) {
     const [activeTab, setActiveTab] = useState(TAB.LOGIN);
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
@@ -303,6 +308,17 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
     const [registerEmailDirty, setRegisterEmailDirty] = useState(false);
     const [agreeToTerms, setAgreeToTerms] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [apiError, setApiError] = useState('');
+
+    const emailInputRef = useRef(null);
+
+    useEffect(() => {
+        if (isOpen && (modalType === 'login' || modalType === 'create')) {
+            setTimeout(() => {
+                emailInputRef.current?.focus();
+            }, 100);
+        }
+    }, [isOpen, modalType]);
 
     const isRegister = activeTab === TAB.REGISTER;
     const showRegisterNameError = isRegister && registerSubmitted && !registerName.trim();
@@ -316,50 +332,27 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
         ((loginSubmitted || loginEmailDirty) && !isValidEmail(loginEmail));
     const showLoginPasswordError = !isRegister && loginSubmitted && !loginPassword.trim();
 
-    const isRegisterSubmitDisabled = isRegister && !agreeToTerms;
-
-    useEffect(() => () => {
-        if (submitTimeoutRef.current) {
-            window.clearTimeout(submitTimeoutRef.current);
-        }
-    }, []);
-
-    const clearPendingSubmit = () => {
-        if (submitTimeoutRef.current) {
-            window.clearTimeout(submitTimeoutRef.current);
-            submitTimeoutRef.current = null;
-        }
-    };
-
-    const finishSubmit = (delay, callback) => {
-        clearPendingSubmit();
-        setIsSubmitting(true);
-        submitTimeoutRef.current = window.setTimeout(() => {
-            submitTimeoutRef.current = null;
-            setIsSubmitting(false);
-            callback();
-        }, delay);
-    };
+    const isRegisterSubmitDisabled = isRegister && (!agreeToTerms || isSubmitting);
 
     const handleBackdropClick = (event) => {
         if (event.target === event.currentTarget) {
-            clearPendingSubmit();
             onClose();
         }
     };
 
     const handleTabChange = (nextTab) => {
-        clearPendingSubmit();
         setActiveTab(nextTab);
         setIsSubmitting(false);
+        setApiError('');
         setRegisterSubmitted(false);
         setRegisterEmailDirty(false);
         setLoginSubmitted(false);
         setLoginEmailDirty(false);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        setApiError('');
 
         if (isRegister) {
             const hasNameError = !registerName.trim();
@@ -368,16 +361,27 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
 
             setRegisterSubmitted(true);
 
-            if (hasEmailError) {
+            if (hasNameError || hasEmailError || hasPasswordError) {
+                onRegisterError('Please fill in all required fields correctly.');
                 return;
             }
 
-            if (hasNameError || hasPasswordError) {
+            setIsSubmitting(true);
+            try {
+                await signUp({
+                    name: registerName.trim(),
+                    email: registerEmail.trim(),
+                    password: registerPassword,
+                });
+                onRegisterSuccess();
+            } catch (error) {
+                console.error('Registration Error:', error);
+                const message = error.response?.data?.message || error.message || 'Registration failed';
+                setApiError(message);
                 onRegisterError();
-                return;
+            } finally {
+                setIsSubmitting(false);
             }
-
-            finishSubmit(700, onRegisterSuccess);
             return;
         }
 
@@ -390,7 +394,27 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
             return;
         }
 
-        finishSubmit(400, onLoginSuccess);
+        setIsSubmitting(true);
+        try {
+            const res = await login({
+                email: loginEmail.trim(),
+                password: loginPassword,
+            });
+
+            // Robust token extraction
+            const token = res?.data?.token || res?.token || res?.accessToken || res?.access_token || res?.data?.access_token;
+            if (token) {
+                localStorage.setItem("token", token);
+            }
+
+            onLoginSuccess();
+        } catch (error) {
+            console.error('Login Error:', error);
+            const message = error.message === 'Unauthorized' ? 'Invalid email or password' : error.message;
+            setApiError(message);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -411,6 +435,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                         type="button"
                         className={`auth-tab ${!isRegister ? 'active' : ''}`}
                         onClick={() => handleTabChange(TAB.LOGIN)}
+                        disabled={isSubmitting}
                     >
                         Log in
                     </button>
@@ -418,6 +443,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                         type="button"
                         className={`auth-tab ${isRegister ? 'active' : ''}`}
                         onClick={() => handleTabChange(TAB.REGISTER)}
+                        disabled={isSubmitting}
                     >
                         Create Account
                     </button>
@@ -429,6 +455,11 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
 
                 <form className="auth-form" onSubmit={handleSubmit} noValidate>
                     <div className="auth-fields">
+                        {apiError && (
+                            <div className="auth-api-error">
+                                {apiError}
+                            </div>
+                        )}
                         {isRegister ? (
                             <AuthField
                                 id="register-name"
@@ -440,6 +471,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                                 icon={<UserIcon />}
                                 label="Name"
                                 hasError={showRegisterNameError}
+                                disabled={isSubmitting}
                             />
                         ) : null}
 
@@ -472,6 +504,8 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                                     setLoginSubmitted(false);
                                 }
                             }}
+                            disabled={isSubmitting}
+                            inputRef={emailInputRef}
                         />
 
                         <AuthField
@@ -488,6 +522,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                             icon={<KeyIcon />}
                             label="Password"
                             hasError={isRegister ? showRegisterPasswordError : showLoginPasswordError}
+                            disabled={isSubmitting}
                             trailing={(
                                 <button
                                     type="button"
@@ -505,6 +540,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
 
                                         setShowLoginPassword((value) => !value);
                                     }}
+                                    disabled={isSubmitting}
                                 >
                                     {isRegister
                                         ? (showRegisterPassword ? <EyeIcon /> : <EyeSlashIcon />)
@@ -515,7 +551,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                     </div>
 
                     {!isRegister ? (
-                        <button type="button" className="auth-forgot-link">
+                        <button type="button" className="auth-forgot-link" disabled={isSubmitting}>
                             Forgot Password ?
                         </button>
                     ) : null}
@@ -528,6 +564,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                             className="auth-checkbox-input"
                             type="checkbox"
                             checked={isRegister ? agreeToTerms : keepLoggedIn}
+                            disabled={isSubmitting}
                             onChange={(event) => {
                                 if (isRegister) {
                                     setAgreeToTerms(event.target.checked);
@@ -541,7 +578,11 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                             <TickSquareIcon checked={isRegister ? agreeToTerms : keepLoggedIn} />
                         </span>
                         <span className="auth-checkbox-text">
-                            {isRegister ? 'I agree to all Terms & Conditions' : 'Keep me logged in'}
+                            {isRegister ? (
+                                <>
+                                    I agree to all <button type="button" className="auth-link-blue">Terms & Conditions</button>
+                                </>
+                            ) : 'Keep me logged in'}
                         </span>
                     </label>
 
@@ -560,11 +601,11 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                     </div>
 
                     <div className="auth-social-row">
-                        <button type="button" className="auth-social-button">
+                        <button type="button" className="auth-social-button" disabled={isSubmitting}>
                             <GoogleIcon />
                             <span>Google</span>
                         </button>
-                        <button type="button" className="auth-social-button">
+                        <button type="button" className="auth-social-button" disabled={isSubmitting}>
                             <FacebookIcon />
                             <span>Facebook</span>
                         </button>

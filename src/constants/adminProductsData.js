@@ -4,7 +4,6 @@ import appleWatchImg from '../assets/images/applewatch.jpg';
 import macbookImg from '../assets/images/macbookairm2.png';
 import samsungWatchImg from '../assets/images/samsungwatch.png';
 import smartphoneImg from '../assets/images/iphone13promax.png';
-import laptopImg from '../assets/images/MAC.png';
 import headsetImg from '../assets/images/headset.png';
 import s23Img from '../assets/images/galaxys23.png';
 

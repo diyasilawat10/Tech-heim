@@ -54,9 +54,10 @@ const MODAL_COPY = {
     },
 };
 
-function StatusModal({ type = 'success', onClose }) {
+function StatusModal({ type = 'success', onClose, message: customMessage }) {
     const isSuccess = type === 'success';
-    const { title, message } = MODAL_COPY[isSuccess ? 'success' : 'error'];
+    const { title, message: defaultMessage } = MODAL_COPY[isSuccess ? 'success' : 'error'];
+    const displayMessage = customMessage || defaultMessage;
 
     const handleBackdropClick = (event) => {
         if (event.target === event.currentTarget) {
@@ -82,7 +83,7 @@ function StatusModal({ type = 'success', onClose }) {
                     {title}
                 </h2>
 
-                <p className="status-message">{message}</p>
+                <p className="status-message">{displayMessage}</p>
             </div>
         </div>
     );

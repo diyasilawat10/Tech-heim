@@ -14,6 +14,7 @@ const MODAL = { NONE: 'none', AUTH: 'auth', SUCCESS: 'success', ERROR: 'error' }
 
 function Navbar() {
   const [modal, setModal] = useState(MODAL.NONE);
+  const [registerError, setRegisterError] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Close on Escape key
@@ -37,7 +38,8 @@ function Navbar() {
     setModal(MODAL.SUCCESS);
   };
 
-  const handleRegisterError = () => {
+  const handleRegisterError = (msg) => {
+    setRegisterError(msg || '');
     setModal(MODAL.ERROR);
   };
 
@@ -151,6 +153,7 @@ function Navbar() {
       {modal === MODAL.ERROR && (
         <StatusModal
           type="error"
+          message={registerError}
           onClose={() => setModal(MODAL.NONE)}
         />
       )}
