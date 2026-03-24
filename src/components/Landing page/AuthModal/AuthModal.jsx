@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './AuthModal.css';
-import { signUp, login } from '../../../api/auth';
+import { register, login } from '../../../api/auth';
 
 const TAB = {
     LOGIN: 'login',
@@ -368,7 +368,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
 
             setIsSubmitting(true);
             try {
-                await signUp({
+                await register({
                     name: registerName.trim(),
                     email: registerEmail.trim(),
                     password: registerPassword,
@@ -397,10 +397,10 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
 
         setIsSubmitting(true);
         try {
-            const res = await login({
-                email: loginEmail.trim(),
-                password: loginPassword,
-            });
+            const res = await login(
+                loginEmail.trim(),
+                loginPassword
+            );
 
             // Robust token extraction
             const token = res?.data?.token || res?.token || res?.accessToken || res?.access_token || res?.data?.access_token;
