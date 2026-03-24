@@ -150,6 +150,15 @@ const AdminSidebar = ({ profileName }) => {
             className={({ isActive }) => 
               `nav-item ${isActive ? 'active' : ''} ${item.isError ? 'error' : ''}`
             }
+            onClick={(e) => {
+              if (item.path === '/logout') {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('lastRegisteredName');
+                window.location.href = '/';
+              }
+            }}
           >
             <span className="nav-icon">{getIcon(item.icon)}</span>
             <span className="nav-text">{item.name}</span>

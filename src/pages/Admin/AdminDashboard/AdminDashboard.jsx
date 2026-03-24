@@ -6,13 +6,14 @@ import { fieldGroup1, fieldGroup2 } from '../../../constants/adminFields';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
+  const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
   const [fieldData, setFieldData] = React.useState({
-    'full-name': 'Jimmy Smith',
-    'phone-number': '+12345678910',
-    'address': 'HubSpot, 25 First Street, Cambridge...',
-    'email': 'Jimmy.smith1996@gmail.com',
+    'full-name': storedUser.name || '',
+    'phone-number': storedUser.phone || '',
+    'address': storedUser.address || '',
+    'email': storedUser.email || '',
     'password': '*********',
-    'postal-code': '',
+    'postal-code': storedUser.postalCode || '',
   });
   const [modalConfig, setModalConfig] = React.useState({
     isOpen: false,
@@ -22,8 +23,6 @@ const AdminDashboard = () => {
 
   const getFirstName = () => fieldData['full-name'].split(' ')[0] || '';
   const getLastName = () => fieldData['full-name'].split(' ').slice(1).join(' ') || '';
-
-
 
   const handleEdit = (id) => {
     if (id === 'full-name') {
