@@ -26,7 +26,7 @@
   padding: 0 20px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 56px 1fr 136px;
+  grid-template-columns: 56px 1fr auto;
   align-items: center;
   column-gap: 90px;
 }
@@ -96,7 +96,6 @@
 }
 
 .nav-icons {
-  width: 136px;
   height: 56px;
   display: flex;
   align-items: center;
@@ -104,7 +103,15 @@
   gap: 8px;
   padding: 8px 0;
   align-self: start;
-  margin-top: 22px;
+  margin-top: 19px;
+}
+
+.nav-icons--before-login {
+  width: 244px;
+}
+
+.nav-icons--authenticated {
+  width: 136px;
 }
 
 .icon-btn {
@@ -145,6 +152,27 @@
   transform: scale(1.7);
 }
 
+.auth-trigger-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  width: 148px;
+  height: 48px;
+  border: 0;
+  border-radius: 8px;
+  background: #0c68f4;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: center;
+  white-space: nowrap;
+}
+
 @media (max-width: 1280px) {
   .header-inner {
     column-gap: 28px;
@@ -171,6 +199,20 @@
     line-height: 20px;
     padding: 6px;
   }
+
+  .nav-icons {
+    margin-top: 14px;
+  }
+
+  .nav-icons--before-login {
+    width: 212px;
+  }
+
+  .auth-trigger-btn {
+    width: 116px;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -181,6 +223,13 @@
 
   .navbar {
     display: none;
+  }
+
+  .nav-icons,
+  .nav-icons--before-login,
+  .nav-icons--authenticated {
+    width: auto;
+    margin-top: 0;
   }
 }
 

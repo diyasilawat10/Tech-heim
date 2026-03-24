@@ -1,10 +1,7 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Breadcrumb.css';
 
 const Breadcrumb = () => {
-    const location = useLocation();
-    
     return (
         <nav className="breadcrumb" aria-label="Breadcrumb">
             <div className="breadcrumb-item">
