@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BACKEND_URL = 'https://tech-heim-indj.onrender.com';
+const BACKEND_URL = '';
 
 const authApi = axios.create({
   baseURL: BACKEND_URL,
