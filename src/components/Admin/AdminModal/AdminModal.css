@@ -49,17 +49,25 @@
 }
 
 .modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  z-index: 10;
+  z-index: 20;
+  transition: transform 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  transform: scale(1.1);
 }
 
 .modal-body {
@@ -200,33 +208,26 @@
 
 /* Delete Modal Specific Styles */
 .delete-modal {
-  min-height: auto !important; /* Let content decide but with padding */
+  min-height: auto !important;
   height: auto !important;
   width: 480px;
-  padding: 40px 32px 32px;
+  padding: 48px 32px 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .delete-modal .modal-header {
-  display: block;
-  height: auto;
+  display: flex;
+  justify-content: center;
   margin-bottom: 24px;
 }
 
 .delete-modal .modal-title {
-  position: static;
-  width: 100%;
   text-align: center;
   font-size: 24px;
   line-height: 30px;
-}
-
-.delete-modal .modal-close-btn {
-  top: 16px;
-  right: 16px;
+  font-weight: 600;
+  color: #0C0C0C;
 }
 
 .delete-modal .modal-body {
@@ -236,23 +237,44 @@
 }
 
 .delete-modal .modal-footer {
-  position: static;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
   padding: 0;
+  margin-top: 0;
 }
 
 .delete-modal .modal-save-btn {
-  background: #C91433; /* Danger color */
-  width: 100%; /* Wider button for delete */
-  max-width: 240px;
+  background: #C91433;
+  width: 100%;
+  max-width: none;
   height: 52px;
-  font-weight: 500;
+  font-weight: 600;
+  border-radius: 8px;
 }
 
 .delete-modal .modal-save-btn:hover {
   background: #a01029;
+}
+
+.modal-cancel-btn {
+  background: #F3F3F3;
+  color: #717171;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  height: 52px;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-cancel-btn:hover {
+  background: #E8E8E8;
+  color: #444444;
 }
 
 .modal-save-btn {

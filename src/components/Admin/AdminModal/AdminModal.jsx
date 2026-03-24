@@ -124,6 +124,11 @@ const AdminModal = ({
         </div>
 
         <div className="modal-footer">
+          {variant === 'delete' && (
+            <button className="modal-cancel-btn" onClick={onClose} type="button">
+              Cancel
+            </button>
+          )}
           <button className="modal-save-btn" onClick={onSave} disabled={saveDisabled}>
             {saveText}
           </button>

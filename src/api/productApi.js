@@ -1,39 +1,50 @@
-import axios from 'axios';
+const BASE = "";  // CRA proxy forwards to https://tech-heim-indj.onrender.com
 
-const productApi = axios.create({
-  baseURL: '/api',
-  timeout: 20000
-});
-
-const getAuthToken = () => {
-  if (typeof window === 'undefined') {
-    return '';
-  }
-
-  return localStorage.getItem('token') || '';
+export const getProducts = async () => {
+  const res = await fetch(`${BASE}/products`);
+  if (!res.ok) throw new Error(`Failed to fetch products (${res.status})`);
+  return res.json();
 };
 
-productApi.interceptors.request.use(
-  (config) => {
-    if (typeof window !== 'undefined') {
-      const token = getAuthToken();
+export const getProductById = async (id) => {
+  const res = await fetch(`${BASE}/products/${id}`);
+  if (!res.ok) throw new Error(`Failed to fetch product (${res.status})`);
+  return res.json();
+};
 
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-    }
+export const createProduct = async (data) => {
+  const res = await fetch(`${BASE}/products`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Failed to create product (${res.status})`);
+  }
+  return res.json();
+};
 
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+export const updateProduct = async (id, data) => {
+  const res = await fetch(`${BASE}/products/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Failed to update product (${res.status})`);
+  }
+  return res.json();
+};
 
-export const getProducts = () => productApi.get('/products');
-
-export const createProduct = (payload) => productApi.post('/products', payload);
-
-export const updateProduct = (id, payload) => productApi.put(`/products/${id}`, payload);
-
-export const deleteProduct = (id) => productApi.delete(`/products/${id}`);
-
-export default productApi;
+export const deleteProduct = async (id) => {
+  const res = await fetch(`${BASE}/products/${id}`, {
+    method: "DELETE"
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Failed to delete product (${res.status})`);
+  }
+  return res.ok;
+};
