@@ -15,7 +15,7 @@ const MODAL = { NONE: 'none', AUTH: 'auth', SUCCESS: 'success', ERROR: 'error' }
 function Navbar() {
   const [modal, setModal] = useState(MODAL.NONE);
   const [registerError, setRegisterError] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('token'));
 
   // Close on Escape key
   useEffect(() => {

@@ -373,6 +373,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
                     email: registerEmail.trim(),
                     password: registerPassword,
                 });
+                localStorage.setItem('lastRegisteredName', registerName.trim());
                 onRegisterSuccess();
             } catch (error) {
                 console.error('Registration Error:', error);
@@ -406,6 +407,12 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
             if (token) {
                 localStorage.setItem("token", token);
             }
+
+            // Extract user info if available or use entered email
+            const userObj = res?.data?.user || res?.user || {};
+            const userName = userObj.name || localStorage.getItem('lastRegisteredName') || '';
+            const userEmail = userObj.email || loginEmail.trim();
+            localStorage.setItem("user", JSON.stringify({ ...userObj, name: userName, email: userEmail }));
 
             onLoginSuccess();
         } catch (error) {
