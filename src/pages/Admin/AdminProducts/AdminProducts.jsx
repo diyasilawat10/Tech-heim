@@ -1,186 +1,316 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AdminProducts.css';
-import AdminSidebar from '../../../components/Admin/AdminSidebar/AdminSidebar';
-import AdminBreadcrumbs from '../../../components/Admin/AdminBreadcrumbs/AdminBreadcrumbs';
+import AdminLayout from '../../../components/Admin/AdminLayout/AdminLayout';
 import AdminProductCard from '../../../components/Admin/AdminProductCard/AdminProductCard';
 import AdminModal from '../../../components/Admin/AdminModal/AdminModal';
-import { INITIAL_PRODUCTS } from '../../../constants/adminProductsData';
+import { createProduct, deleteProduct, getProducts, updateProduct } from '../../../api/productApi';
+import { getCategories } from '../../../api/categoriesApi';
+
+const emptyForm = () => ({
+  name: '',
+  description: '',
+  price: '',
+  stock: '',
+  discount: '',
+  image: '',
+  category: ''
+});
+
+const getId = (p) => p?.id ?? p?._id ?? '';
 
 const AdminProducts = () => {
-  const [products, setProducts] = useState(INITIAL_PRODUCTS);
-  const [modalType, setModalType] = useState(null); // 'add', 'edit', 'delete'
-  const [currentProduct, setCurrentProduct] = useState(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    price: '',
-    image: '',
-    category: ''
-  });
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [modalType, setModalType] = useState(null); // 'add' | 'edit' | 'delete'
+  const [current, setCurrent] = useState(null);
+  const [form, setForm] = useState(emptyForm());
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [pageError, setPageError] = useState('');
+  const [modalError, setModalError] = useState('');
 
-  const handleOpenAdd = () => {
-    setFormData({ name: '', price: '', image: '', category: '' });
+  /* ── Fetch products ── */
+  const fetchProducts = async () => {
+    setLoading(true);
+    setPageError('');
+    try {
+      const data = await getProducts();
+      setProducts(Array.isArray(data) ? data : []);
+    } catch (err) {
+      setPageError(err.message || 'Failed to load products.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const res = await getCategories();
+      setCategories(res.data || []);
+    } catch (err) {
+      console.error('Failed to fetch categories:', err);
+    }
+  };
+
+  useEffect(() => { 
+    fetchProducts(); 
+    fetchCategories();
+  }, []);
+
+  /* ── Open modals ── */
+  const openAdd = () => {
+    setCurrent(null);
+    setForm(emptyForm());
     setErrors({});
+    setModalError('');
     setModalType('add');
   };
 
-  const handleOpenEdit = (product) => {
-    setCurrentProduct(product);
-    setFormData({
-      name: product.name,
-      price: product.price.toString(),
-      image: product.image,
-      category: product.category
+  const openEdit = (product) => {
+    setCurrent(product);
+    setForm({
+      name: product.title ?? product.name ?? '',
+      description: product.description ?? '',
+      price: String(product.price ?? ''),
+      stock: String(product.stock ?? ''),
+      discount: String(product.discount ?? ''),
+      image: product.image ?? '',
+      category: String(product.categoryId ?? product.category ?? '')
     });
     setErrors({});
+    setModalError('');
     setModalType('edit');
   };
 
-  const handleOpenDelete = (product) => {
-    setCurrentProduct(product);
+  const openDelete = (product) => {
+    setCurrent(product);
+    setModalError('');
     setModalType('delete');
   };
 
-  const handleInputChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: null }));
-    }
+  const closeModal = () => setModalType(null);
+
+  /* ── Form helpers ── */
+  const onChange = (field, value) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: null }));
   };
 
   const validate = () => {
-    const newErrors = {};
-    if (!formData.name) newErrors.name = 'Name is required';
-    if (!formData.price || isNaN(formData.price)) newErrors.price = 'Valid price is required';
-    if (!formData.image) newErrors.image = 'Image URL is required';
-    if (!formData.category) newErrors.category = 'Category is required';
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const e = {};
+    const trimmedName = form.name.trim();
+
+    // Title (required, unique)
+    if (!trimmedName) {
+      e.name = 'Product name is required';
+    } else {
+      const exists = products.find(
+        (p) =>
+          (p.title?.toLowerCase() === trimmedName.toLowerCase() ||
+           p.name?.toLowerCase() === trimmedName.toLowerCase()) &&
+          getId(p) !== getId(current)
+      );
+      if (exists) e.name = 'This product name already exists';
+    }
+
+    // Description (required)
+    if (!form.description.trim()) e.description = 'Description is required';
+
+    // Price (required number > 0)
+    const priceNum = Number(form.price);
+    if (form.price === '' || isNaN(priceNum) || priceNum <= 0) {
+      e.price = 'Price must be greater than 0';
+    }
+
+    // Stock (required integer >= 0)
+    const stockNum = Number(form.stock);
+    if (form.stock === '' || isNaN(stockNum) || stockNum < 0 || !Number.isInteger(stockNum)) {
+      e.stock = 'Stock must be a whole number (0 or higher)';
+    }
+
+    // Discount (optional, 0-100)
+    if (form.discount !== '') {
+      const discountNum = Number(form.discount);
+      if (isNaN(discountNum) || discountNum < 0 || discountNum > 100) {
+        e.discount = 'Discount must be between 0 and 100';
+      }
+    }
+
+    // Image URL validation (must be absolute)
+    if (!form.image.trim()) {
+      e.image = 'Image URL is required';
+    } else if (!form.image.startsWith('http') && !form.image.startsWith('/')) {
+      e.image = 'Use a full URL (http/https) or /root-path';
+    }
+
+    // Category (Required)
+    if (!form.category) {
+      e.category = 'Please select a category';
+    }
+
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
-  const handleSave = () => {
+  /* ── Save (add / edit) ── */
+  const handleSave = async () => {
     if (!validate()) return;
+    setSaving(true);
+    setModalError('');
 
-    const productData = {
-      ...formData,
-      price: parseFloat(formData.price),
-      id: modalType === 'add' ? Date.now() : currentProduct.id
+    // Build payload
+    const payload = {
+      title: form.name.trim(),
+      description: form.description.trim(),
+      price: Number(form.price),
+      stock: parseInt(form.stock, 10),
+      image: form.image.trim(),
+      discount: form.discount === '' ? 0 : Number(form.discount),
+      categoryId: parseInt(form.category, 10),
     };
 
-    if (modalType === 'add') {
-      setProducts(prev => [productData, ...prev]);
-    } else {
-      setProducts(prev => prev.map(p => p.id === currentProduct.id ? productData : p));
+    // Remove categoryId for edits to avoid 500 errors (not supported by UpdateProductDto)
+    if (modalType === 'edit') {
+      delete payload.categoryId;
     }
-    setModalType(null);
+
+    try {
+      if (modalType === 'add') {
+        await createProduct(payload);
+      } else {
+        await updateProduct(getId(current), payload);
+      }
+      await fetchProducts();
+      closeModal();
+    } catch (err) {
+      setModalError(err.message || 'Failed to save product.');
+    } finally {
+      setSaving(false);
+    }
   };
 
-  const handleDelete = () => {
-    setProducts(prev => prev.filter(p => p.id !== currentProduct.id));
-    setModalType(null);
+  /* ── Delete ── */
+  const handleDelete = async () => {
+    if (!current) return;
+    setDeleting(true);
+    setModalError('');
+    try {
+      await deleteProduct(getId(current));
+      await fetchProducts();
+      closeModal();
+    } catch (err) {
+      setModalError(err.message || 'Failed to delete product.');
+    } finally {
+      setDeleting(false);
+    }
   };
 
+  /* ── Render ── */
   return (
-    <div className="admin-products-page">
-      <div className="admin-container">
-        <AdminBreadcrumbs />
-        
-        <div className="admin-layout-wrapper">
-          <AdminSidebar profileName="Jimmy smith" />
-          
-          <main className="admin-main-content">
-            <header className="section-header">
-              <div>
-                <h2 className="section-title">Products</h2>
-                <p className="section-subtitle">Manage your store products</p>
-              </div>
-              <button className="add-product-btn" onClick={handleOpenAdd}>
-                + Add Product
-              </button>
-            </header>
-            
+    <>
+      <AdminLayout 
+        pageClassName="admin-products-page"
+        profileName={JSON.parse(localStorage.getItem('user') || '{}').name}
+      >
+        <section className="admin-products-content products-section">
+          <header className="section-header">
+            <div className="section-heading">
+              <h2 className="section-title">Products</h2>
+              <p className="section-subtitle">Manage your store products</p>
+            </div>
+            <div className="section-header-actions">
+              <button className="add-product-btn" onClick={openAdd}>+ Add Product</button>
+            </div>
+          </header>
+
+          {/* Error state */}
+          {pageError && (
+            <div className="products-status-block">
+              <p className="products-feedback products-feedback-error">{pageError}</p>
+              <button className="products-retry-btn" onClick={fetchProducts}>Retry</button>
+            </div>
+          )}
+
+          {/* Loading state */}
+          {loading && !pageError && (
+            <div className="products-status-block">
+              <p className="products-feedback">Loading products…</p>
+            </div>
+          )}
+
+          {/* Product grid */}
+          {!loading && !pageError && products.length > 0 && (
             <div className="products-grid">
-              {products.map(product => (
-                <AdminProductCard 
-                  key={product.id} 
-                  product={product} 
-                  onEdit={handleOpenEdit}
-                  onDelete={handleOpenDelete}
-                />
+              {products.map((p) => (
+                <AdminProductCard key={getId(p)} product={p} onEdit={openEdit} onDelete={openDelete} />
               ))}
             </div>
-          </main>
-        </div>
-      </div>
+          )}
+
+          {/* Empty state */}
+          {!loading && !pageError && products.length === 0 && (
+            <div className="products-empty-state">
+              <h3 className="products-empty-title">No products yet</h3>
+              <p className="products-empty-subtitle">Click "+ Add Product" to get started.</p>
+            </div>
+          )}
+        </section>
+      </AdminLayout>
 
       {/* Add / Edit Modal */}
       {(modalType === 'add' || modalType === 'edit') && (
         <AdminModal
-          isOpen={true}
-          onClose={() => setModalType(null)}
+          isOpen
+          onClose={closeModal}
           onSave={handleSave}
+          saveDisabled={saving}
+          saveText={saving ? 'Saving…' : 'Save'}
           title={modalType === 'add' ? 'Add New Product' : 'Edit Product'}
         >
-          <AdminModal.Input
-            label="Product Name"
-            value={formData.name}
-            error={errors.name}
-            onChange={(val) => handleInputChange('name', val)}
-            placeholder="e.g. iPhone 15 Pro"
-          />
-          <AdminModal.Input
-            label="Price ($)"
-            value={formData.price}
-            error={errors.price}
-            onChange={(val) => handleInputChange('price', val)}
-            placeholder="0.00"
-          />
-          <AdminModal.Input
-            label="Image URL"
-            value={formData.image}
-            error={errors.image}
-            onChange={(val) => handleInputChange('image', val)}
-            placeholder="https://example.com/image.jpg"
-          />
-          <AdminModal.FileUpload
-            label="Or Upload Local Image"
-            value={formData.image}
-            error={errors.image}
-            onChange={(val) => handleInputChange('image', val)}
-          />
-          <AdminModal.Input
-            label="Category"
-            value={formData.category}
-            error={errors.category}
-            onChange={(val) => handleInputChange('category', val)}
-            placeholder="e.g. Mobiles"
+          {modalError && <p className="products-modal-error">{modalError}</p>}
+          <AdminModal.Input label="Product Name" value={form.name} error={errors.name} onChange={(v) => onChange('name', v)} placeholder="e.g. iPhone 15 Pro" />
+          <AdminModal.Input label="Description" value={form.description} error={errors.description} onChange={(v) => onChange('description', v)} placeholder="Write a short product description" />
+          <AdminModal.Input label="Price ($)" type="number" value={form.price} error={errors.price} onChange={(v) => onChange('price', v)} placeholder="0.00" />
+          <AdminModal.Input label="Stock" type="number" value={form.stock} error={errors.stock} onChange={(v) => onChange('stock', v)} placeholder="0" />
+          <AdminModal.Input label="Discount" type="number" value={form.discount} error={errors.discount} onChange={(v) => onChange('discount', v)} placeholder="0" />
+          <AdminModal.Input label="Image URL" value={form.image} error={errors.image} onChange={(v) => onChange('image', v)} placeholder="https://example.com/image.jpg" supportingText={errors.image || "Use a full URL for the product image."} />
+          
+          <AdminModal.Select 
+            label="Category" 
+            value={form.category} 
+            options={categories} 
+            error={errors.category} 
+            disabled={modalType === 'edit'}
+            onChange={(v) => onChange('category', v)} 
+            supportingText={
+              modalType === 'edit' 
+                ? "Category cannot be changed after creation." 
+                : (errors.category || "Select the category this product belongs to.")
+            }
           />
         </AdminModal>
       )}
 
-      {/* Delete Confirmation Modal */}
+      {/* Delete Modal */}
       {modalType === 'delete' && (
         <AdminModal
-          isOpen={true}
-          onClose={() => setModalType(null)}
+          isOpen
+          onClose={closeModal}
           onSave={handleDelete}
           title="Delete Product"
-          saveText="Delete"
+          saveText={deleting ? 'Deleting…' : 'Delete'}
+          saveDisabled={deleting}
           variant="delete"
         >
-          <p style={{ 
-            fontFamily: 'Inter', 
-            fontSize: '16px', 
-            color: '#717171', 
-            margin: '0',
-            textAlign: 'center',
-            padding: '20px 24px'
-          }}>
-            Are you sure you want to delete <strong>{currentProduct?.name}</strong>? This action cannot be undone.
+          {modalError && <p className="products-modal-error products-modal-error-delete">{modalError}</p>}
+          <p style={{ fontFamily: 'Inter', fontSize: '16px', lineHeight: '24px', color: '#717171', margin: 0, textAlign: 'center', padding: '0 8px' }}>
+            Are you sure you want to delete <strong>{current?.title ?? current?.name}</strong>? This action cannot be undone.
           </p>
         </AdminModal>
       )}
-    </div>
+    </>
   );
 };
 

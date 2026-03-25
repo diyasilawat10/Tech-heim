@@ -8,32 +8,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
   z-index: 1000;
 }
 
 .admin-modal-container {
   position: relative;
   width: 392px;
-  min-height: 310px; /* Base height from Figma */
+  max-width: 100%;
+  min-height: 310px;
+  max-height: calc(100vh - 48px);
   background: #FFFFFF;
   box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12);
   border-radius: 8px;
   box-sizing: border-box;
-  padding-bottom: 24px; /* Ensure some bottom space */
-  overflow: visible; /* Ensure nothing is clipped */
-}
-
-/* For modals with more fields (like Add Product) */
-.admin-modal-container:has(.modal-input-group:nth-child(3)) {
-  min-height: 440px;
-}
-
-.admin-modal-container:has(.modal-input-group:nth-child(5)) {
-  min-height: 500px;
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
-  height: 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .modal-title {
@@ -44,59 +45,41 @@
   line-height: 24px;
   color: #444444;
   margin: 0;
-  position: absolute;
-  left: 19px;
-  top: 28px;
-  width: 246px; /* Matches Figma text area */
+  flex: 1;
 }
 
 .modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  right: 24px;
-  top: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10; /* Ensure it's on top */
+  flex-shrink: 0;
+  z-index: 20;
+  transition: transform 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  transform: scale(1.1);
 }
 
 .modal-body {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .modal-input-group {
-  position: absolute; /* Absolute as per Figma body dump */
-  left: 24px;
-  right: 24px;
-  height: 48px;
+  position: relative;
+  min-height: 48px;
   isolation: isolate;
-}
-
-.modal-body .modal-input-group:nth-child(1) {
-  top: 94px;
-}
-
-.modal-body .modal-input-group:nth-child(2) {
-  top: 158px;
-}
-
-.modal-body .modal-input-group:nth-child(3) {
-  top: 222px;
-}
-
-.modal-body .modal-input-group:nth-child(4) {
-  top: 286px;
-}
-
-.modal-body .modal-input-group:nth-child(5) {
-  top: 350px;
 }
 
 .modal-label-container {
@@ -110,12 +93,6 @@
   top: -7px;
   z-index: 3;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.modal-input-group.filled .modal-label-container,
-.modal-input-group.focused .modal-label-container {
   opacity: 1;
 }
 
@@ -211,7 +188,8 @@
   opacity: 0;
 }
 
-.modal-clear-icon {
+.modal-clear-icon,
+.modal-select-arrow {
   width: 24px;
   height: 24px;
   display: flex;
@@ -221,67 +199,100 @@
   color: #0C68F4;
   z-index: 2;
   margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.modal-input-group.focused .modal-select-arrow {
+  transform: rotate(180deg);
+}
+
+.modal-field-select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.modal-field-select option {
+  padding: 12px;
+  background: #FFFFFF;
+  color: #444444;
 }
 
 .modal-footer {
-  position: absolute;
-  right: 24px;
-  bottom: 24px; /* Relative to bottom now */
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
 }
 
 /* Delete Modal Specific Styles */
 .delete-modal {
-  min-height: auto !important; /* Let content decide but with padding */
+  min-height: auto !important;
   height: auto !important;
   width: 480px;
-  padding: 40px 32px 32px;
+  padding: 48px 32px 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .delete-modal .modal-header {
-  height: auto;
+  display: flex;
+  justify-content: center;
   margin-bottom: 24px;
 }
 
 .delete-modal .modal-title {
-  position: static;
-  width: 100%;
   text-align: center;
   font-size: 24px;
   line-height: 30px;
-}
-
-.delete-modal .modal-close-btn {
-  top: 16px;
-  right: 16px;
+  font-weight: 600;
+  color: #0C0C0C;
 }
 
 .delete-modal .modal-body {
   width: 100%;
   margin-bottom: 32px;
+  gap: 0;
 }
 
 .delete-modal .modal-footer {
-  position: static;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
   padding: 0;
+  margin-top: 0;
 }
 
 .delete-modal .modal-save-btn {
-  background: #C91433; /* Danger color */
-  width: 100%; /* Wider button for delete */
-  max-width: 240px;
+  background: #C91433;
+  width: 100%;
+  max-width: none;
   height: 52px;
-  font-weight: 500;
+  font-weight: 600;
+  border-radius: 8px;
 }
 
 .delete-modal .modal-save-btn:hover {
   background: #a01029;
+}
+
+.modal-cancel-btn {
+  background: #F3F3F3;
+  color: #717171;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  height: 52px;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-cancel-btn:hover {
+  background: #E8E8E8;
+  color: #444444;
 }
 
 .modal-save-btn {
@@ -308,6 +319,11 @@
 
 .modal-save-btn:hover {
   background: #0856c9;
+}
+
+.modal-save-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 /* Error State Styles */
@@ -347,10 +363,7 @@
   font-size: 12px;
   line-height: 15px;
   color: #C91433;
-  margin: 4px 0 0 0;
-  position: absolute;
-  top: 100%; /* Positioned below the input group (which is 48px high) */
-  left: 0;
+  margin: 4px 0 0;
 }
 
 /* File Upload Styles */

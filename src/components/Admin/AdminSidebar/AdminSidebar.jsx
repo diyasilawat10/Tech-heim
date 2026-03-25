@@ -1,22 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { ADMIN_MENU_ITEMS } from '../../../constants/adminNavigation';
 import './AdminSidebar.css';
 
 const AdminSidebar = ({ profileName }) => {
-  const menuItems = [
-    { name: 'Personal Data', path: '/admin', icon: 'personal-data' },
-    { name: 'Dashboard', path: '/admin/dashboard', icon: 'dashboard' },
-    { name: 'Products', path: '/admin/products', icon: 'products' },
-    { name: 'Categories', path: '/admin/categories', icon: 'categories' },
-    { name: 'Orders', path: '/admin/orders', icon: 'orders' },
-    { name: 'Customers / Users', path: '/admin/users', icon: 'users' },
-    { name: 'Discounts / Coupons', path: '/admin/discounts', icon: 'discounts' },
-    { name: 'Inventory', path: '/admin/inventory', icon: 'inventory' },
-    { name: 'Reviews', path: '/admin/reviews', icon: 'reviews' },
-    { name: 'Reports / Analytics', path: '/admin/analytics', icon: 'analytics' },
-    { name: 'Settings', path: '/admin/settings', icon: 'settings' },
-    { name: 'Logout', path: '/logout', icon: 'logout', isError: true }
-  ];
+  const menuItems = ADMIN_MENU_ITEMS;
 
   const getIcon = (type) => {
     switch (type) {

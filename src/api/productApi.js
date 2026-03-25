@@ -1,47 +1,53 @@
-import axios from 'axios';
+import { BASE_URL, getAuthHeaders } from './apiConfig';
 
-const productApi = axios.create({
-  baseURL: '/',
-  timeout: 60000
-});
+const BASE = `${BASE_URL}/products`;
 
-const getAuthToken = () => {
-  if (typeof window === 'undefined') {
-    return '';
-  }
-
-  return localStorage.getItem('token') || '';
+export const getProducts = async () => {
+  const res = await fetch(BASE);
+  if (!res.ok) throw new Error(`Failed to fetch products (${res.status})`);
+  return res.json();
 };
 
-productApi.interceptors.request.use(
-  (config) => {
-    // Skip Authorization header for auth endpoints to avoid CORS/preflight issues on public routes
-    const isAuthEndpoint = config.url.includes('/auth/login') || 
-                           config.url.includes('/auth/signup') || 
-                           config.url.includes('/login') || 
-                           config.url.includes('/signup') ||
-                           config.url.includes('/register') ||
-                           config.url.includes('/signin');
+export const getProductById = async (id) => {
+  const res = await fetch(`${BASE}/${id}`);
+  if (!res.ok) throw new Error(`Failed to fetch product (${res.status})`);
+  return res.json();
+};
 
-    if (typeof window !== 'undefined' && !isAuthEndpoint) {
-      const token = getAuthToken();
+export const createProduct = async (data) => {
+  const res = await fetch(BASE, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Failed to create product (${res.status})`);
+  }
+  return res.json();
+};
 
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-    }
+export const updateProduct = async (id, data) => {
+  const res = await fetch(`${BASE}/${id}`, {
+    method: "PUT",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Failed to update product (${res.status})`);
+  }
+  return res.json();
+};
 
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-export const getProducts = () => productApi.get('/products');
-
-export const createProduct = (payload) => productApi.post('/products', payload);
-
-export const updateProduct = (id, payload) => productApi.put(`/products/${id}`, payload);
-
-export const deleteProduct = (id) => productApi.delete(`/products/${id}`);
-
-export default productApi;
+export const deleteProduct = async (id) => {
+  const res = await fetch(`${BASE}/${id}`, {
+    method: "DELETE",
+    headers: getAuthHeaders()
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Failed to delete product (${res.status})`);
+  }
+  return res.ok;
+};
