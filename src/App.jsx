@@ -8,6 +8,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import AdminProducts from "./pages/Admin/AdminProducts/AdminProducts";
 import AdminCategories from "./pages/Admin/AdminCategories/AdminCategories";
 import AdminPlaceholder from "./pages/Admin/AdminPlaceholder/AdminPlaceholder";
+import AdminUsers from "./pages/Admin/AdminUsers/AdminUsers";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/admin/categories" element={<AdminCategories />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/:section" element={<AdminPlaceholder />} />
         <Route path="/logout" element={<AdminPlaceholder />} />
       </Routes>
