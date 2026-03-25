@@ -64,81 +64,171 @@
   gap: 24px;
 }
 
-/* Category Card */
-.admin-category-card {
+/* Category Board (Pinterest Style) */
+.admin-category-board {
   box-sizing: border-box;
-  background-color: #F9F9F9;
-  border: 1px solid #F6F6F6;
-  border-radius: 8px;
-  padding: 24px 16px;
+  background: #FFFFFF;
+  border: 1px solid #EDEDED;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-category-board:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.category-board-header {
+  padding: 16px 20px;
+  background: #FAFAFA;
+  border-bottom: 1px solid #F0F0F0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.admin-category-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  border-color: #EBEBEB;
-}
-
-.category-info {
+.category-meta {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.category-name {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  color: #0c0c0c;
-  margin: 0;
-}
-
-.category-products-count {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  color: #717171;
-  margin: 0;
-}
-
-.category-actions {
-  display: flex;
-  gap: 16px;
   align-items: center;
+  gap: 10px;
 }
 
-.category-action-btn {
+.category-id {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0C68F4;
+  background: #E8F1FF;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.category-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #0C0C0C;
+  margin: 0;
+}
+
+.category-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product-count-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #717171;
+}
+
+.category-delete-btn {
   background: none;
   border: none;
+  color: #C91433;
+  padding: 4px;
   cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  transition: background 0.2s ease;
+}
+
+.category-delete-btn:hover {
+  background: #FFF1F0;
+}
+
+.category-board-content {
+  padding: 20px;
+  min-height: 120px;
   display: flex;
   flex-direction: column;
+}
+
+/* Mini Product Grid */
+.category-product-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.mini-product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: default;
+}
+
+.mini-product-image {
+  aspect-ratio: 1;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #F8F8F8;
+  border-radius: 8px;
+  border: 1px solid #F0F0F0;
+}
+
+.mini-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mini-product-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #444444;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.mini-product-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0C68F4;
+  margin: 0;
+}
+
+.mini-product-more {
+  display: flex;
   align-items: center;
-  gap: 4px;
-  border-radius: 4px;
-  padding: 4px 8px;
-  transition: opacity 0.2s ease;
+  justify-content: center;
+  aspect-ratio: 1;
+  background: #F4F4F4;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 600;
+  color: #717171;
+  cursor: default;
 }
 
-.category-action-btn:hover {
-  opacity: 0.8;
-  background-color: #F4F4F4;
+.category-board-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #E0E0E0;
+  border-radius: 8px;
 }
 
-.category-action-btn.edit-btn {
-  color: #0c68f4;
+.category-board-empty p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #B4B4B4;
+  margin: 0;
 }
 
-.category-action-btn.delete-btn {
-  color: #C91433;
-}
 
 /* Empty & Error States */
 .admin-empty-state, .admin-loading-state {

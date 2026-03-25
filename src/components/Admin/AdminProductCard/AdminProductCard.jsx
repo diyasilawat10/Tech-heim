@@ -13,7 +13,10 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
       <div className="product-image-container">
         <div 
           className="product-image" 
-          style={{ backgroundImage: productImage ? `url(${productImage})` : 'none' }}
+          style={{ 
+            backgroundImage: productImage ? `url(${productImage})` : 'none',
+            backgroundColor: '#F4F4F4'
+          }}
           aria-label={productTitle}
         ></div>
       </div>

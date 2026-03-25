@@ -1,4 +1,5 @@
-export const BASE_URL = "https://tech-heim-indj.onrender.com";
+export const BASE_URL = process.env.REACT_APP_API_URL || "https://tech-heim-indj.onrender.com";
+
 
 export const getAuthHeaders = () => {
   const token = localStorage.getItem('token');

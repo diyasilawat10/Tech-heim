@@ -77,7 +77,7 @@ const AdminProducts = () => {
       stock: String(product.stock ?? ''),
       discount: String(product.discount ?? ''),
       image: product.image ?? '',
-      category: String(product.categoryId ?? product.category ?? '')
+      category: String(product.category?.id ?? product.categoryId ?? product.category ?? '')
     });
     setErrors({});
     setModalError('');
@@ -145,8 +145,8 @@ const AdminProducts = () => {
       e.image = 'Use a full URL (http/https) or /root-path';
     }
 
-    // Category (Required)
-    if (!form.category) {
+    // Category required only on Add (PUT /products does not accept categoryId)
+    if (modalType === 'add' && !form.category) {
       e.category = 'Please select a category';
     }
 
@@ -170,11 +170,9 @@ const AdminProducts = () => {
       discount: form.discount === '' ? 0 : Number(form.discount),
       categoryId: parseInt(form.category, 10),
     };
+    // Backend PUT /products/:id (UpdateProductDto) does not accept categoryId — remove it for edits
+    if (modalType === 'edit') delete payload.categoryId;
 
-    // Remove categoryId for edits to avoid 500 errors (not supported by UpdateProductDto)
-    if (modalType === 'edit') {
-      delete payload.categoryId;
-    }
 
     try {
       if (modalType === 'add') {
@@ -277,19 +275,23 @@ const AdminProducts = () => {
           <AdminModal.Input label="Discount" type="number" value={form.discount} error={errors.discount} onChange={(v) => onChange('discount', v)} placeholder="0" />
           <AdminModal.Input label="Image URL" value={form.image} error={errors.image} onChange={(v) => onChange('image', v)} placeholder="https://example.com/image.jpg" supportingText={errors.image || "Use a full URL for the product image."} />
           
-          <AdminModal.Select 
-            label="Category" 
-            value={form.category} 
-            options={categories} 
-            error={errors.category} 
-            disabled={modalType === 'edit'}
-            onChange={(v) => onChange('category', v)} 
-            supportingText={
-              modalType === 'edit' 
-                ? "Category cannot be changed after creation." 
-                : (errors.category || "Select the category this product belongs to.")
-            }
-          />
+          {/* Category: editable on Add, read-only on Edit (API constraint) */}
+          {modalType === 'add' ? (
+            <AdminModal.Select
+              label="Category"
+              value={form.category}
+              options={categories}
+              error={errors.category}
+              onChange={(v) => onChange('category', v)}
+              supportingText={errors.category || ''}
+            />
+          ) : (
+            <AdminModal.Input
+              label="Category"
+              value={categories.find(c => String(c.id) === String(form.category))?.name || '—'}
+              readOnly
+            />
+          )}
         </AdminModal>
       )}
 
