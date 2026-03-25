@@ -1,0 +1,141 @@
+.admin-users-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 24px;
+}
+
+.admin-users-content .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 0;
+}
+
+.admin-users-content .section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-users-content .section-title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0C0C0C;
+  margin: 0;
+}
+
+.admin-users-content .section-subtitle {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: #717171;
+  margin: 0;
+}
+
+/* ── Users grid ── */
+.admin-users-content .users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+/* ── Status block (loading / error) ── */
+.admin-users-content .users-status-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.admin-users-content .users-feedback {
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
+  color: #717171;
+}
+
+.admin-users-content .users-feedback-error {
+  color: #C91433;
+}
+
+.admin-users-content .users-retry-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 18px;
+  border: 1px solid #0C68F4;
+  border-radius: 8px;
+  background: #FFFFFF;
+  color: #0C68F4;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-users-content .users-retry-btn:hover {
+  background: #EBF2FF;
+}
+
+/* ── Empty state ── */
+.admin-users-content .users-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 80px;
+}
+
+.admin-users-content .users-empty-title {
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 500;
+  color: #0C0C0C;
+}
+
+.admin-users-content .users-empty-subtitle {
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 300;
+  color: #717171;
+}
+
+/* ── Modal error banner ── */
+.users-modal-error {
+  margin: 0;
+  font-family: 'Inter';
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #C91433;
+  background: #FFF1F3;
+  border: 1px solid #F3B7C2;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.users-modal-error-delete {
+  text-align: center;
+}
+
+@media (max-width: 992px) {
+  .admin-users-content .section-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

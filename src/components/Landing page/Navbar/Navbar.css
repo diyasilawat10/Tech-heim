@@ -8,12 +8,10 @@
   background: #ffffff;
   border-bottom: 1px solid transparent;
   border-image-slice: 1;
-  border-image-source: linear-gradient(
-    147.38deg,
-    rgba(12, 104, 244, 0.3) 60.98%,
-    rgba(12, 104, 244, 0.7) 81.93%,
-    rgba(12, 104, 244, 0.3) 99.45%
-  );
+  border-image-source: linear-gradient(147.38deg,
+      rgba(12, 104, 244, 0.3) 60.98%,
+      rgba(12, 104, 244, 0.7) 81.93%,
+      rgba(12, 104, 244, 0.3) 99.45%);
   z-index: 1000;
 }
 
@@ -82,8 +80,10 @@
   font-weight: 300;
   line-height: 22px;
   color: #0c0c0c;
-  text-decoration: none; /* Add this for NavLink */
-  display: flex; /* Add this for better alignment */
+  text-decoration: none;
+  /* Add this for NavLink */
+  display: flex;
+  /* Add this for better alignment */
   align-items: center;
   justify-content: center;
 }
@@ -147,6 +147,27 @@
   transform: scale(1.7);
 }
 
+.auth-trigger-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  width: 148px;
+  height: 48px;
+  border: 0;
+  border-radius: 8px;
+  background: #0c68f4;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: center;
+  white-space: nowrap;
+}
+
 @media (max-width: 1280px) {
   .header-inner {
     column-gap: 28px;
@@ -173,6 +194,20 @@
     line-height: 20px;
     padding: 6px;
   }
+
+  .nav-icons {
+    margin-top: 14px;
+  }
+
+  .nav-icons--before-login {
+    width: 212px;
+  }
+
+  .auth-trigger-btn {
+    width: 116px;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -183,6 +218,13 @@
 
   .navbar {
     display: none;
+  }
+
+  .nav-icons,
+  .nav-icons--before-login,
+  .nav-icons--authenticated {
+    width: auto;
+    margin-top: 0;
   }
 }
 

@@ -1,0 +1,115 @@
+.admin-sidebar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 8px 0px 0px;
+  width: 288px;
+  min-height: 748px;
+  background: #F9F9F9;
+  border: 1px solid #F6F6F6;
+  border-radius: 8px;
+  z-index: 5;
+}
+
+.admin-profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 8px;
+  gap: 16px;
+  width: auto;
+  height: 64px;
+  margin-bottom: 24px;
+}
+
+.profile-avatar {
+  box-sizing: border-box;
+  width: 60px;
+  height: 60px;
+  background: #F9F9F9;
+  border: 1px solid #F6F6F6;
+  border-radius: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0C0C0C;
+  white-space: nowrap;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 24px; /* Figma: Property 1=Hover padding: 24px */
+  gap: 16px;
+  width: 100%;
+  min-height: 76px; /* Figma: Property 1=Normal height: 76px */
+  text-decoration: none;
+  box-sizing: border-box;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 28px;
+  color: #0C0C0C;
+}
+
+.nav-item:hover .nav-text,
+.nav-item:hover .nav-icon {
+  color: #0C68F4;
+}
+
+.nav-item.active {
+  background: transparent; /* Changed from white to match selected state in snippet */
+  border-left: 2px solid #0C68F4;
+}
+
+.nav-item.active .nav-text,
+.nav-item.active .nav-icon {
+  color: #0C68F4;
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #444444; /* Neutral/Gray 444444 from Figma */
+}
+
+.nav-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-item.error .nav-text,
+.nav-item.error .nav-icon {
+  color: #C91433; /* State/Error */
+}
