@@ -7,30 +7,60 @@ import './AdminCategories.css';
 /* ── Sub-Components ── */
 
 const CategoryCard = ({ category, onDelete }) => (
-  <div className="admin-category-card">
-    <div className="category-info">
-      <h3 className="category-name">
-        <span style={{ color: '#0c68f4', marginRight: '8px' }}>#{category?.id}</span>
-        {category?.name}
-      </h3>
-      <p className="category-products-count">
-        {category?.products?.length || 0} Products
-      </p>
-    </div>
-    <div className="category-actions">
-      <button
-        className="category-action-btn delete-btn"
-        onClick={() => onDelete(category?.id)}
-        aria-label={`Delete ${category?.name}`}
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M21 5.98C17.67 5.65 14.32 5.48 10.98 5.48C9 5.48 7.02 5.58 5.04 5.78L3 5.98" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M8.5 4.97L8.72 3.66C8.88 2.71 9 2 10.69 2H13.31C15 2 15.13 2.75 15.28 3.67L15.5 4.97" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M18.85 9.14L18.2 19.21C18.09 20.78 18 22 15.21 22H8.79C6 22 5.91 20.78 5.8 19.21L5.15 9.14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M10.33 16.5H13.66" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M9.5 12.5H14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
+  <div className="admin-category-board">
+    <header className="category-board-header">
+      <div className="category-meta">
+        <span className="category-id">#{category?.id}</span>
+        <h3 className="category-title">{category?.name}</h3>
+      </div>
+      <div className="category-stats">
+        <span className="product-count-badge">
+          {category?.products?.length || 0} Products
+        </span>
+        <button
+          className="category-delete-btn"
+          onClick={() => onDelete(category?.id)}
+          aria-label={`Delete ${category?.name}`}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M21 5.98C17.67 5.65 14.32 5.48 10.98 5.48C9 5.48 7.02 5.58 5.04 5.78L3 5.98" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M8.5 4.97L8.72 3.66C8.88 2.71 9 2 10.69 2H13.31C15 2 15.13 2.75 15.28 3.67L15.5 4.97" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M18.85 9.14L18.2 19.21C18.09 20.78 18 22 15.21 22H8.79C6 22 5.91 20.78 5.8 19.21L5.15 9.14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div className="category-board-content">
+      {category?.products && category.products.length > 0 ? (
+        <div className="category-product-mini-grid">
+          {category.products.slice(0, 8).map(product => (
+            <div key={product.id} className="mini-product-card">
+              <div 
+                className="mini-product-image" 
+                style={{ 
+                  backgroundImage: product.image ? `url(${product.image})` : 'none',
+                  backgroundColor: '#F8F8F8'
+                }}
+                title={product.title}
+              />
+              <div className="mini-product-info">
+                <p className="mini-product-name">{product.title}</p>
+                <p className="mini-product-price">${Number(product.price).toFixed(2)}</p>
+              </div>
+            </div>
+          ))}
+          {category.products.length > 8 && (
+            <div className="mini-product-more">
+              +{category.products.length - 8} More
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="category-board-empty">
+          <p>No products in this category yet.</p>
+        </div>
+      )}
     </div>
   </div>
 );

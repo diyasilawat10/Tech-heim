@@ -1,12 +1,12 @@
 import React from 'react';
 import './AdminModal.css';
 
-const ModalInput = ({ label, value, onChange, placeholder, type = 'text', error, supportingText }) => {
+const ModalInput = ({ label, value, onChange, placeholder, type = 'text', error, supportingText, readOnly, className = '' }) => {
   const [isFocused, setIsFocused] = React.useState(false);
   const isFilled = !!value;
 
   return (
-    <div className={`modal-input-group ${isFocused ? 'focused' : ''} ${isFilled ? 'filled' : ''} ${error ? 'error' : ''}`}>
+    <div className={`modal-input-group ${isFocused ? 'focused' : ''} ${isFilled ? 'filled' : ''} ${error ? 'error' : ''} ${readOnly ? 'readonly' : ''} ${className}`}>
       <div className="modal-label-container">
         <span className="modal-label-segment left"></span>
         <label className="modal-input-label">
@@ -20,10 +20,11 @@ const ModalInput = ({ label, value, onChange, placeholder, type = 'text', error,
           type={type}
           className="modal-field-input"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onFocus={() => setIsFocused(true)}
+          onChange={(e) => !readOnly && onChange(e.target.value)}
+          onFocus={() => !readOnly && setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder || label}
+          readOnly={readOnly}
         />
         {value && isFocused && (
           <span 

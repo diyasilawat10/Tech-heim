@@ -218,6 +218,22 @@
   color: #444444;
 }
 
+/* Read-only state for ModalInput */
+.modal-input-group.readonly .modal-input-wrapper {
+  background: #F9F9F9;
+  cursor: default;
+}
+
+.modal-input-group.readonly .modal-field-input {
+  cursor: default;
+  color: #717171;
+}
+
+.modal-input-group.readonly .modal-focus-shadow {
+  display: none;
+}
+
+
 .modal-footer {
   display: flex;
   justify-content: flex-end;
