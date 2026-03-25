@@ -1,0 +1,221 @@
+.admin-categories-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 808px; /* Using similar width bounds from Admin layout references */
+  margin: 0 auto;
+}
+
+.categories-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.categories-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0c0c0c;
+  margin: 0;
+}
+
+.categories-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: #717171;
+  margin: 0;
+}
+
+.add-category-btn {
+  background-color: #0c68f4;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.add-category-btn:hover {
+  opacity: 0.9;
+}
+
+.admin-categories-list-container {
+  width: 100%;
+}
+
+.admin-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Category Card */
+.admin-category-card {
+  box-sizing: border-box;
+  background-color: #F9F9F9;
+  border: 1px solid #F6F6F6;
+  border-radius: 8px;
+  padding: 24px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-category-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: #EBEBEB;
+}
+
+.category-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #0c0c0c;
+  margin: 0;
+}
+
+.category-products-count {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #717171;
+  margin: 0;
+}
+
+.category-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.category-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  transition: opacity 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.category-action-btn:hover {
+  opacity: 0.8;
+  background-color: #F4F4F4;
+}
+
+.category-action-btn.edit-btn {
+  color: #0c68f4;
+}
+
+.category-action-btn.delete-btn {
+  color: #C91433;
+}
+
+/* Empty & Error States */
+.admin-empty-state, .admin-loading-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 0;
+  gap: 8px;
+}
+
+.empty-primary {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #0c0c0c;
+  margin: 0;
+}
+
+.empty-secondary {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #717171;
+  margin: 0;
+}
+
+/* Category Modal Extensions */
+.admin-modal-container.category-modal-compact {
+  min-height: auto;
+  padding: 32px 24px;
+}
+
+.category-modal-compact .modal-header {
+  margin-bottom: 28px;
+}
+
+.category-modal-compact .modal-body {
+  gap: 0;
+}
+
+.category-modal-compact .modal-footer {
+  margin-top: 36px;
+}
+
+.admin-modal-category-header {
+  padding: 0 16px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.admin-category-id-chip {
+  background: #E8F1FF;
+  color: #0C68F4;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(12, 104, 244, 0.1);
+}
+
+.admin-loading-state {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #717171;
+  padding: 20px;
+  text-align: center;
+}
+
+.admin-error-banner {
+  background-color: #fff1f0;
+  color: #ff4d4f;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #ffccc7;
+  margin-bottom: 24px;
+}

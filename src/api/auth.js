@@ -1,9 +1,8 @@
 import axios from 'axios';
-
-const BACKEND_URL = '';
+import { BASE_URL } from './apiConfig';
 
 const authApi = axios.create({
-  baseURL: BACKEND_URL,
+  baseURL: BASE_URL,
   timeout: 30000
 });
 

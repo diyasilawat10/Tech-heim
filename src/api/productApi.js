@@ -1,27 +1,23 @@
-const BASE = "";  // CRA proxy forwards to https://tech-heim-indj.onrender.com
+import { BASE_URL, getAuthHeaders } from './apiConfig';
+
+const BASE = `${BASE_URL}/products`;
 
 export const getProducts = async () => {
-  const res = await fetch(`${BASE}/products`);
+  const res = await fetch(BASE);
   if (!res.ok) throw new Error(`Failed to fetch products (${res.status})`);
   return res.json();
 };
 
 export const getProductById = async (id) => {
-  const res = await fetch(`${BASE}/products/${id}`);
+  const res = await fetch(`${BASE}/${id}`);
   if (!res.ok) throw new Error(`Failed to fetch product (${res.status})`);
   return res.json();
 };
 
 export const createProduct = async (data) => {
-  const token = localStorage.getItem('token');
-  const headers = { "Content-Type": "application/json" };
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
-  }
-
-  const res = await fetch(`${BASE}/products`, {
+  const res = await fetch(BASE, {
     method: "POST",
-    headers,
+    headers: getAuthHeaders(),
     body: JSON.stringify(data)
   });
   if (!res.ok) {
@@ -32,9 +28,9 @@ export const createProduct = async (data) => {
 };
 
 export const updateProduct = async (id, data) => {
-  const res = await fetch(`${BASE}/products/${id}`, {
+  const res = await fetch(`${BASE}/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: getAuthHeaders(),
     body: JSON.stringify(data)
   });
   if (!res.ok) {
@@ -45,8 +41,9 @@ export const updateProduct = async (id, data) => {
 };
 
 export const deleteProduct = async (id) => {
-  const res = await fetch(`${BASE}/products/${id}`, {
-    method: "DELETE"
+  const res = await fetch(`${BASE}/${id}`, {
+    method: "DELETE",
+    headers: getAuthHeaders()
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));

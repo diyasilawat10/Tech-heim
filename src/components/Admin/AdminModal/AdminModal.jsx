@@ -45,6 +45,43 @@ const ModalInput = ({ label, value, onChange, placeholder, type = 'text', error,
   );
 };
 
+const ModalSelect = ({ label, value, onChange, options = [], error, supportingText }) => {
+  const [isFocused, setIsFocused] = React.useState(false);
+  const isFilled = !!value;
+
+  return (
+    <div className={`modal-input-group ${isFocused ? 'focused' : ''} ${isFilled ? 'filled' : ''} ${error ? 'error' : ''}`}>
+      <div className="modal-label-container">
+        <span className="modal-label-segment left"></span>
+        <label className="modal-input-label">{label}</label>
+        <span className="modal-label-segment fill"></span>
+      </div>
+      <div className="modal-input-wrapper select-wrapper">
+        <select
+          className="modal-field-input modal-field-select"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        >
+          <option value="" disabled>Select {label}</option>
+          {options.map((opt) => (
+            <option key={opt.id} value={opt.id}>
+              {opt.name}
+            </option>
+          ))}
+        </select>
+        <span className="modal-select-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M19.92 8.95L13.4 15.47C12.63 16.24 11.37 16.24 10.6 15.47L4.08 8.95" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      {supportingText && <p className="modal-supporting-text">{supportingText}</p>}
+    </div>
+  );
+};
+
 const FileUpload = ({ label, value, onChange, error }) => {
   const fileInputRef = React.useRef(null);
 
@@ -102,13 +139,14 @@ const AdminModal = ({
   children,
   saveText = 'save',
   variant = 'default',
-  saveDisabled = false
+  saveDisabled = false,
+  className = ''
 }) => {
   if (!isOpen) return null;
 
   return (
     <div className={`modal-overlay ${variant}`} onClick={onClose}>
-      <div className={`admin-modal-container ${variant === 'delete' ? 'delete-modal' : ''}`} onClick={(e) => e.stopPropagation()}>
+      <div className={`admin-modal-container ${variant === 'delete' ? 'delete-modal' : ''} ${className}`} onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">{title}</h2>
           <button className="modal-close-btn" onClick={onClose} aria-label="Close">
@@ -139,6 +177,7 @@ const AdminModal = ({
 };
 
 AdminModal.Input = ModalInput;
+AdminModal.Select = ModalSelect;
 AdminModal.FileUpload = FileUpload;
 
 export default AdminModal;

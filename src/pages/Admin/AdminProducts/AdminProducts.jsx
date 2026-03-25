@@ -4,6 +4,7 @@ import AdminLayout from '../../../components/Admin/AdminLayout/AdminLayout';
 import AdminProductCard from '../../../components/Admin/AdminProductCard/AdminProductCard';
 import AdminModal from '../../../components/Admin/AdminModal/AdminModal';
 import { createProduct, deleteProduct, getProducts, updateProduct } from '../../../api/productApi';
+import { getCategories } from '../../../api/categoriesApi';
 
 const emptyForm = () => ({
   name: '',
@@ -19,6 +20,7 @@ const getId = (p) => p?.id ?? p?._id ?? '';
 
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [modalType, setModalType] = useState(null); // 'add' | 'edit' | 'delete'
   const [current, setCurrent] = useState(null);
   const [form, setForm] = useState(emptyForm());
@@ -43,7 +45,19 @@ const AdminProducts = () => {
     }
   };
 
-  useEffect(() => { fetchProducts(); }, []);
+  const fetchCategories = async () => {
+    try {
+      const res = await getCategories();
+      setCategories(res.data || []);
+    } catch (err) {
+      console.error('Failed to fetch categories:', err);
+    }
+  };
+
+  useEffect(() => { 
+    fetchProducts(); 
+    fetchCategories();
+  }, []);
 
   /* ── Open modals ── */
   const openAdd = () => {
@@ -86,10 +100,56 @@ const AdminProducts = () => {
 
   const validate = () => {
     const e = {};
-    if (!form.name.trim()) e.name = 'Name is required';
-    if (form.price === '' || isNaN(Number(form.price))) e.price = 'Valid price is required';
-    if (form.stock === '' || isNaN(Number(form.stock))) e.stock = 'Valid stock is required';
-    if (!form.image.trim()) e.image = 'Image URL is required';
+    const trimmedName = form.name.trim();
+
+    // Title (required, unique)
+    if (!trimmedName) {
+      e.name = 'Product name is required';
+    } else {
+      const exists = products.find(
+        (p) =>
+          (p.title?.toLowerCase() === trimmedName.toLowerCase() ||
+           p.name?.toLowerCase() === trimmedName.toLowerCase()) &&
+          getId(p) !== getId(current)
+      );
+      if (exists) e.name = 'This product name already exists';
+    }
+
+    // Description (required)
+    if (!form.description.trim()) e.description = 'Description is required';
+
+    // Price (required number > 0)
+    const priceNum = Number(form.price);
+    if (form.price === '' || isNaN(priceNum) || priceNum <= 0) {
+      e.price = 'Price must be greater than 0';
+    }
+
+    // Stock (required integer >= 0)
+    const stockNum = Number(form.stock);
+    if (form.stock === '' || isNaN(stockNum) || stockNum < 0 || !Number.isInteger(stockNum)) {
+      e.stock = 'Stock must be a whole number (0 or higher)';
+    }
+
+    // Discount (optional, 0-100)
+    if (form.discount !== '') {
+      const discountNum = Number(form.discount);
+      if (isNaN(discountNum) || discountNum < 0 || discountNum > 100) {
+        e.discount = 'Discount must be between 0 and 100';
+      }
+    }
+
+    // Image URL validation (must be absolute)
+    if (!form.image.trim()) {
+      e.image = 'Image URL is required';
+    } else if (!form.image.startsWith('http') && !form.image.startsWith('/')) {
+      e.image = 'Use a full URL (http/https) or /root-path';
+    }
+
+    // Category (Required)
+    if (!form.category) {
+      e.category = 'Please select a category';
+    }
+
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -100,18 +160,20 @@ const AdminProducts = () => {
     setSaving(true);
     setModalError('');
 
+    // Build payload
     const payload = {
       title: form.name.trim(),
       description: form.description.trim(),
       price: Number(form.price),
-      stock: Number(form.stock),
+      stock: parseInt(form.stock, 10),
+      image: form.image.trim(),
       discount: form.discount === '' ? 0 : Number(form.discount),
-      image: form.image.trim()
+      categoryId: parseInt(form.category, 10),
     };
 
-    if (modalType === 'add' && form.category.trim()) {
-      const cat = form.category.trim();
-      payload.categoryId = /^\d+$/.test(cat) ? Number(cat) : cat;
+    // Remove categoryId for edits to avoid 500 errors (not supported by UpdateProductDto)
+    if (modalType === 'edit') {
+      delete payload.categoryId;
     }
 
     try {
@@ -148,7 +210,10 @@ const AdminProducts = () => {
   /* ── Render ── */
   return (
     <>
-      <AdminLayout pageClassName="admin-products-page" profileName="Jimmy Smith">
+      <AdminLayout 
+        pageClassName="admin-products-page"
+        profileName={JSON.parse(localStorage.getItem('user') || '{}').name}
+      >
         <section className="admin-products-content products-section">
           <header className="section-header">
             <div className="section-heading">
@@ -210,10 +275,21 @@ const AdminProducts = () => {
           <AdminModal.Input label="Price ($)" type="number" value={form.price} error={errors.price} onChange={(v) => onChange('price', v)} placeholder="0.00" />
           <AdminModal.Input label="Stock" type="number" value={form.stock} error={errors.stock} onChange={(v) => onChange('stock', v)} placeholder="0" />
           <AdminModal.Input label="Discount" type="number" value={form.discount} error={errors.discount} onChange={(v) => onChange('discount', v)} placeholder="0" />
-          <AdminModal.Input label="Image URL" value={form.image} error={errors.image} onChange={(v) => onChange('image', v)} placeholder="https://example.com/image.jpg" />
-          {modalType === 'add' && (
-            <AdminModal.Input label="Category ID" value={form.category} error={errors.category} onChange={(v) => onChange('category', v)} placeholder="e.g. 1" />
-          )}
+          <AdminModal.Input label="Image URL" value={form.image} error={errors.image} onChange={(v) => onChange('image', v)} placeholder="https://example.com/image.jpg" supportingText={errors.image || "Use a full URL for the product image."} />
+          
+          <AdminModal.Select 
+            label="Category" 
+            value={form.category} 
+            options={categories} 
+            error={errors.category} 
+            disabled={modalType === 'edit'}
+            onChange={(v) => onChange('category', v)} 
+            supportingText={
+              modalType === 'edit' 
+                ? "Category cannot be changed after creation." 
+                : (errors.category || "Select the category this product belongs to.")
+            }
+          />
         </AdminModal>
       )}
 

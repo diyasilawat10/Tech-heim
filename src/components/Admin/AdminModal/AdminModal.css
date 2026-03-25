@@ -188,7 +188,8 @@
   opacity: 0;
 }
 
-.modal-clear-icon {
+.modal-clear-icon,
+.modal-select-arrow {
   width: 24px;
   height: 24px;
   display: flex;
@@ -198,6 +199,23 @@
   color: #0C68F4;
   z-index: 2;
   margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.modal-input-group.focused .modal-select-arrow {
+  transform: rotate(180deg);
+}
+
+.modal-field-select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.modal-field-select option {
+  padding: 12px;
+  background: #FFFFFF;
+  color: #444444;
 }
 
 .modal-footer {
