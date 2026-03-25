@@ -8,6 +8,12 @@ export const getUsers = async () => {
   return res.json();
 };
 
+export const getUserById = async (id) => {
+  const res = await fetch(`${BASE}/${id}`, { headers: getAuthHeaders() });
+  if (!res.ok) throw new Error(`Failed to fetch user (${res.status})`);
+  return res.json();
+};
+
 export const updateUser = async (id, data) => {
   const res = await fetch(`${BASE}/${id}`, {
     method: 'PUT',

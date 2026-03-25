@@ -545,12 +545,11 @@
     height: 40px;
     margin: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-end;
     gap: 16px;
   }
 
-  .chat-bubble,
   .back-to-top {
     width: 40px;
     height: 40px;
@@ -562,21 +561,12 @@
     border: 0;
   }
 
-  .chat-bubble {
-    position: relative;
-    left: auto;
-    top: auto;
-    right: auto;
-    padding: 6px 8px;
-  }
-
   .back-to-top {
     position: relative;
     right: auto;
     top: auto;
   }
 
-  .chat-bubble img,
   .back-to-top img {
     width: 24px;
     height: 24px;

@@ -17,6 +17,7 @@ function ProductCard({
   const [isFavorited, setIsFavorited] = useState(initialHasHeart || false);
   const visibleColors = Array.isArray(colors) ? colors.slice(0, 3) : [];
   const showColors = visibleColors.length > 0;
+  const productTitle = title || 'Product image unavailable';
   // Matches design: "+" appears only for 3-color products (iPhone, S23).
   const showColorsPlus = Array.isArray(colors) && colors.length >= 3;
 
@@ -43,7 +44,11 @@ function ProductCard({
           </div>
         )}
 
-        <div className="product-image" style={{ backgroundImage: `url(${image})` }}></div>
+        {image ? (
+          <img className="product-image" src={image} alt={productTitle} />
+        ) : (
+          <span className="product-image-fallback">{productTitle}</span>
+        )}
 
         {showColors && (
           <div className="product-colors">

@@ -14,7 +14,6 @@ const AdminPlaceholder = () => {
   return (
     <AdminLayout
       pageClassName="admin-placeholder-page"
-      profileName="Jimmy Smith"
       showSidebar={isAdminRoute}
     >
       {isAdminRoute ? (

@@ -5,9 +5,6 @@ import AdminLayout from '../../../components/Admin/AdminLayout/AdminLayout';
 import { getOrderById } from '../../../api/ordersApi';
 import { getDemoOrderById } from '../../../constants/demoOrders';
 
-const PLACEHOLDER_IMAGE =
-  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="87" height="74" viewBox="0 0 87 74"%3E%3Crect width="87" height="74" rx="4" fill="%23FFFFFF"/%3E%3Cpath d="M22 52l12-12 8 9 7-7 12 10" stroke="%239E9E9E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/%3E%3Ccircle cx="31" cy="27" r="5" fill="%23D9D9D9"/%3E%3C/svg%3E';
-
 const normalizeText = (value, fallback = 'N/A') => {
   if (typeof value === 'string' && value.trim()) return value.trim();
   if (typeof value === 'number' && Number.isFinite(value)) return String(value);
@@ -74,7 +71,7 @@ const getItemImage = (item) =>
   getProductFromItem(item)?.thumbnail ??
   item?.image ??
   item?.productImage ??
-  PLACEHOLDER_IMAGE;
+  '';
 
 const getItemName = (item) =>
   normalizeText(
@@ -203,7 +200,6 @@ const AdminOrderStatus = () => {
   return (
     <AdminLayout
       pageClassName="admin-order-detail-page"
-      profileName={JSON.parse(localStorage.getItem('user') || '{}').name}
     >
       <section className="admin-order-detail-content">
         <Link to="/admin/orders" className="admin-order-back-link">
@@ -364,21 +360,20 @@ const AdminOrderStatus = () => {
                     {items.map((item, index) => {
                       const quantity = getItemQuantity(item);
                       const price = getItemPrice(item);
+                      const itemImage = getItemImage(item);
+                      const itemName = getItemName(item);
 
                       return (
-                        <tr key={`${getItemName(item)}-${index}`}>
+                        <tr key={`${itemName}-${index}`}>
                           <td>
                             <div className="order-item-product">
-                              <img
-                                className="order-item-image"
-                                src={getItemImage(item)}
-                                alt={getItemName(item)}
-                                onError={(event) => {
-                                  event.currentTarget.src = PLACEHOLDER_IMAGE;
-                                }}
-                              />
+                              {itemImage ? (
+                                <img className="order-item-image" src={itemImage} alt={itemName} />
+                              ) : (
+                                <span className="order-item-image-fallback">{itemName}</span>
+                              )}
                               <div className="order-item-copy">
-                                <p className="order-item-name">{getItemName(item)}</p>
+                                <p className="order-item-name">{itemName}</p>
                               </div>
                             </div>
                           </td>

@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ADMIN_MENU_ITEMS } from '../../../constants/adminNavigation';
+import { useCurrentUser } from '../../../context/CurrentUserContext';
 import './AdminSidebar.css';
 
 const AdminSidebar = ({ profileName }) => {
   const menuItems = ADMIN_MENU_ITEMS;
+  const { clearCurrentUser } = useCurrentUser();
 
   const getIcon = (type) => {
     switch (type) {
@@ -154,8 +156,8 @@ const AdminSidebar = ({ profileName }) => {
               if (item.path === '/logout') {
                 e.preventDefault();
                 localStorage.removeItem('token');
-                localStorage.removeItem('user');
                 localStorage.removeItem('lastRegisteredName');
+                clearCurrentUser();
                 window.location.href = '/';
               }
             }}

@@ -281,6 +281,24 @@
   border: 1px solid #ededed;
 }
 
+.order-item-image-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid #ededed;
+  background: #fff;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  text-align: center;
+  word-break: break-word;
+}
+
 .order-item-copy {
   display: flex;
   flex-direction: column;

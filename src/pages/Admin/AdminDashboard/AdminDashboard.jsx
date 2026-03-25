@@ -3,23 +3,59 @@ import AdminLayout from '../../../components/Admin/AdminLayout/AdminLayout';
 import AdminModal from '../../../components/Admin/AdminModal/AdminModal';
 import { getAdminIcon } from '../../../constants/adminIcons';
 import { fieldGroup1, fieldGroup2 } from '../../../constants/adminFields';
+import { getUserById, updateUser } from '../../../api/usersApi';
+import { useCurrentUser } from '../../../context/CurrentUserContext';
 import './AdminDashboard.css';
 
+const getUserId = (user) => user?.id ?? user?._id ?? '';
+
+const mapUserToFieldData = (user) => ({
+  'full-name': user?.name || '',
+  'phone-number': user?.phone || '',
+  'address': user?.address || '',
+  'email': user?.email || '',
+  'password': '*********',
+  'postal-code': user?.postalCode || '',
+});
+
 const AdminDashboard = () => {
-  const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
-  const [fieldData, setFieldData] = React.useState({
-    'full-name': storedUser.name || '',
-    'phone-number': storedUser.phone || '',
-    'address': storedUser.address || '',
-    'email': storedUser.email || '',
-    'password': '*********',
-    'postal-code': storedUser.postalCode || '',
-  });
+  const { currentUser, setCurrentUser } = useCurrentUser();
+  const userId = getUserId(currentUser);
+  const [fieldData, setFieldData] = React.useState(mapUserToFieldData(currentUser));
   const [modalConfig, setModalConfig] = React.useState({
     isOpen: false,
     title: '',
     fields: [], // { id, label, value }
   });
+  const [pageError, setPageError] = React.useState('');
+
+  React.useEffect(() => {
+    setFieldData(mapUserToFieldData(currentUser));
+  }, [currentUser]);
+
+  React.useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    const loadUser = async () => {
+      try {
+        const user = await getUserById(userId);
+        if (cancelled) return;
+        setCurrentUser(user);
+        setPageError('');
+      } catch (error) {
+        if (cancelled) return;
+        setPageError(error.message || 'Failed to load your profile.');
+      }
+    };
+
+    loadUser();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, setCurrentUser]);
 
   const getFirstName = () => fieldData['full-name'].split(' ')[0] || '';
   const getLastName = () => fieldData['full-name'].split(' ').slice(1).join(' ') || '';
@@ -62,7 +98,7 @@ const AdminDashboard = () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleModalSave = () => {
+  const handleModalSave = async () => {
     const updates = {};
     let hasError = false;
     const newFields = [...modalConfig.fields];
@@ -91,7 +127,28 @@ const AdminDashboard = () => {
       });
     }
 
-    setFieldData(prev => ({ ...prev, ...updates }));
+    if (userId) {
+      const payload = {
+        name: updates['full-name'] ?? fieldData['full-name'],
+        email: updates.email ?? fieldData.email,
+        phone: (updates['phone-number'] ?? fieldData['phone-number'] ?? '').trim() || null,
+        address: (updates.address ?? fieldData.address ?? '').trim() || null,
+        postalCode: (updates['postal-code'] ?? fieldData['postal-code'] ?? '').trim() || null,
+      };
+
+      try {
+        const updatedUser = await updateUser(userId, payload);
+        setFieldData(mapUserToFieldData(updatedUser));
+        setCurrentUser(updatedUser);
+        setPageError('');
+      } catch (error) {
+        setPageError(error.message || 'Failed to save your profile.');
+        return;
+      }
+    } else {
+      setFieldData(prev => ({ ...prev, ...updates }));
+    }
+
     setModalConfig(prev => ({ ...prev, isOpen: false }));
   };
 
@@ -144,6 +201,12 @@ const AdminDashboard = () => {
             <h2 className="section-title">Identification</h2>
             <p className="section-subtitle">Verify your identity</p>
           </header>
+
+          {pageError && (
+            <p className="section-subtitle" style={{ color: '#c91433' }}>
+              {pageError}
+            </p>
+          )}
 
           <div className="identification-content-wrapper">
             <div className="identification-frame frame-1">

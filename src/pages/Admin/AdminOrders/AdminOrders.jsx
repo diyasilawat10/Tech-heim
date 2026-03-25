@@ -7,9 +7,6 @@ import { demoOrders } from '../../../constants/demoOrders';
 import arrowDownIcon from '../../../assets/icons/arrow-down.svg';
 import arrowCircleRightIcon from '../../../assets/icons/arrow-circle-right.svg';
 
-const PLACEHOLDER_IMAGE =
-  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"%3E%3Crect width="160" height="160" rx="16" fill="%23FFFFFF"/%3E%3Cpath d="M38 108l24-24 16 18 14-14 24 20" stroke="%239E9E9E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/%3E%3Ccircle cx="62" cy="54" r="10" fill="%23D9D9D9"/%3E%3C/svg%3E';
-
 const normalizeText = (value, fallback = 'N/A') => {
   if (typeof value === 'string' && value.trim()) return value.trim();
   if (typeof value === 'number' && Number.isFinite(value)) return String(value);
@@ -103,7 +100,13 @@ const getItemImage = (item) =>
   getProductFromItem(item)?.thumbnail ??
   item?.image ??
   item?.productImage ??
-  PLACEHOLDER_IMAGE;
+  '';
+
+const getItemName = (item) =>
+  normalizeText(
+    getProductFromItem(item)?.name ?? getProductFromItem(item)?.title ?? item?.name ?? item?.title,
+    'Product image unavailable'
+  );
 
 const AdminOrders = () => {
   const navigate = useNavigate();
@@ -142,7 +145,6 @@ const AdminOrders = () => {
   return (
     <AdminLayout
       pageClassName="admin-orders-page"
-      profileName={JSON.parse(localStorage.getItem('user') || '{}').name}
     >
       <section className="orders-page-content">
         <header className="orders-page-header">
@@ -268,14 +270,16 @@ const AdminOrders = () => {
                   <div className="orders-card-items">
                     {items.slice(0, 6).map((item, index) => (
                       <div key={`${orderId}-${index}`} className="orders-item-tile">
-                        <img
-                          className="orders-item-image"
-                          src={getItemImage(item)}
-                          alt=""
-                          onError={(event) => {
-                            event.currentTarget.src = PLACEHOLDER_IMAGE;
-                          }}
-                        />
+                        {(() => {
+                          const itemImage = getItemImage(item);
+                          const itemName = getItemName(item);
+
+                          return itemImage ? (
+                            <img className="orders-item-image" src={itemImage} alt={itemName} />
+                          ) : (
+                            <span className="orders-item-fallback">{itemName}</span>
+                          );
+                        })()}
                       </div>
                     ))}
                     {items.length > 6 && (

@@ -6,19 +6,16 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
   const productImage = Array.isArray(product.image)
     ? product.image[0]
     : product.image || product.thumbnail || product.images?.[0]?.url || product.images?.[0] || '';
-  const productTitle = product.title ?? product.name;
+  const productTitle = product.title ?? product.name ?? 'Product image unavailable';
 
   return (
     <div className="admin-product-card">
       <div className="product-image-container">
-        <div 
-          className="product-image" 
-          style={{ 
-            backgroundImage: productImage ? `url(${productImage})` : 'none',
-            backgroundColor: '#F4F4F4'
-          }}
-          aria-label={productTitle}
-        ></div>
+        {productImage ? (
+          <img className="product-image" src={productImage} alt={productTitle} />
+        ) : (
+          <span className="product-image-fallback">{productTitle}</span>
+        )}
       </div>
       
       <div className="product-divider"></div>

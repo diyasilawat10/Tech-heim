@@ -166,12 +166,30 @@
 
 .mini-product-image {
   aspect-ratio: 1;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  width: 100%;
+  object-fit: contain;
   background-color: #F8F8F8;
   border-radius: 8px;
   border: 1px solid #F0F0F0;
+}
+
+.mini-product-image-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  width: 100%;
+  padding: 8px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  color: #717171;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 500;
+  text-align: center;
+  word-break: break-word;
 }
 
 .mini-product-info {
