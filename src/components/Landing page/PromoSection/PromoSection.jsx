@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './PromoSection.css';
 import iphoneImg from '../../../assets/images/iphones.png';
 import ps5Img from '../../../assets/images/ps53.png';
@@ -40,7 +41,7 @@ const PromoSection = () => {
             Get ready for the future of smartphones. Experience innovation like never before.
             Stay tuned for the big iPhone 15 sale.
           </p>
-          <button className="btn-primary register-btn">Shop Now</button>
+          <Link to="/products" className="btn-primary register-btn">Shop Now</Link>
         </div>
 
         <img src={iphoneImg} alt="iPhone 15" className="img-iphone" />
@@ -56,7 +57,7 @@ const PromoSection = () => {
         <img src={ps5Img} alt="PS5" className="img-ps5" />
 
         <div className="ps5-badge">Digital Edition + 2TB</div>
-        <button className="btn-primary buy-btn">Buy Now</button>
+        <Link to="/products" className="btn-primary buy-btn">Buy Now</Link>
       </div>
     </section>
   );

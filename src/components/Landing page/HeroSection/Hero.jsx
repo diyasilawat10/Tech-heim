@@ -1,4 +1,5 @@
 import './Hero.css';
+import { Link } from 'react-router-dom';
 import laptopImg from '../../../assets/images/laptop.png';
 
 function Hero() {
@@ -10,7 +11,9 @@ function Hero() {
           <h2 className="hero-subtitle">
             "Join the <span className="hero-subtitle-highlight">digital revolution</span>"
           </h2>
-          <button className="hero-btn">Explore More</button>
+          <Link to="/products" className="hero-btn">
+            Explore More
+          </Link>
         </div>
 
         <img src={laptopImg} alt="Laptop showcase" className="hero-laptop" />
