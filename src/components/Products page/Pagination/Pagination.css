@@ -1,0 +1,82 @@
+.pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  width: 289px;
+  height: 45px;
+}
+
+.page-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  gap: 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 200px;
+  flex: none;
+  flex-grow: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.2s ease;
+}
+
+.page-item:hover:not(.active):not(.dots) {
+  background: rgba(12, 104, 244, 0.06);
+}
+
+.page-item.dots {
+  cursor: default;
+}
+
+.page-item.active {
+  border-radius: 0;
+  border-bottom: 1px solid #0C68F4;
+}
+
+.page-text {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+  color: #0C0C0C;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.page-item.active .page-text {
+  color: #0C68F4;
+}
+
+.page-item:hover:not(.active):not(.dots) .page-text {
+  color: #0C68F4;
+}
+
+.page-arrow {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  order: 5;
+  flex-grow: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.page-arrow.disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.page-arrow:not(.disabled):hover svg path {
+  stroke: #0C68F4;
+}

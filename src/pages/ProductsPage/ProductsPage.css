@@ -1,12 +1,58 @@
 .products-page {
-  padding-top: 100px; /* Space for fixed navbar */
+  padding-top: 100px;
   min-height: 100vh;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
-.products-page-container {
-  max-width: 1224px;
+.products-page-content {
+  width: 1440px;
   margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
+  padding: 24px 108px 100px 108px; /* Left 108px matches */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Vertical Stack Calculation:
+   Navbar (100px) + Padding (24px) = Breadcrumb Top 124px.
+   Breadcrumb Height (30px) + Gap (40px) = Categories Top 194px.
+   Categories Height (124px) + Gap (48px) = Chips Top 366px.
+   Chips Height (40px) + Gap (40px) = Filters Top 446px.
+   Products Top 518px is 72px below Filters Top.
+*/
+
+.product-categories-wrapper {
+  margin-top: 40px; /* Breadcrumb -> Categories gap */
+}
+
+.filter-chips-wrapper {
+  margin-top: 48px; /* Categories -> Chips gap */
+  width: 728px;
+  height: 40px;
+}
+
+.horizontal-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px; /* 108 (Left) + 288 (Width) + 24 (Gap) = 420 (Products Left) */
+  width: 100%;
+  margin-top: 40px; /* Chips -> Filters gap */
+}
+
+.main-products-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 72px; /* 446 (Filters Top) + 72 = 518 (Products Top) */
+}
+
+/* Ensure no absolute positioning leaks */
+.products-page-content > *:not(.sort-container),
+.horizontal-layout > *,
+.main-products-area > * {
+  position: static !important;
 }

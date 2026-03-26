@@ -21,19 +21,24 @@
 
 .header-inner {
   width: 100%;
-  max-width: 1224px;
+  max-width: 1440px;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 108px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 56px 1fr auto;
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: center;
   column-gap: 90px;
 }
 
 .logo {
+  position: absolute;
   width: 56px;
   height: 63px;
+  left: 108px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,6 +53,7 @@
 .navbar {
   display: flex;
   justify-content: center;
+  flex: 1;
 }
 
 .navbar ul {
@@ -77,9 +83,7 @@
   line-height: 22px;
   color: #0c0c0c;
   text-decoration: none;
-  /* Add this for NavLink */
   display: flex;
-  /* Add this for better alignment */
   align-items: center;
   justify-content: center;
 }
@@ -96,14 +100,16 @@
 }
 
 .nav-icons {
-  height: 56px;
+  position: absolute;
+  right: 108px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
+  height: 56px;
   padding: 8px 0;
-  align-self: start;
-  margin-top: 19px;
 }
 
 .nav-icons--before-login {
@@ -166,6 +172,7 @@
 @media (max-width: 1280px) {
   .header-inner {
     column-gap: 28px;
+    padding: 0 48px;
   }
 
   .navbar ul {
@@ -176,7 +183,7 @@
 
 @media (max-width: 900px) {
   .header-inner {
-    grid-template-columns: 56px 1fr auto;
+    column-gap: 20px;
     padding: 0 16px;
   }
 
@@ -207,6 +214,7 @@
 
 @media (max-width: 700px) {
   .header-inner {
+    display: grid;
     grid-template-columns: 56px auto;
     justify-content: space-between;
   }
