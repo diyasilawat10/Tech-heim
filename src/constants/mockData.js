@@ -14,7 +14,7 @@ import guaranteeIcon from '../assets/icons/guarentee.svg';
 import shippingIcon from '../assets/icons/shipping.svg';
 import supportIcon from '../assets/icons/24hrs.svg';
 
-export const navLinks = ['Home', 'Products', 'Blog', 'FAQ', 'Contact Us'];
+export const navLinks = ['Home', 'Products'];
 
 export const timerUnits = [
     { value: '08', label: 'Days' },

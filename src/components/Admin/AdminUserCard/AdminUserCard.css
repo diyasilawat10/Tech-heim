@@ -1,0 +1,192 @@
+/* ── AdminUserCard ── */
+.admin-user-card {
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid #E8E8E8;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.admin-user-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ── Top section: avatar + identity ── */
+.user-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.user-avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #EBF2FF;
+  color: #0C68F4;
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.user-identity {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: #0C0C0C;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-email {
+  font-family: 'Inter';
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 18px;
+  color: #717171;
+  margin: 2px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Role badge ── */
+.user-role-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.user-role-badge.admin {
+  background: #EBF2FF;
+  color: #0C68F4;
+}
+
+.user-role-badge.user {
+  background: #F4F4F4;
+  color: #717171;
+}
+
+/* ── Divider ── */
+.user-card-divider {
+  height: 1px;
+  background: #F0F0F0;
+  margin: 0;
+}
+
+/* ── Info rows: phone & address ── */
+.user-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-info-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #B4B4B4;
+}
+
+.user-info-text {
+  font-family: 'Inter';
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 18px;
+  color: #717171;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-info-text.na {
+  color: #CACACA;
+  font-style: italic;
+}
+
+/* ── Action buttons ── */
+.user-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.user-edit-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  background: #F0F6FF;
+  border: 1px solid #C8DFFE;
+  border-radius: 8px;
+  color: #0C68F4;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-edit-btn:hover {
+  background: #0C68F4;
+  border-color: #0C68F4;
+  color: #FFFFFF;
+}
+
+.user-delete-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF1F3;
+  border: 1px solid #F3B7C2;
+  border-radius: 8px;
+  color: #C91433;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.user-delete-btn:hover {
+  background: #C91433;
+  border-color: #C91433;
+  color: #FFFFFF;
+}

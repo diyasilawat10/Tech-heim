@@ -1,0 +1,329 @@
+.admin-categories-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 808px; /* Using similar width bounds from Admin layout references */
+  margin: 0 auto;
+}
+
+.categories-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.categories-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0c0c0c;
+  margin: 0;
+}
+
+.categories-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: #717171;
+  margin: 0;
+}
+
+.add-category-btn {
+  background-color: #0c68f4;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.add-category-btn:hover {
+  opacity: 0.9;
+}
+
+.admin-categories-list-container {
+  width: 100%;
+}
+
+.admin-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Category Board (Pinterest Style) */
+.admin-category-board {
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid #EDEDED;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-category-board:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.category-board-header {
+  padding: 16px 20px;
+  background: #FAFAFA;
+  border-bottom: 1px solid #F0F0F0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-id {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0C68F4;
+  background: #E8F1FF;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.category-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #0C0C0C;
+  margin: 0;
+}
+
+.category-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product-count-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #717171;
+}
+
+.category-delete-btn {
+  background: none;
+  border: none;
+  color: #C91433;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  transition: background 0.2s ease;
+}
+
+.category-delete-btn:hover {
+  background: #FFF1F0;
+}
+
+.category-board-content {
+  padding: 20px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mini Product Grid */
+.category-product-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.mini-product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: default;
+}
+
+.mini-product-image {
+  aspect-ratio: 1;
+  width: 100%;
+  object-fit: contain;
+  background-color: #F8F8F8;
+  border-radius: 8px;
+  border: 1px solid #F0F0F0;
+}
+
+.mini-product-image-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  width: 100%;
+  padding: 8px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  color: #717171;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 500;
+  text-align: center;
+  word-break: break-word;
+}
+
+.mini-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mini-product-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #444444;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.mini-product-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0C68F4;
+  margin: 0;
+}
+
+.mini-product-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  background: #F4F4F4;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #717171;
+  cursor: default;
+}
+
+.category-board-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #E0E0E0;
+  border-radius: 8px;
+}
+
+.category-board-empty p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #B4B4B4;
+  margin: 0;
+}
+
+
+/* Empty & Error States */
+.admin-empty-state, .admin-loading-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 0;
+  gap: 8px;
+}
+
+.empty-primary {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #0c0c0c;
+  margin: 0;
+}
+
+.empty-secondary {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #717171;
+  margin: 0;
+}
+
+/* Category Modal Extensions */
+.admin-modal-container.category-modal-compact {
+  min-height: auto;
+  padding: 32px 24px;
+}
+
+.category-modal-compact .modal-header {
+  margin-bottom: 28px;
+}
+
+.category-modal-compact .modal-body {
+  gap: 0;
+}
+
+.category-modal-compact .modal-footer {
+  margin-top: 36px;
+}
+
+.admin-modal-category-header {
+  padding: 0 16px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.admin-category-id-chip {
+  background: #E8F1FF;
+  color: #0C68F4;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(12, 104, 244, 0.1);
+}
+
+.admin-loading-state {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #717171;
+  padding: 20px;
+  text-align: center;
+}
+
+.admin-error-banner {
+  background-color: #fff1f0;
+  color: #ff4d4f;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #ffccc7;
+  margin-bottom: 24px;
+}

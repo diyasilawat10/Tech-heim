@@ -1,44 +1,40 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from "./components/Landing page/Navbar/Navbar";
-import Hero from "./components/Landing page/HeroSection/Hero";
-import Categories from "./components/Landing page/Categories/Categories";
-import ProductSection from "./components/Landing page/ProductSection/ProductSection";
-import NewProducts from "./components/Landing page/NewProducts/NewProducts";
-import PromoSection from "./components/Landing page/PromoSection/PromoSection";
-import BestSellers from "./components/Landing page/BestSellers/BestSellers";
-import TopBrands from "./components/Landing page/TopBrands/TopBrands";
-import WatchBanner from "./components/Landing page/WatchBanner/WatchBanner";
-import BlogsSection from "./components/Landing page/BlogsSection/BlogsSection";
-import ServiceBar from "./components/Landing page/ServiceBar/ServiceBar";
 import Footer from "./components/Landing page/Footer/Footer";
+import HomePage from "./pages/HomePage/HomePage";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
-
-const HomePage = () => (
-  <>
-    <Hero />
-    <Categories />
-    <ProductSection />
-    <NewProducts />
-    <PromoSection />
-    <BestSellers />
-    <TopBrands />
-    <WatchBanner />
-    <BlogsSection />
-    <ServiceBar />
-  </>
-);
+import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
+import AdminProducts from "./pages/Admin/AdminProducts/AdminProducts";
+import AdminCategories from "./pages/Admin/AdminCategories/AdminCategories";
+import AdminPlaceholder from "./pages/Admin/AdminPlaceholder/AdminPlaceholder";
+import AdminUsers from "./pages/Admin/AdminUsers/AdminUsers";
+import OrdersPage from "./pages/Admin/AdminOrders/AdminOrders";
+import OrderStatusPage from "./pages/Admin/AdminOrderStatus/AdminOrderStatus";
+import ScrollToTop from "./components/ScrollToTop";
+import { CurrentUserProvider } from "./context/CurrentUserContext";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductsPage />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <CurrentUserProvider>
+      <Router>
+        <ScrollToTop />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/products" element={<AdminProducts />} />
+          <Route path="/admin/categories" element={<AdminCategories />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/orders" element={<OrdersPage />} />
+          <Route path="/admin/orders/:id" element={<OrderStatusPage />} />
+          <Route path="/admin/:section" element={<AdminPlaceholder />} />
+          <Route path="/logout" element={<AdminPlaceholder />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </CurrentUserProvider>
   );
 }
 

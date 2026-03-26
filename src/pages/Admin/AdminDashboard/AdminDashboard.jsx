@@ -1,0 +1,245 @@
+import React from 'react';
+import AdminLayout from '../../../components/Admin/AdminLayout/AdminLayout';
+import AdminModal from '../../../components/Admin/AdminModal/AdminModal';
+import { getAdminIcon } from '../../../constants/adminIcons';
+import { fieldGroup1, fieldGroup2 } from '../../../constants/adminFields';
+import { getUserById, updateUser } from '../../../api/usersApi';
+import { useCurrentUser } from '../../../context/CurrentUserContext';
+import './AdminDashboard.css';
+
+const getUserId = (user) => user?.id ?? user?._id ?? '';
+
+const mapUserToFieldData = (user) => ({
+  'full-name': user?.name || '',
+  'phone-number': user?.phone || '',
+  'address': user?.address || '',
+  'email': user?.email || '',
+  'password': '*********',
+  'postal-code': user?.postalCode || '',
+});
+
+const AdminDashboard = () => {
+  const { currentUser, setCurrentUser } = useCurrentUser();
+  const userId = getUserId(currentUser);
+  const [fieldData, setFieldData] = React.useState(mapUserToFieldData(currentUser));
+  const [modalConfig, setModalConfig] = React.useState({
+    isOpen: false,
+    title: '',
+    fields: [], // { id, label, value }
+  });
+  const [pageError, setPageError] = React.useState('');
+
+  React.useEffect(() => {
+    setFieldData(mapUserToFieldData(currentUser));
+  }, [currentUser]);
+
+  React.useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    const loadUser = async () => {
+      try {
+        const user = await getUserById(userId);
+        if (cancelled) return;
+        setCurrentUser(user);
+        setPageError('');
+      } catch (error) {
+        if (cancelled) return;
+        setPageError(error.message || 'Failed to load your profile.');
+      }
+    };
+
+    loadUser();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, setCurrentUser]);
+
+  const getFirstName = () => fieldData['full-name'].split(' ')[0] || '';
+  const getLastName = () => fieldData['full-name'].split(' ').slice(1).join(' ') || '';
+
+  const handleEdit = (id) => {
+    if (id === 'full-name') {
+      setModalConfig({
+        isOpen: true,
+        title: 'First name and Last name',
+        fields: [
+          { id: 'first', label: 'first name', value: getFirstName() },
+          { id: 'last', label: 'last name', value: getLastName() }
+        ]
+      });
+    } else {
+      const field = [...fieldGroup1, ...fieldGroup2].find(f => f.id === id);
+      setModalConfig({
+        isOpen: true,
+        title: field ? field.label : 'Edit Field',
+        fields: [{ 
+          id, 
+          label: (field ? field.label : id).toLowerCase(), 
+          value: fieldData[id],
+          type: field?.type || 'text',
+          error: false,
+          supportingText: ''
+        }]
+      });
+    }
+  };
+
+  const handleModalInputChange = (id, value) => {
+    setModalConfig(prev => ({
+      ...prev,
+      fields: prev.fields.map(f => f.id === id ? { ...f, value, error: false, supportingText: '' } : f)
+    }));
+  };
+
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const handleModalSave = async () => {
+    const updates = {};
+    let hasError = false;
+    const newFields = [...modalConfig.fields];
+
+    const emailField = newFields.find(f => f.id === 'email');
+    if (emailField && !validateEmail(emailField.value)) {
+      emailField.error = true;
+      emailField.supportingText = 'invalid e-mail address';
+      hasError = true;
+    }
+
+    if (hasError) {
+      setModalConfig(prev => ({ ...prev, fields: newFields }));
+      return;
+    }
+
+    const isNameModal = modalConfig.fields.some(f => f.id === 'first' || f.id === 'last');
+
+    if (isNameModal) {
+      const first = modalConfig.fields.find(f => f.id === 'first')?.value || '';
+      const last = modalConfig.fields.find(f => f.id === 'last')?.value || '';
+      updates['full-name'] = `${first} ${last}`.trim();
+    } else {
+      modalConfig.fields.forEach(f => {
+        updates[f.id] = f.value;
+      });
+    }
+
+    if (userId) {
+      const payload = {
+        name: updates['full-name'] ?? fieldData['full-name'],
+        email: updates.email ?? fieldData.email,
+        phone: (updates['phone-number'] ?? fieldData['phone-number'] ?? '').trim() || null,
+        address: (updates.address ?? fieldData.address ?? '').trim() || null,
+        postalCode: (updates['postal-code'] ?? fieldData['postal-code'] ?? '').trim() || null,
+      };
+
+      try {
+        const updatedUser = await updateUser(userId, payload);
+        setFieldData(mapUserToFieldData(updatedUser));
+        setCurrentUser(updatedUser);
+        setPageError('');
+      } catch (error) {
+        setPageError(error.message || 'Failed to save your profile.');
+        return;
+      }
+    } else {
+      setFieldData(prev => ({ ...prev, ...updates }));
+    }
+
+    setModalConfig(prev => ({ ...prev, isOpen: false }));
+  };
+
+  const renderField = (field) => {
+    const value = fieldData[field.id];
+    const isFilled = !!value;
+    const displayText = field.type === 'password' ? '*'.repeat(8) : (value || field.placeholder);
+
+    return (
+      <div
+        key={field.id}
+        className={`account-input-group ${isFilled ? 'filled' : ''}`}
+      >
+        <div className="label-container">
+          <span className="label-segment segment-left"></span>
+          <label className="input-label" htmlFor={`input-${field.id}`}>
+            {field.label}
+          </label>
+          <span className="label-segment segment-fill"></span>
+        </div>
+
+        <div className="account-input-container">
+          <div className="shadow"></div>
+          <div className="input-left">
+            <span className="input-icon">{getAdminIcon(field.icon)}</span>
+            <span className="field-display-text">{displayText}</span>
+          </div>
+          <div className="input-right">
+            <button
+              className="edit-btn"
+              onClick={() => handleEdit(field.id)}
+              aria-label={`Edit ${field.label}`}
+            >
+              {getAdminIcon('edit')}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <AdminLayout
+        pageClassName="admin-dashboard-page"
+        profileName={fieldData['full-name']}
+      >
+        <section className="admin-dashboard-content identification-section">
+          <header className="section-header">
+            <h2 className="section-title">Identification</h2>
+            <p className="section-subtitle">Verify your identity</p>
+          </header>
+
+          {pageError && (
+            <p className="section-subtitle" style={{ color: '#c91433' }}>
+              {pageError}
+            </p>
+          )}
+
+          <div className="identification-content-wrapper">
+            <div className="identification-frame frame-1">
+              {fieldGroup1.map(renderField)}
+            </div>
+
+            <div className="identification-frame frame-2">
+              {fieldGroup2.map(renderField)}
+            </div>
+          </div>
+        </section>
+      </AdminLayout>
+
+      <AdminModal
+        isOpen={modalConfig.isOpen}
+        onClose={() => setModalConfig(prev => ({ ...prev, isOpen: false }))}
+        onSave={handleModalSave}
+        title={modalConfig.title}
+      >
+        {modalConfig.fields.map((field) => (
+          <AdminModal.Input
+            key={field.id}
+            label={field.label}
+            value={field.value}
+            type={field.type}
+            error={field.error}
+            supportingText={field.supportingText}
+            onChange={(val) => handleModalInputChange(field.id, val)}
+          />
+        ))}
+      </AdminModal>
+    </>
+  );
+};
+
+export default AdminDashboard;
