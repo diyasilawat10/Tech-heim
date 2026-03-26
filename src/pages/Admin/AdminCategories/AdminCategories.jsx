@@ -36,14 +36,11 @@ const CategoryCard = ({ category, onDelete }) => (
         <div className="category-product-mini-grid">
           {category.products.slice(0, 8).map(product => (
             <div key={product.id} className="mini-product-card">
-              <div 
-                className="mini-product-image" 
-                style={{ 
-                  backgroundImage: product.image ? `url(${product.image})` : 'none',
-                  backgroundColor: '#F8F8F8'
-                }}
-                title={product.title}
-              />
+              {product.image ? (
+                <img className="mini-product-image" src={product.image} alt={product.title || 'Product image unavailable'} />
+              ) : (
+                <span className="mini-product-image-fallback">{product.title || 'Product image unavailable'}</span>
+              )}
               <div className="mini-product-info">
                 <p className="mini-product-name">{product.title}</p>
                 <p className="mini-product-price">${Number(product.price).toFixed(2)}</p>
@@ -203,7 +200,6 @@ const AdminCategories = () => {
   return (
     <AdminLayout
       pageClassName="admin-categories-page"
-      profileName={JSON.parse(localStorage.getItem('user') || '{}').name}
     >
       <section className="admin-categories-content-wrapper">
         <header className="categories-section-header">

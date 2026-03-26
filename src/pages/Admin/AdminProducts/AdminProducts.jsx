@@ -210,7 +210,6 @@ const AdminProducts = () => {
     <>
       <AdminLayout 
         pageClassName="admin-products-page"
-        profileName={JSON.parse(localStorage.getItem('user') || '{}').name}
       >
         <section className="admin-products-content products-section">
           <header className="section-header">

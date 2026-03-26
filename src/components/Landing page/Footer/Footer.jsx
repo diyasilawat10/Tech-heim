@@ -12,7 +12,6 @@ import amexIcon from '../../../assets/icons/american express.svg';
 import visaIcon from '../../../assets/icons/visa.svg';
 import masterIcon from '../../../assets/icons/master card.svg';
 import arrowUpIcon from '../../../assets/icons/back to up bottun.svg';
-import chatIcon from '../../../assets/icons/online chat.svg';
 
 function Footer() {
   const handleBackToTop = () => {
@@ -23,10 +22,6 @@ function Footer() {
     <footer className="footer">
       <div className="footer-main container">
         <div className="footer-mobile-top-row">
-          <button className="chat-bubble">
-            <img src={chatIcon} alt="Chat" />
-          </button>
-
           <button className="back-to-top" onClick={handleBackToTop} aria-label="Back to top">
             <img src={arrowUpIcon} alt="Back to top" />
           </button>
@@ -84,10 +79,6 @@ function Footer() {
         </div>
 
       </div>
-
-      <button className="chat-bubble footer-desktop-float" aria-label="Open chat">
-        <img src={chatIcon} alt="Chat" />
-      </button>
 
       <button className="back-to-top footer-desktop-float" onClick={handleBackToTop} aria-label="Back to top">
         <img src={arrowUpIcon} alt="Back to top" />

@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import './Navbar.css';
 import logoImg from '../../../assets/icons/logo.svg';
-import searchIcon from '../../../assets/icons/search-normal.svg';
-import bagIcon from '../../../assets/icons/basket.svg';
 import userIcon from '../../../assets/icons/profile.svg';
 import { navLinks } from '../../../constants/mockData';
 import AuthModal from '../AuthModal/AuthModal';
@@ -71,12 +69,6 @@ function Navbar() {
           </nav>
 
           <div className={`nav-icons ${isAuthenticated ? 'nav-icons--authenticated' : 'nav-icons--before-login'}`}>
-            <button type="button" className="icon-btn" aria-label="Search">
-              <img src={searchIcon} alt="" className="icon-search" />
-            </button>
-            <button type="button" className="icon-btn" aria-label="Cart">
-              <img src={bagIcon} alt="" className="icon-basket" />
-            </button>
             {isAuthenticated ? (
               <Link to="/admin" className="icon-btn" aria-label="User profile">
                 <img src={userIcon} alt="" className="icon-user" />
@@ -104,9 +96,6 @@ function Navbar() {
             <div className="mobile-logo-text">Tech Heim</div>
 
             <div className="mobile-icons">
-              <button type="button" className="icon-btn mobile-icon-btn" aria-label="Cart">
-                <img src={bagIcon} alt="" className="icon-basket" />
-              </button>
               {isAuthenticated ? (
                 <Link to="/admin" className="icon-btn mobile-icon-btn" aria-label="User profile">
                   <img src={userIcon} alt="" className="icon-user" />
@@ -123,11 +112,6 @@ function Navbar() {
               )}
             </div>
           </div>
-
-          <button type="button" className="mobile-search" aria-label="Search products">
-            <span className="mobile-search-placeholder">What can we help you to find ?</span>
-            <img src={searchIcon} alt="" className="mobile-search-icon" />
-          </button>
         </div>
       </header>
 

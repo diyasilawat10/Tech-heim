@@ -6,12 +6,6 @@ export const ADMIN_MENU_ITEMS = [
     description: 'Review and update your account information.'
   },
   {
-    name: 'Dashboard',
-    path: '/admin/dashboard',
-    icon: 'dashboard',
-    description: 'Track the overall status of your store.'
-  },
-  {
     name: 'Products',
     path: '/admin/products',
     icon: 'products',
@@ -34,36 +28,6 @@ export const ADMIN_MENU_ITEMS = [
     path: '/admin/users',
     icon: 'users',
     description: 'View customer and user account activity.'
-  },
-  {
-    name: 'Discounts / Coupons',
-    path: '/admin/discounts',
-    icon: 'discounts',
-    description: 'Create and manage discount offers.'
-  },
-  {
-    name: 'Inventory',
-    path: '/admin/inventory',
-    icon: 'inventory',
-    description: 'Monitor product stock and availability.'
-  },
-  {
-    name: 'Reviews',
-    path: '/admin/reviews',
-    icon: 'reviews',
-    description: 'Moderate and review customer feedback.'
-  },
-  {
-    name: 'Reports / Analytics',
-    path: '/admin/analytics',
-    icon: 'analytics',
-    description: 'Inspect performance metrics and reports.'
-  },
-  {
-    name: 'Settings',
-    path: '/admin/settings',
-    icon: 'settings',
-    description: 'Configure store and account settings.'
   },
   {
     name: 'Logout',

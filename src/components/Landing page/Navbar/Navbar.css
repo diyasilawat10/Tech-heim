@@ -107,11 +107,11 @@
 }
 
 .nav-icons--before-login {
-  width: 244px;
+  width: 148px;
 }
 
 .nav-icons--authenticated {
-  width: 136px;
+  width: 40px;
 }
 
 .icon-btn {
@@ -132,20 +132,10 @@
   object-fit: contain;
 }
 
-.icon-search,
-.icon-basket,
 .icon-user {
   width: 24px;
   height: 24px;
   transform-origin: center;
-}
-
-.icon-search {
-  transform: scale(1);
-}
-
-.icon-basket {
-  transform: scale(1.68);
 }
 
 .icon-user {
@@ -205,7 +195,7 @@
   }
 
   .nav-icons--before-login {
-    width: 212px;
+    width: 116px;
   }
 
   .auth-trigger-btn {
@@ -245,12 +235,10 @@
 
   .header-mobile {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
     width: calc(100% - 48px);
     max-width: 312px;
     margin: 0 auto;
-    padding: 0;
+    padding: 12px 0 0;
     box-sizing: border-box;
   }
 
@@ -304,40 +292,10 @@
     padding: 0;
   }
 
-  .mobile-icon-btn .icon-basket,
   .mobile-icon-btn .icon-user {
     width: 24px;
     height: 24px;
     transform: none;
   }
 
-  .mobile-search {
-    position: relative;
-    width: 100%;
-    height: 40px;
-    padding: 0 16px;
-    border-radius: 4px;
-    background: #ededed;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .mobile-search-placeholder {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 12px;
-    line-height: 15px;
-    color: #717171;
-  }
-
-  .mobile-search-icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-  }
-
-  .mobile-search .icon-search {
-    transform: none;
-  }
 }

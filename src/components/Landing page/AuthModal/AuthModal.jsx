@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './AuthModal.css';
 import { register, login } from '../../../api/auth';
+import { useCurrentUser } from '../../../context/CurrentUserContext';
 
 const TAB = {
     LOGIN: 'login',
@@ -293,6 +294,7 @@ function AuthField({
 }
 
 function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError, isOpen, modalType }) {
+    const { setCurrentUser } = useCurrentUser();
     const [activeTab, setActiveTab] = useState(TAB.LOGIN);
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
@@ -412,7 +414,7 @@ function AuthModal({ onClose, onLoginSuccess, onRegisterSuccess, onRegisterError
             const userObj = res?.data?.user || res?.user || {};
             const userName = userObj.name || localStorage.getItem('lastRegisteredName') || '';
             const userEmail = userObj.email || loginEmail.trim();
-            localStorage.setItem("user", JSON.stringify({ ...userObj, name: userName, email: userEmail }));
+            setCurrentUser({ ...userObj, name: userName, email: userEmail });
 
             onLoginSuccess();
         } catch (error) {

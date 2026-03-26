@@ -1,6 +1,7 @@
 import React from 'react';
 import AdminBreadcrumbs from '../AdminBreadcrumbs/AdminBreadcrumbs';
 import AdminSidebar from '../AdminSidebar/AdminSidebar';
+import { useCurrentUser } from '../../../context/CurrentUserContext';
 import './AdminLayout.css';
 
 const AdminLayout = ({
@@ -9,10 +10,12 @@ const AdminLayout = ({
   profileName = 'Jimmy Smith',
   showSidebar = true
 }) => {
+  const { currentUser } = useCurrentUser();
   const rootClassName = ['admin-layout-page', pageClassName].filter(Boolean).join(' ');
   const mainClassName = ['admin-layout-main', showSidebar ? '' : 'admin-layout-main--standalone']
     .filter(Boolean)
     .join(' ');
+  const resolvedProfileName = profileName || currentUser?.name || 'Jimmy Smith';
 
   return (
     <div className={rootClassName}>
@@ -21,7 +24,7 @@ const AdminLayout = ({
 
         {showSidebar ? (
           <div className="admin-layout-shell">
-            <AdminSidebar profileName={profileName} />
+            <AdminSidebar profileName={resolvedProfileName} />
             <main className={mainClassName}>{children}</main>
           </div>
         ) : (
