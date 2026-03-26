@@ -39,6 +39,7 @@
   cursor: pointer;
   border-radius: 8px;
   transition: opacity 0.3s ease;
+  text-decoration: none;
   flex: none;
   order: 1;
   flex-grow: 0;

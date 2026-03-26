@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './NewProducts.css';
 import ProductCard from '../ProductCard/ProductCard';
 import arrowRightIcon from '../../../assets/icons/arrow-circle-right.svg';
@@ -9,10 +10,10 @@ function NewProducts() {
         <section className="new-products-section main-container main-section">
                 <div className="new-products-header">
                     <h2 className="new-products-title">New Products</h2>
-                    <button type="button" className="view-all-button">
+                    <Link to="/products" className="view-all-button">
                         <span>View all</span>
                         <img src={arrowRightIcon} alt="" aria-hidden="true" className="view-all-icon" />
-                    </button>
+                    </Link>
                 </div>
 
                 <hr className="section-divider" />

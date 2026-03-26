@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProductCard from "../ProductCard/ProductCard";
 import './ProductSection.css';
 import randomShape from '../../../assets/images/randomshape.png';
@@ -59,10 +60,10 @@ function ProductSection() {
             <h2>Products On Sale</h2>
             <p>Shop Now!</p>
           </div>
-          <button className="sales-view-all">
+          <Link to="/products" className="sales-view-all">
             <span>View all</span>
             <img src={arrowCircleRight} alt="" aria-hidden="true" />
-          </button>
+          </Link>
         </div>
 
         <div className="sales-cards-viewport" ref={viewportRef}>
