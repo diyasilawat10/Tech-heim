@@ -271,11 +271,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .chat-bubble {
   gap: 10px;
   padding: 6px 8px;
+}
+
+.chat-bubble:hover,
+.back-to-top:hover {
+  transform: translateY(-2px);
+  background: #c3dcff;
+}
+
+.chat-bubble:focus-visible,
+.back-to-top:focus-visible {
+  outline: 2px solid #f9f9f9;
+  outline-offset: 2px;
 }
 
 .footer-desktop-float.chat-bubble {

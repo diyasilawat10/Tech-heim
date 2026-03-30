@@ -11,6 +11,17 @@ body {
   overflow-x: hidden;
 }
 
+.bpWebchat {
+  right: max(24px, calc((100vw - 1224px) / 2 + 28px)) !important;
+  bottom: 76px !important;
+  width: 392px !important;
+  height: 545px !important;
+  max-height: 545px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: -2px 2px 20px -1px rgba(113, 113, 113, 0.2) !important;
+}
+
 .main-container,
 .section-container {
   width: 100%;
@@ -77,6 +88,14 @@ img {
 }
 
 @media (max-width: 768px) {
+  .bpWebchat {
+    right: 16px !important;
+    bottom: 72px !important;
+    width: calc(100vw - 32px) !important;
+    height: min(72vh, 545px) !important;
+    max-height: min(72vh, 545px) !important;
+  }
+
   .main-container,
   .section-container {
     padding: 0 16px;
@@ -88,6 +107,16 @@ img {
 }
 
 @media (max-width: 480px) {
+  .bpWebchat {
+    right: 12px !important;
+    left: 12px !important;
+    bottom: 72px !important;
+    width: auto !important;
+    height: min(70vh, 520px) !important;
+    max-height: min(70vh, 520px) !important;
+    border-radius: 8px !important;
+  }
+
   .main-container,
   .section-container {
     padding: 0 24px;
