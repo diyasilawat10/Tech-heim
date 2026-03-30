@@ -16,6 +16,62 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2026/03/30/06/20260330063140-X3ZUWKTN.js" defer></script>
+    <script>
+      window.addEventListener('load', function () {
+        const applyBotpressLayout = () => {
+          const webchat = document.querySelector('.bpWebchat');
+          if (!webchat) {
+            return false;
+          }
+
+          webchat.style.right = 'max(24px, calc((100vw - 1224px) / 2 + 28px))';
+          webchat.style.left = 'auto';
+          webchat.style.bottom = '76px';
+          webchat.style.width = '392px';
+          webchat.style.height = '545px';
+          webchat.style.maxHeight = '545px';
+          webchat.style.borderRadius = '8px';
+          webchat.style.overflow = 'hidden';
+          webchat.style.boxShadow = '-2px 2px 20px -1px rgba(113, 113, 113, 0.2)';
+
+          if (window.innerWidth <= 768) {
+            webchat.style.right = '16px';
+            webchat.style.bottom = '72px';
+            webchat.style.width = 'calc(100vw - 32px)';
+            webchat.style.height = 'min(72vh, 545px)';
+            webchat.style.maxHeight = 'min(72vh, 545px)';
+          }
+
+          if (window.innerWidth <= 480) {
+            webchat.style.left = '12px';
+            webchat.style.right = '12px';
+            webchat.style.bottom = '72px';
+            webchat.style.width = 'auto';
+            webchat.style.height = 'min(70vh, 520px)';
+            webchat.style.maxHeight = 'min(70vh, 520px)';
+          }
+
+          return true;
+        };
+
+        applyBotpressLayout();
+
+        const observer = new MutationObserver(() => {
+          applyBotpressLayout();
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['style', 'class'],
+        });
+
+        window.addEventListener('resize', applyBotpressLayout);
+      });
+    </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
