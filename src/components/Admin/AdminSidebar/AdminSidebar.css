@@ -69,6 +69,7 @@
   box-sizing: border-box;
   border-left: 2px solid transparent;
   transition: all 0.2s ease;
+  flex-wrap: nowrap;
 }
 
 .nav-text {
@@ -78,6 +79,10 @@
   font-size: 20px;
   line-height: 28px;
   color: #0C0C0C;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .nav-item:hover .nav-text,

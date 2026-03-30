@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import './AdminOrderStatus.css';
 import AdminLayout from '../../../components/Admin/AdminLayout/AdminLayout';
-import { getOrderById } from '../../../api/ordersApi';
-import { getDemoOrderById } from '../../../constants/demoOrders';
+import { getOrderById, updateOrderStatus, deleteOrder } from '../../../api/ordersApi';
 
 const normalizeText = (value, fallback = 'N/A') => {
   if (typeof value === 'string' && value.trim()) return value.trim();
@@ -145,46 +144,73 @@ const getTransactionId = (order) =>
 
 const AdminOrderStatus = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [updatingStatus, setUpdatingStatus] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [statusUpdateMessage, setStatusUpdateMessage] = useState('');
+  const [deletingOrder, setDeletingOrder] = useState(false);
+
+  const loadOrder = async (showRefreshing = false) => {
+    if (showRefreshing) setRefreshing(true);
+    else setLoading(true);
+    setError('');
+
+    try {
+      const orderDetails = await getOrderById(id);
+      setOrder(orderDetails);
+    } catch (loadError) {
+      setError(loadError.message || 'Failed to load order details');
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
 
   useEffect(() => {
-    const loadOrder = async () => {
-      setLoading(true);
-      setError('');
-
-      try {
-        const orderDetails = await getOrderById(id);
-
-        if (!orderDetails) {
-          const demoOrder = getDemoOrderById(id);
-
-          if (demoOrder) {
-            setOrder(demoOrder);
-            return;
-          }
-
-          setError('Order not found');
-          return;
-        }
-
-        setOrder(orderDetails);
-      } catch (loadError) {
-        const demoOrder = getDemoOrderById(id);
-
-        if (demoOrder) {
-          setOrder(demoOrder);
-        } else {
-          setError(loadError.message || 'Failed to load order details');
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
     loadOrder();
   }, [id]);
+
+  const handleStatusUpdate = async (newStatus) => {
+    if (!order || updatingStatus || newStatus === status) return;
+
+    setUpdatingStatus(true);
+    setStatusUpdateMessage('');
+    setError('');
+
+    try {
+      await updateOrderStatus(id, newStatus);
+      setOrder({ ...order, status: newStatus });
+      setStatusUpdateMessage('Order status updated successfully!');
+      setTimeout(() => setStatusUpdateMessage(''), 3000);
+    } catch (err) {
+      setError(err.message || 'Failed to update order status');
+    } finally {
+      setUpdatingStatus(false);
+    }
+  };
+
+  const handleDeleteOrder = async () => {
+    if (!order || deletingOrder) return;
+
+    const confirmed = window.confirm('Are you sure you want to delete this order? This action cannot be undone.');
+    if (!confirmed) return;
+
+    setDeletingOrder(true);
+    setError('');
+
+    try {
+      await deleteOrder(id);
+      // Redirect back to orders list
+      navigate('/admin/orders');
+    } catch (err) {
+      setError(err.message || 'Failed to delete order');
+    } finally {
+      setDeletingOrder(false);
+    }
+  };
 
   const items = useMemo(() => getOrderItems(order), [order]);
   const totalItems = useMemo(
@@ -223,6 +249,12 @@ const AdminOrderStatus = () => {
 
         {!loading && !error && order && (
           <>
+            {statusUpdateMessage && (
+              <div className="order-status-message order-status-message--success">
+                {statusUpdateMessage}
+              </div>
+            )}
+
             <header className="order-detail-header">
               <div className="order-detail-heading-group">
                 <p className="order-detail-page-title">Order Detail</p>
@@ -230,7 +262,25 @@ const AdminOrderStatus = () => {
                 <h1 className="order-detail-title">Order #{getOrderId(order)}</h1>
               </div>
 
-              <div className="order-detail-header-meta">
+              <div className="order-detail-header-actions">
+                <div className="order-detail-action-buttons">
+                  <button
+                    type="button"
+                    className="order-detail-refresh-btn"
+                    onClick={() => loadOrder(true)}
+                    disabled={refreshing}
+                  >
+                    {refreshing ? 'Refreshing...' : 'Refresh'}
+                  </button>
+                  <button
+                    type="button"
+                    className="order-detail-delete-btn"
+                    onClick={handleDeleteOrder}
+                    disabled={deletingOrder}
+                  >
+                    {deletingOrder ? 'Deleting...' : 'Delete Order'}
+                  </button>
+                </div>
                 <span className={`order-detail-badge order-detail-badge--${statusTone}`}>{status}</span>
                 <span className="order-detail-date">
                   Placed {formatDate(order?.createdAt ?? order?.created_at ?? order?.date)}
@@ -269,9 +319,23 @@ const AdminOrderStatus = () => {
                   </div>
                   <div className="order-detail-list-row">
                     <span className="order-detail-list-label">Current status</span>
-                    <span className={`order-detail-inline-badge order-detail-inline-badge--${statusTone}`}>
-                      {status}
-                    </span>
+                    <div className="order-status-controls">
+                      <span className={`order-detail-inline-badge order-detail-inline-badge--${statusTone}`}>
+                        {status}
+                      </span>
+                      <select
+                        value={status}
+                        onChange={(e) => handleStatusUpdate(e.target.value)}
+                        disabled={updatingStatus}
+                        className="order-status-select"
+                      >
+                        <option value="placed">Placed</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                      </select>
+                      {updatingStatus && <span className="order-status-updating">Updating...</span>}
+                    </div>
                   </div>
                   <div className="order-detail-list-row">
                     <span className="order-detail-list-label">Placed on</span>

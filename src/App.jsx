@@ -10,7 +10,6 @@ import AdminCategories from "./pages/Admin/AdminCategories/AdminCategories";
 import AdminPlaceholder from "./pages/Admin/AdminPlaceholder/AdminPlaceholder";
 import AdminUsers from "./pages/Admin/AdminUsers/AdminUsers";
 import OrdersPage from "./pages/Admin/AdminOrders/AdminOrders";
-import OrderStatusPage from "./pages/Admin/AdminOrderStatus/AdminOrderStatus";
 import ScrollToTop from "./components/ScrollToTop";
 import { CurrentUserProvider } from "./context/CurrentUserContext";
 
@@ -28,7 +27,6 @@ function App() {
           <Route path="/admin/categories" element={<AdminCategories />} />
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/orders" element={<OrdersPage />} />
-          <Route path="/admin/orders/:id" element={<OrderStatusPage />} />
           <Route path="/admin/:section" element={<AdminPlaceholder />} />
           <Route path="/logout" element={<AdminPlaceholder />} />
         </Routes>

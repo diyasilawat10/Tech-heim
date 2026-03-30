@@ -65,7 +65,7 @@ const ModalSelect = ({ label, value, onChange, options = [], error, supportingTe
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         >
-          <option value="" disabled>Select {label}</option>
+          <option value="" disabled>Select...</option>
           {options.map((opt) => (
             <option key={opt.id} value={opt.id}>
               {opt.name}
@@ -113,7 +113,7 @@ const FileUpload = ({ label, value, onChange, error }) => {
           onChange={handleFileChange}
         />
         <div className="file-display" onClick={() => fileInputRef.current.click()}>
-          {value && value.startsWith('data:') ? (
+          {value && (value.startsWith('data:') || value.startsWith('http') || value.startsWith('/')) ? (
             <div className="file-preview-mini" style={{ backgroundImage: `url(${value})` }}></div>
           ) : (
             <div className="upload-placeholder">
