@@ -19,14 +19,14 @@
   max-width: 100%;
   min-height: 310px;
   max-height: calc(100vh - 48px);
+  box-sizing: border-box;
+  padding: 24px;
   background: #FFFFFF;
   box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12);
   border-radius: 8px;
-  box-sizing: border-box;
-  padding: 24px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .modal-header {
@@ -110,8 +110,8 @@
   font-size: 12px;
   line-height: 15px;
   color: #0C68F4;
-  background: #FFFFFF; /* Fix: prevent line from passing through text */
-  margin: 0 4px; /* Give some space for the text */
+  background: #FFFFFF;
+  margin: 0 4px;
   position: relative;
   z-index: 4;
 }
@@ -204,6 +204,82 @@
 
 .modal-input-group.focused .modal-select-arrow {
   transform: rotate(180deg);
+}
+
+.modal-search-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: #0C68F4;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.modal-search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -1px;
+  right: -1px;
+  max-height: 216px;
+  overflow-y: auto;
+  background: #FFFFFF;
+  border: 1px solid #D8E0EE;
+  border-radius: 12px;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+  z-index: 40;
+  padding: 8px;
+}
+
+.modal-search-option,
+.modal-search-empty {
+  width: 100%;
+  border-radius: 10px;
+  font-family: 'Inter';
+}
+
+.modal-search-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: #0C0C0C;
+  cursor: pointer;
+  text-align: left;
+}
+
+.modal-search-option span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.modal-search-option small {
+  font-size: 12px;
+  line-height: 18px;
+  color: #717171;
+}
+
+.modal-search-option:hover,
+.modal-search-option.active {
+  background: #F4F8FF;
+}
+
+.modal-search-empty {
+  padding: 12px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #717171;
 }
 
 .modal-field-select {

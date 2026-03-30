@@ -184,9 +184,112 @@
   text-align: center;
 }
 
-@media (max-width: 992px) {
-  .admin-products-content .section-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
+/* ── Order Selection Mode ── */
+
+.order-selection-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  padding: 16px 40px;
+  z-index: 1000;
+  border-top: 1px solid #f0f0f0;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.selection-bar-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selection-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.selection-user {
+  font-size: 14px;
+  color: #717171;
+  margin: 0;
+}
+
+.selection-count {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0c0c0c;
+  margin: 0;
+}
+
+.selection-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.cancel-selection-btn {
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  color: #717171;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.finish-selection-btn {
+  padding: 10px 24px;
+  background: #0c68f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(12, 104, 244, 0.2);
+}
+
+.finish-selection-btn:disabled {
+  background: #e0e0e0;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.add-to-order-btn {
+  width: 100%;
+  padding: 10px;
+  background: #e3f2fd;
+  color: #0c68f4;
+  border: 1px dashed #0c68f4;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 12px;
+}
+
+.add-to-order-btn:hover {
+  background: #0c68f4;
+  color: white;
+  border-style: solid;
+}
+
+.add-to-order-btn.added {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-color: #2e7d32;
+  border-style: solid;
+}
+
+.add-to-order-btn {
+  margin-top: auto;
 }
