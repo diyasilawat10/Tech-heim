@@ -59,6 +59,7 @@
   font-size: 14px;
   line-height: 17px;
   color: #0c0c0c;
+  white-space: nowrap;
 }
 
 .top-brands-view-all img {
@@ -157,7 +158,8 @@
   }
 
   .top-brands-view-all {
-    width: 91px;
+    width: auto;
+    min-width: 112px;
     height: 40px;
   }
 

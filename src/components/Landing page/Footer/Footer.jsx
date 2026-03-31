@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Footer.css';
 import locationIcon from '../../../assets/icons/location.svg';
 import callIcon from '../../../assets/icons/call-calling.svg';
@@ -15,8 +16,14 @@ import arrowUpIcon from '../../../assets/icons/back to up bottun.svg';
 import ChatButton from '../../ChatButton/ChatButton';
 
 function Footer() {
+  const [openPanel, setOpenPanel] = useState('company');
+
   const handleBackToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const togglePanel = (panelId) => {
+    setOpenPanel((current) => (current === panelId ? '' : panelId));
   };
 
   return (
@@ -112,18 +119,51 @@ function Footer() {
       </div>
 
       <div className="footer-mobile-panels">
-        <button type="button" className="footer-mobile-panel">
-          <span>Company</span>
-          <span className="footer-mobile-chevron" aria-hidden="true" />
-        </button>
-        <button type="button" className="footer-mobile-panel">
-          <span>Info</span>
-          <span className="footer-mobile-chevron" aria-hidden="true" />
-        </button>
-        <button type="button" className="footer-mobile-panel">
-          <span>Contact us</span>
-          <span className="footer-mobile-chevron" aria-hidden="true" />
-        </button>
+        <div className={`footer-mobile-accordion ${openPanel === 'company' ? 'is-open' : ''}`}>
+          <button type="button" className="footer-mobile-panel" onClick={() => togglePanel('company')}>
+            <span>Company</span>
+            <span className="footer-mobile-chevron" aria-hidden="true" />
+          </button>
+          <div className="footer-mobile-panel-content">
+            <p>about us</p>
+            <p>blog</p>
+            <p>returns</p>
+            <p>order status</p>
+          </div>
+        </div>
+
+        <div className={`footer-mobile-accordion ${openPanel === 'info' ? 'is-open' : ''}`}>
+          <button type="button" className="footer-mobile-panel" onClick={() => togglePanel('info')}>
+            <span>Info</span>
+            <span className="footer-mobile-chevron" aria-hidden="true" />
+          </button>
+          <div className="footer-mobile-panel-content">
+            <p>How it works?</p>
+            <p>our promises</p>
+            <p>FAQ</p>
+          </div>
+        </div>
+
+        <div className={`footer-mobile-accordion ${openPanel === 'contact' ? 'is-open' : ''}`}>
+          <button type="button" className="footer-mobile-panel" onClick={() => togglePanel('contact')}>
+            <span>Contact us</span>
+            <span className="footer-mobile-chevron" aria-hidden="true" />
+          </button>
+          <div className="footer-mobile-panel-content footer-mobile-contact-content">
+            <div className="contact-item">
+              <img src={locationIcon} alt="Location" />
+              <p>123 Main Street, Anytown,USA</p>
+            </div>
+            <div className="contact-item">
+              <img src={callIcon} alt="Call" />
+              <p>+1 (555) 123-4567</p>
+            </div>
+            <div className="contact-item">
+              <img src={smsIcon} alt="Email" />
+              <p>TechHeimSupport@gmail.com</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="footer-bottom">

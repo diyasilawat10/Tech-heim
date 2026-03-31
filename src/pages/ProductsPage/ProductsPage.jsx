@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Landing page/Navbar/Navbar';
 import Breadcrumb from '../../components/Products page/Breadcrumb/Breadcrumb';
 import ProductCategories from '../../components/Products page/ProductCategories/ProductCategories';
@@ -10,6 +10,10 @@ import './ProductsPage.css';
 
 const ProductsPage = () => {
   const [sortOrder, setSortOrder] = useState('featured');
+  const [isCompactFilters, setIsCompactFilters] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth <= 1023 : false
+  );
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [filters, setFilters] = useState({
     Brand: ['Apple'],
     Color: [],
@@ -62,24 +66,69 @@ const ProductsPage = () => {
     });
   };
 
+  useEffect(() => {
+    const updateViewportMode = () => {
+      const compact = window.innerWidth <= 1023;
+      setIsCompactFilters(compact);
+      setIsFiltersOpen((prev) => (compact ? prev : true));
+    };
+
+    updateViewportMode();
+    window.addEventListener('resize', updateViewportMode);
+
+    return () => {
+      window.removeEventListener('resize', updateViewportMode);
+    };
+  }, []);
+
   return (
     <div className="products-page">
       <Navbar />
       <div className="products-page-content">
         <Breadcrumb />
         <ProductCategories />
-        <Sort onSortChange={setSortOrder} />
+        <div className="products-toolbar">
+          <Sort onSortChange={setSortOrder} />
+          {isCompactFilters && (
+            <button
+              type="button"
+              className={`filters-toggle-btn ${isFiltersOpen ? 'is-open' : ''}`}
+              onClick={() => setIsFiltersOpen((prev) => !prev)}
+            >
+              <span>Filters</span>
+              <span className="filters-toggle-count">
+                {Object.values(filters).reduce((total, value) => {
+                  if (Array.isArray(value)) return total + value.length;
+                  return value ? total + 1 : total;
+                }, 0)}
+              </span>
+            </button>
+          )}
+        </div>
+
+        {isCompactFilters && isFiltersOpen && (
+          <div className="filters-dropdown-panel">
+            <Filters
+              filters={filters}
+              onToggle={toggleFilter}
+              onClearAll={clearAllFilters}
+            />
+          </div>
+        )}
+
         <FilterChips 
           filters={filters} 
           onRemove={removeFilterChip} 
           onClearAll={clearAllFilters} 
         />
         <div className="horizontal-layout">
-          <Filters 
-            filters={filters} 
-            onToggle={toggleFilter} 
-            onClearAll={clearAllFilters}
-          />
+          {!isCompactFilters && (
+            <Filters 
+              filters={filters} 
+              onToggle={toggleFilter} 
+              onClearAll={clearAllFilters}
+            />
+          )}
           <div className="main-products-area">
             <ProductGrid sortOrder={sortOrder} />
           </div>

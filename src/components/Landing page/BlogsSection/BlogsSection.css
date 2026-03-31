@@ -61,6 +61,7 @@
   line-height: 19px;
   color: #0c0c0c;
   text-align: center;
+  white-space: nowrap;
 }
 
 .blogs-view-arrow-icon {
@@ -626,7 +627,8 @@
   }
 
   .blogs-view-all {
-    width: 91px;
+    width: auto;
+    min-width: 112px;
     height: 40px;
     padding: 8px;
     gap: 8px;

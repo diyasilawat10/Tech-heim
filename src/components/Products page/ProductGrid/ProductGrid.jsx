@@ -12,6 +12,9 @@ function ProductGrid({ sortOrder = 'featured' }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerRow, setCardsPerRow] = useState(() =>
+    typeof window !== 'undefined' && window.innerWidth <= 1023 ? 2 : 3
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -50,6 +53,19 @@ function ProductGrid({ sortOrder = 'featured' }) {
 
   useEffect(() => { setCurrentPage(1); }, [sortOrder]);
 
+  useEffect(() => {
+    const updateCardsPerRow = () => {
+      setCardsPerRow(window.innerWidth <= 1023 ? 2 : 3);
+    };
+
+    updateCardsPerRow();
+    window.addEventListener('resize', updateCardsPerRow);
+
+    return () => {
+      window.removeEventListener('resize', updateCardsPerRow);
+    };
+  }, []);
+
   const sortedProducts = useMemo(() => {
     const result = [...products];
     if (sortOrder === 'price-asc')    result.sort((a, b) => a.price - b.price);
@@ -76,8 +92,8 @@ function ProductGrid({ sortOrder = 'featured' }) {
   }
 
   const rows = [];
-  for (let i = 0; i < currentProducts.length; i += 3) {
-    rows.push(currentProducts.slice(i, i + 3));
+  for (let i = 0; i < currentProducts.length; i += cardsPerRow) {
+    rows.push(currentProducts.slice(i, i + cardsPerRow));
   }
 
   // Only show promo banner if there are rows AFTER it (i.e. more than 3 rows total)

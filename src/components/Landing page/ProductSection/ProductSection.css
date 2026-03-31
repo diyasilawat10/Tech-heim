@@ -5,8 +5,8 @@
 
 .sales-section {
   position: relative;
-  width: 1224px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 1224px;
   height: 325px;
   min-height: 325px;
   margin: 0 auto;
@@ -257,6 +257,86 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sales-section {
+    width: 100%;
+    height: 252px;
+    min-height: 252px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .sales-left {
+    left: 24px;
+    top: 38px;
+    width: 148px;
+    height: 162px;
+  }
+
+  .sales-text {
+    width: 148px;
+    height: 50px;
+  }
+
+  .sales-text h2 {
+    width: 148px;
+    height: auto;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .sales-text p {
+    left: 18px;
+    top: 30px;
+    width: auto;
+    height: auto;
+    font-size: 15px;
+    line-height: 20px;
+    margin: 0;
+  }
+
+  .sales-view-all {
+    left: 8px;
+    top: 102px;
+    width: 96px;
+    height: 38px;
+    padding: 6px 8px;
+    gap: 4px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .sales-cards-viewport {
+    left: 194px;
+    top: 28px;
+    width: calc(100% - 218px);
+    height: 194px;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+  }
+
+  .sales-cards {
+    gap: 12px;
+    padding-bottom: 0;
+  }
+
+  .sales-cards > * {
+    flex: 0 0 148px;
+    height: 186px;
+    min-height: 186px;
+    margin-top: 0;
+  }
+
+  .sales-cards > *:nth-child(n + 4) {
+    display: none;
+  }
+
+  .sales-arrows {
+    display: none;
+  }
+}
+
 @media (max-width: 600px) {
   .sales-random-shape {
     display: block;
@@ -268,8 +348,8 @@
   }
 
   .sales-section {
-    min-height: 174px;
-    height: 174px;
+    min-height: 188px;
+    height: 188px;
     display: block;
     padding: 0;
   }
@@ -277,9 +357,9 @@
   .sales-left {
     position: absolute;
     left: 8px;
-    top: 16px;
-    width: 132px;
-    height: 152px;
+    top: 14px;
+    width: 120px;
+    height: 160px;
     min-height: 0;
     padding: 0;
     display: block;
@@ -287,7 +367,7 @@
 
   .sales-text {
     position: relative;
-    width: 132px;
+    width: 120px;
     height: 40px;
     max-width: none;
   }
@@ -296,7 +376,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 132px;
+    width: 120px;
     height: 17px;
     margin: 0;
     font-size: 14px;
@@ -307,9 +387,9 @@
 
   .sales-text p {
     position: absolute;
-    left: 35px;
-    top: 25px;
-    width: 62px;
+    left: 14px;
+    top: 24px;
+    width: auto;
     height: 15px;
     margin: 0;
     font-size: 12px;
@@ -320,20 +400,20 @@
 
   .sales-view-all {
     position: absolute;
-    left: 34px;
+    left: 0;
     top: 112px;
     display: inline-flex;
-    width: 73px;
-    height: 40px;
+    width: 92px;
+    height: 36px;
     margin: 0;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 8px;
-    gap: 0;
+    gap: 4px;
     color: #ffffff;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: left;
     border-radius: 8px;
   }
 
@@ -353,11 +433,11 @@
 
   .sales-cards-viewport {
     position: absolute;
-    left: 140px;
-    right: auto;
-    top: 16px;
-    width: 172px;
-    height: 142px;
+    left: 132px;
+    right: 8px;
+    top: 14px;
+    width: auto;
+    height: 160px;
     margin-left: 0;
     padding-top: 0;
     padding-right: 0;
@@ -366,26 +446,29 @@
 
   .sales-cards {
     position: relative;
-    width: 220px;
-    height: 142px;
-    display: block;
+    width: 100%;
+    height: 160px;
+    display: flex;
+    gap: 8px;
     transform: none !important;
     padding-bottom: 0;
   }
 
   .sales-cards > * {
-    position: absolute;
-    width: 102px;
-    min-height: 142px;
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    min-height: 160px;
     top: 0;
   }
 
   .sales-cards > *:nth-child(1) {
-    left: 0;
+    left: auto;
   }
 
   .sales-cards > *:nth-child(2) {
-    left: 118px;
+    left: auto;
   }
 
   .sales-cards > *:nth-child(n + 3) {

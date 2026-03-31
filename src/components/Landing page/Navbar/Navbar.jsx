@@ -12,19 +12,23 @@ const MODAL = { NONE: 'none', AUTH: 'auth', SUCCESS: 'success', ERROR: 'error' }
 
 function Navbar() {
   const [modal, setModal] = useState(MODAL.NONE);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [registerError, setRegisterError] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('token'));
 
   // Close on Escape key
   useEffect(() => {
     const handleKey = (e) => {
-      if (e.key === 'Escape') setModal(MODAL.NONE);
+      if (e.key === 'Escape') {
+        setModal(MODAL.NONE);
+        setIsMobileMenuOpen(false);
+      }
     };
-    if (modal !== MODAL.NONE) {
+    if (modal !== MODAL.NONE || isMobileMenuOpen) {
       document.addEventListener('keydown', handleKey);
     }
     return () => document.removeEventListener('keydown', handleKey);
-  }, [modal]);
+  }, [isMobileMenuOpen, modal]);
 
   const handleLoginSuccess = () => {
     setIsAuthenticated(true);
@@ -87,13 +91,21 @@ function Navbar() {
 
         <div className="header-mobile">
           <div className="header-mobile-top">
-            <button type="button" className="mobile-menu-btn" aria-label="Open menu">
+            <button
+              type="button"
+              className="mobile-menu-btn"
+              aria-label="Open menu"
+              aria-expanded={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
               <span />
               <span />
               <span />
             </button>
 
-            <div className="mobile-logo-text">Tech Heim</div>
+            <Link to="/" className="mobile-logo-text" onClick={() => setIsMobileMenuOpen(false)}>
+              Tech Heim
+            </Link>
 
             <div className="mobile-icons">
               {isAuthenticated ? (
@@ -114,6 +126,46 @@ function Navbar() {
           </div>
         </div>
       </header>
+
+      {isMobileMenuOpen && (
+        <>
+          <button
+            type="button"
+            className="mobile-menu-backdrop"
+            aria-label="Close menu"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <div className="mobile-menu-drawer">
+            <div className="mobile-menu-drawer-top">
+              <Link to="/" className="mobile-menu-brand" onClick={() => setIsMobileMenuOpen(false)}>
+                Tech Heim
+              </Link>
+              <button
+                type="button"
+                className="mobile-menu-close"
+                aria-label="Close menu"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span />
+                <span />
+              </button>
+            </div>
+
+            <nav className="mobile-menu-nav">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link}
+                  to={link === 'Home' ? '/' : `/${link.toLowerCase().replace(/\s+/g, '-')}`}
+                  className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+        </>
+      )}
 
       {/* Login Modal */}
       {modal === MODAL.AUTH && (
