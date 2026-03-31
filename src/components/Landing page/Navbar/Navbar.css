@@ -19,6 +19,11 @@
   display: none;
 }
 
+.mobile-menu-backdrop,
+.mobile-menu-drawer {
+  display: none;
+}
+
 .header-inner {
   width: 100%;
   max-width: 1440px;
@@ -280,6 +285,7 @@
   }
 
   .mobile-logo-text {
+    text-decoration: none;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -306,4 +312,94 @@
     transform: none;
   }
 
+  .mobile-menu-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    border: 0;
+    background: rgba(4, 35, 82, 0.18);
+    z-index: 1001;
+  }
+
+  .mobile-menu-drawer {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(260px, calc(100% - 56px));
+    height: 100vh;
+    padding: 24px 20px;
+    background: #ffffff;
+    box-shadow: 12px 0 36px rgba(4, 35, 82, 0.16);
+    flex-direction: column;
+    gap: 28px;
+    z-index: 1002;
+  }
+
+  .mobile-menu-drawer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .mobile-menu-brand {
+    color: #0951be;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .mobile-menu-close {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: transparent;
+  }
+
+  .mobile-menu-close span {
+    position: absolute;
+    top: 11px;
+    left: 3px;
+    width: 18px;
+    height: 1.5px;
+    background: #0c0c0c;
+    border-radius: 999px;
+  }
+
+  .mobile-menu-close span:first-child {
+    transform: rotate(45deg);
+  }
+
+  .mobile-menu-close span:last-child {
+    transform: rotate(-45deg);
+  }
+
+  .mobile-menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mobile-menu-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #0c0c0c;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+
+  .mobile-menu-link.active {
+    background: #eef4ff;
+    color: #0c68f4;
+  }
 }

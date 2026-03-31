@@ -57,3 +57,22 @@
 .active-border {
     border-bottom: 1px solid #0C68F4;
 }
+
+@media (min-width: 375px) and (max-width: 428px) {
+    .breadcrumb-container,
+    .breadcrumb {
+        width: 100%;
+        height: auto;
+        flex-wrap: wrap;
+    }
+
+    .breadcrumb-link {
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .breadcrumb-arrow {
+        width: 18px;
+        height: 18px;
+    }
+}

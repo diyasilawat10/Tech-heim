@@ -710,3 +710,112 @@
     line-height: 17px;
   }
 }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sale-card.small {
+    width: 132px;
+    height: 184px;
+    min-height: 184px;
+    padding: 6px;
+    gap: 8px;
+    margin-top: 0;
+  }
+
+  .sale-card.small:hover {
+    height: 184px;
+    margin-top: 0;
+  }
+
+  .sale-card.small .product-image-container {
+    width: 120px;
+    max-width: 120px;
+    height: 92px;
+  }
+
+  .sale-card.small .product-image,
+  .sale-card.small .product-image-fallback {
+    width: 120px;
+    height: 92px;
+  }
+
+  .sale-card.small .product-discount {
+    width: 34px;
+    height: 18px;
+    top: 6px;
+    font-size: 10px;
+    line-height: 12px;
+    padding: 2px 4px;
+  }
+
+  .sale-card.small .product-info {
+    width: 120px;
+    height: auto;
+    gap: 6px;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .sale-card.small .product-line {
+    width: 120px;
+  }
+
+  .sale-card.small .product-title {
+    width: 120px;
+    min-height: 32px;
+    height: 32px;
+    font-size: 10px;
+    line-height: 13px;
+  }
+
+  .sale-card.small .product-price-rate {
+    width: 120px;
+    height: 28px;
+    align-items: flex-end;
+  }
+
+  .sale-card.small .product-price {
+    width: 84px;
+    height: 28px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .sale-card.small .product-last-price {
+    width: 84px;
+    height: 12px;
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  .sale-card.small .product-new-price {
+    width: 84px;
+    height: 14px;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: left;
+  }
+
+  .sale-card.small .product-rate {
+    height: 14px;
+    gap: 2px;
+  }
+
+  .sale-card.small .product-rate-frame {
+    height: 14px;
+    gap: 1px;
+  }
+
+  .sale-card.small .product-star,
+  .sale-card.small .product-star svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .sale-card.small .product-rate-text {
+    width: auto;
+    height: 14px;
+    font-size: 11px;
+    line-height: 14px;
+  }
+}

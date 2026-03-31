@@ -368,3 +368,59 @@ input[type=range] {
 /* Specific offsets for layout if height is fixed, 
    but since sections are dynamic (expand/collapse), 
    auto height with flex-direction column is better. */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .filters-container {
+    width: 100%;
+    min-height: 0;
+  }
+
+  .filters-general,
+  .price-range-slider {
+    width: 100%;
+  }
+
+  .price-inputs {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 428px) {
+  .filters-container {
+    width: 100%;
+    min-height: 0;
+  }
+
+  .filters-header,
+  .section-header,
+  .section-content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .header-title,
+  .section-title,
+  .checkbox-container {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .clear-all-btn {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .filters-general,
+  .price-range-slider {
+    width: 100%;
+  }
+
+  .price-inputs {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .price-input-box {
+    width: calc(50% - 6px);
+  }
+}

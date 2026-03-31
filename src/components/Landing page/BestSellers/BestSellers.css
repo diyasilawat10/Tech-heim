@@ -62,6 +62,7 @@
     flex: none;
     order: 1;
     flex-grow: 0;
+    white-space: nowrap;
 }
 
 .view-all-link:hover {
@@ -105,7 +106,8 @@
     }
 
     .view-all-link {
-        width: 91px;
+        width: auto;
+        min-width: 112px;
         height: 40px;
         padding: 8px;
         gap: 8px;
